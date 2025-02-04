@@ -1,1 +1,1 @@
-npm i express mysql2 dotenv body-parser 
+npm i express mysql2 dotenv body-parser cors
