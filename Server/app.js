@@ -4,8 +4,6 @@ const app = express();
 
 const path = require('path');
 
-const mysql = require('mysql2');
-
 require('dotenv').config();
 
 const connect = require(path.join(__dirname, 'db.js'));
