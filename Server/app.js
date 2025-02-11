@@ -17,10 +17,10 @@ app.get('/', (req, res) => {
 });
 
 // Webes végpontok használata (felhasználói végpontok)
-app.use('/api/web', WebRoutes);
+app.use('/web', WebRoutes);
 
 // Adminisztrátori (asztali) végpontok használata
-app.use('/api/desktop', DesktopRoutes);
+app.use('/desktop', DesktopRoutes);
 
 // Hiba kezelő middleware
 app.use((err, req, res, next) => {
