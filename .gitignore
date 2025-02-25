@@ -1,3 +1,48 @@
-node_modules
+# Build kimeneti fájlok
+bin/
+obj/
+
+# Visual Studio specifikus fájlok
+.vs/
+.vscode/
+.idea/
+
+# NuGet csomagok
+packages/
+
+# Temp fájlok
+*.log
+*.bak
+*.tmp
+
+# Visual Studio konfigurációs fájlok
+*.user
+*.userosscache
+*.suo
+*.dbmdl
+
+# IDE által generált fájlok
+*.sln.docstates
+
+# Windows specifikus fájlok
+Thumbs.db
+Desktop.ini
+
+# Rider konfigurációk (ha használod)
+.idea/
+
+# Különböző fejlesztői környezetek által generált fájlok
+.vscode/
+
+# Lokális konfigurációs fájlok
+appsettings.Development.json
+appsettings.Staging.json
+
+# Node.js specifikus fájlok
+node_modules/
+
+# Környezeti fájlok
 .env
+
+# MacOS specifikus fájlok
 .DS_Store
