@@ -33,8 +33,7 @@ router.post('/admin/auth/logout', async (req, res) => {
 router.get('/admin/events', async (req, res) => {
     try {
         const events = await db.query(
-            `SELECT event_id, event_name, event_date, max_participants, current_participants
-             FROM events`
+            `SELECT * FROM events`
         );
         res.status(200).json(events);
     } catch (error) {
