@@ -33,7 +33,7 @@ namespace MTG_CARDSHOP_ADMIN
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonEventShowHide = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -45,19 +45,19 @@ namespace MTG_CARDSHOP_ADMIN
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxDate = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.numericUpDownMax = new System.Windows.Forms.NumericUpDown();
-            this.label5 = new System.Windows.Forms.Label();
+            this.groupBoxEvent = new System.Windows.Forms.GroupBox();
+            this.textBoxCurrent = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxDescription = new System.Windows.Forms.TextBox();
-            this.textBoxCurrent = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.numericUpDownMax = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxDate = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.groupBoxEvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMax)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,14 +78,15 @@ namespace MTG_CARDSHOP_ADMIN
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // button1
+            // buttonEventShowHide
             // 
-            this.button1.Location = new System.Drawing.Point(584, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonEventShowHide.Location = new System.Drawing.Point(584, 12);
+            this.buttonEventShowHide.Name = "buttonEventShowHide";
+            this.buttonEventShowHide.Size = new System.Drawing.Size(75, 23);
+            this.buttonEventShowHide.TabIndex = 1;
+            this.buttonEventShowHide.Text = "Events";
+            this.buttonEventShowHide.UseVisualStyleBackColor = true;
+            this.buttonEventShowHide.Click += new System.EventHandler(this.buttonEventShowHide_Click);
             // 
             // button2
             // 
@@ -189,72 +190,34 @@ namespace MTG_CARDSHOP_ADMIN
             this.textBoxName.Size = new System.Drawing.Size(170, 22);
             this.textBoxName.TabIndex = 11;
             // 
-            // groupBox1
+            // groupBoxEvent
             // 
-            this.groupBox1.Controls.Add(this.textBoxCurrent);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.textBoxDescription);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.numericUpDownMax);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.textBoxDate);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBoxId);
-            this.groupBox1.Controls.Add(this.textBoxName);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(566, 426);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Event properties";
+            this.groupBoxEvent.Controls.Add(this.textBoxCurrent);
+            this.groupBoxEvent.Controls.Add(this.label6);
+            this.groupBoxEvent.Controls.Add(this.textBoxDescription);
+            this.groupBoxEvent.Controls.Add(this.label5);
+            this.groupBoxEvent.Controls.Add(this.numericUpDownMax);
+            this.groupBoxEvent.Controls.Add(this.label4);
+            this.groupBoxEvent.Controls.Add(this.label3);
+            this.groupBoxEvent.Controls.Add(this.textBoxDate);
+            this.groupBoxEvent.Controls.Add(this.label1);
+            this.groupBoxEvent.Controls.Add(this.label2);
+            this.groupBoxEvent.Controls.Add(this.textBoxId);
+            this.groupBoxEvent.Controls.Add(this.textBoxName);
+            this.groupBoxEvent.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxEvent.Name = "groupBoxEvent";
+            this.groupBoxEvent.Size = new System.Drawing.Size(566, 426);
+            this.groupBoxEvent.TabIndex = 13;
+            this.groupBoxEvent.TabStop = false;
+            this.groupBoxEvent.Text = "Event properties";
             // 
-            // label3
+            // textBoxCurrent
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 93);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 17);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Date:";
-            // 
-            // textBoxDate
-            // 
-            this.textBoxDate.Location = new System.Drawing.Point(114, 90);
-            this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(220, 22);
-            this.textBoxDate.TabIndex = 13;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 121);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 17);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Max participants:";
-            // 
-            // numericUpDownMax
-            // 
-            this.numericUpDownMax.Location = new System.Drawing.Point(144, 118);
-            this.numericUpDownMax.Maximum = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.numericUpDownMax.Name = "numericUpDownMax";
-            this.numericUpDownMax.Size = new System.Drawing.Size(70, 22);
-            this.numericUpDownMax.TabIndex = 17;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 147);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 17);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Current participants:";
+            this.textBoxCurrent.Location = new System.Drawing.Point(144, 146);
+            this.textBoxCurrent.Name = "textBoxCurrent";
+            this.textBoxCurrent.ReadOnly = true;
+            this.textBoxCurrent.Size = new System.Drawing.Size(29, 22);
+            this.textBoxCurrent.TabIndex = 22;
             // 
             // label6
             // 
@@ -273,20 +236,58 @@ namespace MTG_CARDSHOP_ADMIN
             this.textBoxDescription.Size = new System.Drawing.Size(446, 149);
             this.textBoxDescription.TabIndex = 20;
             // 
-            // textBoxCurrent
+            // label5
             // 
-            this.textBoxCurrent.Location = new System.Drawing.Point(144, 146);
-            this.textBoxCurrent.Name = "textBoxCurrent";
-            this.textBoxCurrent.ReadOnly = true;
-            this.textBoxCurrent.Size = new System.Drawing.Size(29, 22);
-            this.textBoxCurrent.TabIndex = 22;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 147);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(136, 17);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Current participants:";
+            // 
+            // numericUpDownMax
+            // 
+            this.numericUpDownMax.Location = new System.Drawing.Point(144, 118);
+            this.numericUpDownMax.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.numericUpDownMax.Name = "numericUpDownMax";
+            this.numericUpDownMax.Size = new System.Drawing.Size(70, 22);
+            this.numericUpDownMax.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 121);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(114, 17);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Max participants:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 93);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Date:";
+            // 
+            // textBoxDate
+            // 
+            this.textBoxDate.Location = new System.Drawing.Point(114, 90);
+            this.textBoxDate.Name = "textBoxDate";
+            this.textBoxDate.Size = new System.Drawing.Size(220, 22);
+            this.textBoxDate.TabIndex = 13;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 677);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.groupBoxEvent);
             this.Controls.Add(this.dataGridViewEvents);
             this.Controls.Add(this.radioButtonDark);
             this.Controls.Add(this.radioButtonLight);
@@ -294,7 +295,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonEventShowHide);
             this.Controls.Add(this.chart1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -302,8 +303,8 @@ namespace MTG_CARDSHOP_ADMIN
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBoxEvent.ResumeLayout(false);
+            this.groupBoxEvent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMax)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -313,7 +314,7 @@ namespace MTG_CARDSHOP_ADMIN
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonEventShowHide;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
@@ -325,7 +326,7 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBoxEvent;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxDate;

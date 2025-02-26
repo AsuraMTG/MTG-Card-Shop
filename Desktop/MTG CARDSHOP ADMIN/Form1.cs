@@ -15,9 +15,10 @@ namespace MTG_CARDSHOP_ADMIN
 {
     public partial class Form1 : Form
     {
-        string eventsBaseURL = "http://localhost:3000/desktop/admin/events";
+        public string eventsBaseURL = "http://localhost:3000/desktop/admin/events";
         List<Event> events = new List<Event>();
 
+        public bool eventShowHide = true;
         public Form1()
         {
             InitializeComponent();
@@ -68,6 +69,20 @@ namespace MTG_CARDSHOP_ADMIN
                 textBoxCurrent.Text = selectedRow.Cells["CurrentParticipants"].Value.ToString();
                 textBoxDescription.Text = selectedRow.Cells["EventDescription"].Value.ToString();
                 numericUpDownMax.Value = Convert.ToDecimal(selectedRow.Cells["MaxParticipants"].Value);
+            }
+        }
+
+        private void buttonEventShowHide_Click(object sender, EventArgs e)
+        {
+            if (eventShowHide == true)
+            {
+                eventShowHide = false;
+                groupBoxEvent.Hide();
+            }
+            else
+            {
+                eventShowHide = true;
+                groupBoxEvent.Show();
             }
         }
     }
