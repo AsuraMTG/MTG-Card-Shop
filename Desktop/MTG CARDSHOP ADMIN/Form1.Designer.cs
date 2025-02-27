@@ -29,9 +29,9 @@ namespace MTG_CARDSHOP_ADMIN
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.buttonEventShowHide = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -54,6 +54,10 @@ namespace MTG_CARDSHOP_ADMIN
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxDate = new System.Windows.Forms.TextBox();
+            this.buttonEventCreate = new System.Windows.Forms.Button();
+            this.buttonEventDelete = new System.Windows.Forms.Button();
+            this.buttonEventUpdate = new System.Windows.Forms.Button();
+            this.buttonEventNew = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
@@ -63,17 +67,17 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart1.Legends.Add(legend5);
             this.chart1.Location = new System.Drawing.Point(584, 138);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chart1.Series.Add(series5);
             this.chart1.Size = new System.Drawing.Size(300, 300);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -192,6 +196,10 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // groupBoxEvent
             // 
+            this.groupBoxEvent.Controls.Add(this.buttonEventNew);
+            this.groupBoxEvent.Controls.Add(this.buttonEventUpdate);
+            this.groupBoxEvent.Controls.Add(this.buttonEventDelete);
+            this.groupBoxEvent.Controls.Add(this.buttonEventCreate);
             this.groupBoxEvent.Controls.Add(this.textBoxCurrent);
             this.groupBoxEvent.Controls.Add(this.label6);
             this.groupBoxEvent.Controls.Add(this.textBoxDescription);
@@ -282,6 +290,45 @@ namespace MTG_CARDSHOP_ADMIN
             this.textBoxDate.Size = new System.Drawing.Size(220, 22);
             this.textBoxDate.TabIndex = 13;
             // 
+            // buttonEventCreate
+            // 
+            this.buttonEventCreate.Location = new System.Drawing.Point(304, 393);
+            this.buttonEventCreate.Name = "buttonEventCreate";
+            this.buttonEventCreate.Size = new System.Drawing.Size(75, 27);
+            this.buttonEventCreate.TabIndex = 14;
+            this.buttonEventCreate.Text = "Create";
+            this.buttonEventCreate.UseVisualStyleBackColor = true;
+            this.buttonEventCreate.Click += new System.EventHandler(this.buttonEventCreate_Click);
+            // 
+            // buttonEventDelete
+            // 
+            this.buttonEventDelete.Location = new System.Drawing.Point(466, 393);
+            this.buttonEventDelete.Name = "buttonEventDelete";
+            this.buttonEventDelete.Size = new System.Drawing.Size(75, 27);
+            this.buttonEventDelete.TabIndex = 23;
+            this.buttonEventDelete.Text = "Delete";
+            this.buttonEventDelete.UseVisualStyleBackColor = true;
+            this.buttonEventDelete.Click += new System.EventHandler(this.buttonEventDelete_Click);
+            // 
+            // buttonEventUpdate
+            // 
+            this.buttonEventUpdate.Location = new System.Drawing.Point(385, 393);
+            this.buttonEventUpdate.Name = "buttonEventUpdate";
+            this.buttonEventUpdate.Size = new System.Drawing.Size(75, 27);
+            this.buttonEventUpdate.TabIndex = 24;
+            this.buttonEventUpdate.Text = "Update";
+            this.buttonEventUpdate.UseVisualStyleBackColor = true;
+            // 
+            // buttonEventNew
+            // 
+            this.buttonEventNew.Location = new System.Drawing.Point(9, 393);
+            this.buttonEventNew.Name = "buttonEventNew";
+            this.buttonEventNew.Size = new System.Drawing.Size(75, 27);
+            this.buttonEventNew.TabIndex = 25;
+            this.buttonEventNew.Text = "New";
+            this.buttonEventNew.UseVisualStyleBackColor = true;
+            this.buttonEventNew.Click += new System.EventHandler(this.buttonEventNew_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -335,6 +382,10 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.TextBox textBoxCurrent;
+        private System.Windows.Forms.Button buttonEventUpdate;
+        private System.Windows.Forms.Button buttonEventDelete;
+        private System.Windows.Forms.Button buttonEventCreate;
+        private System.Windows.Forms.Button buttonEventNew;
     }
 }
 
