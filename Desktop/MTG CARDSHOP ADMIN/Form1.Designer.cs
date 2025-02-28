@@ -29,11 +29,12 @@ namespace MTG_CARDSHOP_ADMIN
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
             this.radioButtonLight = new System.Windows.Forms.RadioButton();
             this.radioButtonDark = new System.Windows.Forms.RadioButton();
             this.dataGridViewEvents = new System.Windows.Forms.DataGridView();
@@ -58,43 +59,51 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButtonEvents = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
             this.groupBoxEvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMax)).BeginInit();
             this.groupBoxNav.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(584, 156);
+            this.chart1.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.chart1.BackColor = System.Drawing.SystemColors.Control;
+            this.chart1.BorderlineColor = System.Drawing.SystemColors.Control;
+            this.chart1.BorderSkin.PageColor = System.Drawing.SystemColors.Control;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(584, 186);
             this.chart1.Name = "chart1";
-            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(300, 282);
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(300, 252);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // pictureBox1
+            // pictureBoxLogo
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(774, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(110, 52);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxLogo.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLogo.Image")));
+            this.pictureBoxLogo.Location = new System.Drawing.Point(713, 3);
+            this.pictureBoxLogo.Name = "pictureBoxLogo";
+            this.pictureBoxLogo.Size = new System.Drawing.Size(171, 105);
+            this.pictureBoxLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLogo.TabIndex = 5;
+            this.pictureBoxLogo.TabStop = false;
             // 
             // radioButtonLight
             // 
             this.radioButtonLight.AutoSize = true;
-            this.radioButtonLight.Location = new System.Drawing.Point(774, 72);
+            this.radioButtonLight.Location = new System.Drawing.Point(6, 27);
             this.radioButtonLight.Name = "radioButtonLight";
             this.radioButtonLight.Size = new System.Drawing.Size(99, 21);
             this.radioButtonLight.TabIndex = 6;
@@ -105,7 +114,7 @@ namespace MTG_CARDSHOP_ADMIN
             // radioButtonDark
             // 
             this.radioButtonDark.AutoSize = true;
-            this.radioButtonDark.Location = new System.Drawing.Point(774, 99);
+            this.radioButtonDark.Location = new System.Drawing.Point(6, 54);
             this.radioButtonDark.Name = "radioButtonDark";
             this.radioButtonDark.Size = new System.Drawing.Size(98, 21);
             this.radioButtonDark.TabIndex = 7;
@@ -301,7 +310,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBoxNav.Controls.Add(this.radioButtonEvents);
             this.groupBoxNav.Location = new System.Drawing.Point(584, 12);
             this.groupBoxNav.Name = "groupBoxNav";
-            this.groupBoxNav.Size = new System.Drawing.Size(123, 138);
+            this.groupBoxNav.Size = new System.Drawing.Size(123, 164);
             this.groupBoxNav.TabIndex = 14;
             this.groupBoxNav.TabStop = false;
             this.groupBoxNav.Text = "Navigation";
@@ -340,38 +349,50 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonEvents.UseVisualStyleBackColor = true;
             this.radioButtonEvents.CheckedChanged += new System.EventHandler(this.radioButtonEvents_CheckedChanged);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.radioButtonDark);
+            this.groupBox1.Controls.Add(this.radioButtonLight);
+            this.groupBox1.Location = new System.Drawing.Point(713, 87);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(168, 89);
+            this.groupBox1.TabIndex = 15;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Theme";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 677);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBoxNav);
             this.Controls.Add(this.groupBoxEvent);
             this.Controls.Add(this.dataGridViewEvents);
-            this.Controls.Add(this.radioButtonDark);
-            this.Controls.Add(this.radioButtonLight);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxLogo);
             this.Controls.Add(this.chart1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "MTG CARD SHOP ADMIN";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).EndInit();
             this.groupBoxEvent.ResumeLayout(false);
             this.groupBoxEvent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMax)).EndInit();
             this.groupBoxNav.ResumeLayout(false);
             this.groupBoxNav.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxLogo;
         private System.Windows.Forms.RadioButton radioButtonLight;
         private System.Windows.Forms.RadioButton radioButtonDark;
         private System.Windows.Forms.DataGridView dataGridViewEvents;
@@ -396,6 +417,7 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButtonEvents;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 

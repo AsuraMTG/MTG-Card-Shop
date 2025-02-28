@@ -48,6 +48,8 @@ namespace MTG_CARDSHOP_ADMIN
 
             radioButtonLight.Checked = true;
             radioButtonEvents.Checked = true;
+
+            
         }
 
         //Adatok beállítása
