@@ -27,18 +27,6 @@ namespace MTG_CARDSHOP_ADMIN
         {
             InitializeComponent();
         }
-
-        //Adatok beállítása
-        public void adatokSet(string date = "")
-        {
-            textBoxId.Text = "";
-            textBoxName.Text = "";
-            textBoxDate.Text = date;
-            numericUpDownMax.Value = 0;
-            textBoxCurrent.Text = "0";
-            textBoxDescription.Text = "";
-        }
-
         private async void Form1_Load(object sender, EventArgs e)
         {
             await getEvents();
@@ -59,17 +47,18 @@ namespace MTG_CARDSHOP_ADMIN
             }
 
             radioButtonLight.Checked = true;
+            radioButtonEvents.Checked = true;
         }
 
-        //Eventek megjelenítése
-        private async Task getEvents()
+        //Adatok beállítása
+        public void adatokSet(string date = "")
         {
-            HttpResponseMessage response = await client.GetAsync(eventsBaseURL);
-            if (response.IsSuccessStatusCode)
-            {
-                string json = await response.Content.ReadAsStringAsync();
-                events = Event.FromJson(json);
-            }
+            textBoxId.Text = "";
+            textBoxName.Text = "";
+            textBoxDate.Text = date;
+            numericUpDownMax.Value = 0;
+            textBoxCurrent.Text = "0";
+            textBoxDescription.Text = "";
         }
 
         //Űrlap feltöltese
@@ -85,23 +74,6 @@ namespace MTG_CARDSHOP_ADMIN
                 textBoxCurrent.Text = selectedRow.Cells["CurrentParticipants"].Value.ToString();
                 textBoxDescription.Text = selectedRow.Cells["EventDescription"].Value.ToString();
                 numericUpDownMax.Value = Convert.ToDecimal(selectedRow.Cells["MaxParticipants"].Value);
-            }
-        }
-
-        //Events Show/Hide
-        private void buttonEventShowHide_Click(object sender, EventArgs e)
-        {
-            if (eventShowHide == true)
-            {
-                eventShowHide = false;
-                groupBoxEvent.Hide();
-                dataGridViewEvents.Hide();
-            }
-            else
-            {
-                eventShowHide = true;
-                groupBoxEvent.Show();
-                dataGridViewEvents.Show();
             }
         }
 
@@ -143,6 +115,64 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
+        //Read events
+        private async Task getEvents()
+        {
+            HttpResponseMessage response = await client.GetAsync(eventsBaseURL);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                events = Event.FromJson(json);
+            }
+        }
+
+        //Update event
+        private void buttonEventUpdate_Click(object sender, EventArgs e)
+        {
+
+            decimal id = Convert.ToInt32(textBoxId.Text);
+            string name = textBoxName.Text;
+            string date = textBoxDate.Text;
+            decimal max = numericUpDownMax.Value;
+            string description = textBoxDescription.Text;
+
+            if (name.Length == 0)
+            {
+                MessageBox.Show("Név megadása kötelező!");
+                return;
+            }
+
+            if (MessageBox.Show("Biztosan frissíteni szeretné a felhasználót?", "Frissítés", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                updateUser(id, name, date, max, description);
+            }
+        }
+        private async void updateUser(decimal id, string name, string date, decimal max, string description)
+        {
+            try
+            {
+                var content = new StringContent($"{{\"event_name\":\"{name}\",\"event_date\":\"{date}\",\"event_description\":\"{description}\",\"max_participants\":\"{max}\"}}", Encoding.UTF8, "application/json");
+
+                HttpResponseMessage result = await client.PutAsync($"{eventsBaseURL}/{id}", content);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres frissítés!");
+                    await getEvents();
+                    dataGridViewEvents.DataSource = events;
+                    adatokSet("");
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a frissítés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         //Delete event
         private void buttonEventDelete_Click(object sender, EventArgs e)
         {
@@ -177,6 +207,23 @@ namespace MTG_CARDSHOP_ADMIN
             catch (HttpRequestException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        //Events Show/Hide
+        private void radioButtonEvents_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonEvents.Checked == false)
+            {
+                groupBoxEvent.Hide();
+                dataGridViewEvents.Hide();
+                adatokSet("");
+            }
+            else
+            {
+                groupBoxEvent.Show();
+                dataGridViewEvents.Show();
+                adatokSet("");
             }
         }
     }
