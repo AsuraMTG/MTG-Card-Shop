@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -49,15 +50,16 @@ namespace MTG_CARDSHOP_ADMIN
             radioButtonLight.Checked = true;
             radioButtonEvents.Checked = true;
 
-            
+            dateTimePickerDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerDate.CustomFormat = "yyyy-MM-dd HH:mm";
         }
 
         //Adatok beállítása
-        public void adatokSet(string date = "")
+        public void adatokSet()
         {
             textBoxId.Text = "";
             textBoxName.Text = "";
-            textBoxDate.Text = date;
+            dateTimePickerDate.Value = DateTime.Now;
             numericUpDownMax.Value = 0;
             textBoxCurrent.Text = "0";
             textBoxDescription.Text = "";
@@ -72,7 +74,7 @@ namespace MTG_CARDSHOP_ADMIN
                 DataGridViewRow selectedRow = dataGridViewEvents.Rows[index];
                 textBoxId.Text = selectedRow.Cells["EventId"].Value.ToString();
                 textBoxName.Text = selectedRow.Cells["EventName"].Value.ToString();
-                textBoxDate.Text = selectedRow.Cells["EventDate"].Value.ToString();
+                dateTimePickerDate.Value = ((DateTimeOffset)selectedRow.Cells["EventDate"].Value).DateTime;
                 textBoxCurrent.Text = selectedRow.Cells["CurrentParticipants"].Value.ToString();
                 textBoxDescription.Text = selectedRow.Cells["EventDescription"].Value.ToString();
                 numericUpDownMax.Value = Convert.ToDecimal(selectedRow.Cells["MaxParticipants"].Value);
@@ -82,20 +84,23 @@ namespace MTG_CARDSHOP_ADMIN
         //Create event
         private void buttonEventNew_Click(object sender, EventArgs e)
         {
-            adatokSet(DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+            adatokSet();
         }
         private async void buttonEventCreate_Click(object sender, EventArgs e)
         {
             string name = textBoxName.Text;
-            string date = textBoxDate.Text;
+            string date = dateTimePickerDate.Value.ToString("yyyy-MM-dd HH:mm");
             decimal max = numericUpDownMax.Value;
             string description = textBoxDescription.Text;
+
             if (name.Length == 0)
             {
                 MessageBox.Show("Név megadása kötelező!");
                 return;
             }
+
             var content = new StringContent($"{{\"event_name\":\"{name}\",\"event_date\":\"{date}\",\"event_description\":\"{description}\",\"max_participants\":\"{max}\"}}", Encoding.UTF8, "application/json");
+            
             try
             {
                 HttpResponseMessage result = await client.PostAsync(eventsBaseURL, content);
@@ -134,7 +139,7 @@ namespace MTG_CARDSHOP_ADMIN
 
             decimal id = Convert.ToInt32(textBoxId.Text);
             string name = textBoxName.Text;
-            string date = textBoxDate.Text;
+            string date = dateTimePickerDate.Value.ToString("yyyy-MM-dd HH:mm");
             decimal max = numericUpDownMax.Value;
             string description = textBoxDescription.Text;
 
@@ -162,7 +167,7 @@ namespace MTG_CARDSHOP_ADMIN
                     MessageBox.Show("Sikeres frissítés!");
                     await getEvents();
                     dataGridViewEvents.DataSource = events;
-                    adatokSet("");
+                    adatokSet();
                 }
                 else
                 {
@@ -199,7 +204,7 @@ namespace MTG_CARDSHOP_ADMIN
                     MessageBox.Show("Sikeres törlés!");
                     await getEvents();
                     dataGridViewEvents.DataSource = events;
-                    adatokSet("");
+                    adatokSet();
                 }
                 else
                 {
@@ -219,14 +224,14 @@ namespace MTG_CARDSHOP_ADMIN
             {
                 groupBoxEvent.Hide();
                 dataGridViewEvents.Hide();
-                adatokSet("");
             }
             else
             {
                 groupBoxEvent.Show();
                 dataGridViewEvents.Show();
-                adatokSet("");
             }
+
+            adatokSet();
         }
     }
 }

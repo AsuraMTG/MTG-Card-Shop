@@ -29,9 +29,9 @@ namespace MTG_CARDSHOP_ADMIN
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
@@ -54,12 +54,12 @@ namespace MTG_CARDSHOP_ADMIN
             this.numericUpDownMax = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBoxDate = new System.Windows.Forms.TextBox();
             this.groupBoxNav = new System.Windows.Forms.GroupBox();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButtonEvents = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dateTimePickerDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
@@ -75,17 +75,17 @@ namespace MTG_CARDSHOP_ADMIN
             this.chart1.BackColor = System.Drawing.SystemColors.Control;
             this.chart1.BorderlineColor = System.Drawing.SystemColors.Control;
             this.chart1.BorderSkin.PageColor = System.Drawing.SystemColors.Control;
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(584, 186);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chart1.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(300, 252);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
@@ -105,7 +105,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonLight.AutoSize = true;
             this.radioButtonLight.Location = new System.Drawing.Point(6, 27);
             this.radioButtonLight.Name = "radioButtonLight";
-            this.radioButtonLight.Size = new System.Drawing.Size(99, 21);
+            this.radioButtonLight.Size = new System.Drawing.Size(94, 20);
             this.radioButtonLight.TabIndex = 6;
             this.radioButtonLight.TabStop = true;
             this.radioButtonLight.Text = "Light Mode";
@@ -116,7 +116,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonDark.AutoSize = true;
             this.radioButtonDark.Location = new System.Drawing.Point(6, 54);
             this.radioButtonDark.Name = "radioButtonDark";
-            this.radioButtonDark.Size = new System.Drawing.Size(98, 21);
+            this.radioButtonDark.Size = new System.Drawing.Size(95, 20);
             this.radioButtonDark.TabIndex = 7;
             this.radioButtonDark.TabStop = true;
             this.radioButtonDark.Text = "Dark Mode";
@@ -147,7 +147,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(6, 32);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(25, 17);
+            this.label1.Size = new System.Drawing.Size(23, 16);
             this.label1.TabIndex = 10;
             this.label1.Text = "ID:";
             // 
@@ -156,7 +156,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 62);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 17);
+            this.label2.Size = new System.Drawing.Size(47, 16);
             this.label2.TabIndex = 12;
             this.label2.Text = "Name:";
             // 
@@ -169,6 +169,7 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // groupBoxEvent
             // 
+            this.groupBoxEvent.Controls.Add(this.dateTimePickerDate);
             this.groupBoxEvent.Controls.Add(this.buttonEventNew);
             this.groupBoxEvent.Controls.Add(this.buttonEventUpdate);
             this.groupBoxEvent.Controls.Add(this.buttonEventDelete);
@@ -180,7 +181,6 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBoxEvent.Controls.Add(this.numericUpDownMax);
             this.groupBoxEvent.Controls.Add(this.label4);
             this.groupBoxEvent.Controls.Add(this.label3);
-            this.groupBoxEvent.Controls.Add(this.textBoxDate);
             this.groupBoxEvent.Controls.Add(this.label1);
             this.groupBoxEvent.Controls.Add(this.label2);
             this.groupBoxEvent.Controls.Add(this.textBoxId);
@@ -245,7 +245,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(6, 176);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 17);
+            this.label6.Size = new System.Drawing.Size(78, 16);
             this.label6.TabIndex = 21;
             this.label6.Text = "Description:";
             // 
@@ -262,7 +262,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(6, 147);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 17);
+            this.label5.Size = new System.Drawing.Size(124, 16);
             this.label5.TabIndex = 18;
             this.label5.Text = "Current participants:";
             // 
@@ -283,7 +283,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(6, 121);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(114, 17);
+            this.label4.Size = new System.Drawing.Size(107, 16);
             this.label4.TabIndex = 16;
             this.label4.Text = "Max participants:";
             // 
@@ -292,16 +292,9 @@ namespace MTG_CARDSHOP_ADMIN
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(6, 93);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.Size = new System.Drawing.Size(39, 16);
             this.label3.TabIndex = 14;
             this.label3.Text = "Date:";
-            // 
-            // textBoxDate
-            // 
-            this.textBoxDate.Location = new System.Drawing.Point(114, 90);
-            this.textBoxDate.Name = "textBoxDate";
-            this.textBoxDate.Size = new System.Drawing.Size(220, 22);
-            this.textBoxDate.TabIndex = 13;
             // 
             // groupBoxNav
             // 
@@ -320,7 +313,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButton3.AutoSize = true;
             this.radioButton3.Location = new System.Drawing.Point(6, 76);
             this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(110, 21);
+            this.radioButton3.Size = new System.Drawing.Size(103, 20);
             this.radioButton3.TabIndex = 2;
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "radioButton3";
@@ -331,7 +324,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButton2.AutoSize = true;
             this.radioButton2.Location = new System.Drawing.Point(6, 49);
             this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(110, 21);
+            this.radioButton2.Size = new System.Drawing.Size(103, 20);
             this.radioButton2.TabIndex = 1;
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "radioButton2";
@@ -342,7 +335,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonEvents.AutoSize = true;
             this.radioButtonEvents.Location = new System.Drawing.Point(7, 22);
             this.radioButtonEvents.Name = "radioButtonEvents";
-            this.radioButtonEvents.Size = new System.Drawing.Size(72, 21);
+            this.radioButtonEvents.Size = new System.Drawing.Size(69, 20);
             this.radioButtonEvents.TabIndex = 0;
             this.radioButtonEvents.TabStop = true;
             this.radioButtonEvents.Text = "Events";
@@ -359,6 +352,13 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Theme";
+            // 
+            // dateTimePickerDate
+            // 
+            this.dateTimePickerDate.Location = new System.Drawing.Point(114, 90);
+            this.dateTimePickerDate.Name = "dateTimePickerDate";
+            this.dateTimePickerDate.Size = new System.Drawing.Size(325, 22);
+            this.dateTimePickerDate.TabIndex = 26;
             // 
             // Form1
             // 
@@ -403,7 +403,6 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.GroupBox groupBoxEvent;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxDate;
         private System.Windows.Forms.NumericUpDown numericUpDownMax;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -418,6 +417,7 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButtonEvents;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDate;
     }
 }
 
