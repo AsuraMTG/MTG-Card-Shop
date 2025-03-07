@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace MTG_CARDSHOP_ADMIN
 {
@@ -27,6 +28,33 @@ namespace MTG_CARDSHOP_ADMIN
         public Form1()
         {
             InitializeComponent();
+        }
+        private void AddDataToChart()
+        {
+            chartParticipants.Series.Clear();
+
+            var series = new Series
+            {
+                Name = "Participants",
+                ChartType = SeriesChartType.Column,
+                BorderWidth = 3
+            };
+
+            foreach (DataGridViewRow row in dataGridViewEvents.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                string name = row.Cells[1].Value.ToString();
+                int participants = Convert.ToInt32(row.Cells[5].Value);
+
+                series.Points.AddXY(name, participants);
+            }
+            chartParticipants.Series.Add(series);
+
+            chartParticipants.ChartAreas[0].AxisY.LabelStyle.Format = "0";
+            chartParticipants.ChartAreas[0].AxisY.Interval = 1;
+
+
         }
         private async void Form1_Load(object sender, EventArgs e)
         {
@@ -52,6 +80,8 @@ namespace MTG_CARDSHOP_ADMIN
 
             dateTimePickerDate.Format = DateTimePickerFormat.Custom;
             dateTimePickerDate.CustomFormat = "yyyy-MM-dd HH:mm";
+
+            AddDataToChart();
         }
 
         //Adatok beállítása
@@ -79,13 +109,18 @@ namespace MTG_CARDSHOP_ADMIN
                 textBoxDescription.Text = selectedRow.Cells["EventDescription"].Value.ToString();
                 numericUpDownMax.Value = Convert.ToDecimal(selectedRow.Cells["MaxParticipants"].Value);
             }
+
+            AddDataToChart();
         }
 
-        //Create event
+        //NEW event
         private void buttonEventNew_Click(object sender, EventArgs e)
         {
             adatokSet();
+            AddDataToChart();
         }
+
+        //Create event
         private async void buttonEventCreate_Click(object sender, EventArgs e)
         {
             string name = textBoxName.Text;
@@ -120,6 +155,8 @@ namespace MTG_CARDSHOP_ADMIN
                 MessageBox.Show(ex.Message);
                 throw;
             }
+
+            AddDataToChart();
         }
 
         //Read events
@@ -153,6 +190,8 @@ namespace MTG_CARDSHOP_ADMIN
             {
                 updateUser(id, name, date, max, description);
             }
+
+            AddDataToChart();
         }
         private async void updateUser(decimal id, string name, string date, decimal max, string description)
         {
@@ -186,15 +225,17 @@ namespace MTG_CARDSHOP_ADMIN
             string id = textBoxId.Text;
             if (id.Length == 0)
             {
-                MessageBox.Show("Nincs kiválasztva felhasználó!");
+                MessageBox.Show("Nincs kiválasztva Event!");
                 return;
             }
-            if (MessageBox.Show("Biztosan törölni szeretné a felhasználót?", "Törlés", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Biztosan törölni szeretné az Eventet?", "Törlés", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                deleteUser(id);
+                deleteEvent(id);
             }
+
+            AddDataToChart();
         }
-        private async void deleteUser(string id)
+        private async void deleteEvent(string id)
         {
             try
             {
@@ -224,14 +265,17 @@ namespace MTG_CARDSHOP_ADMIN
             {
                 groupBoxEvent.Hide();
                 dataGridViewEvents.Hide();
+                chartParticipants.Hide();
             }
             else
             {
                 groupBoxEvent.Show();
                 dataGridViewEvents.Show();
+                chartParticipants.Show();
+                adatokSet();
+                AddDataToChart();
             }
 
-            adatokSet();
         }
     }
 }
