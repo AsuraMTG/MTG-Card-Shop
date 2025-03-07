@@ -18,8 +18,10 @@ namespace MTG_CARDSHOP_ADMIN
     public partial class Form1 : Form
     {
         public string eventsBaseURL = "http://localhost:3000/desktop/admin/events";
+        public string customersBaseURL = "http://localhost:3000/desktop/admin/customers";
 
         List<Event> events = new List<Event>();
+        List<Customer> customers = new List<Customer>();
 
         readonly HttpClient client = new HttpClient();
 
@@ -59,7 +61,8 @@ namespace MTG_CARDSHOP_ADMIN
         private async void Form1_Load(object sender, EventArgs e)
         {
             await getEvents();
-
+            await getCustomers();
+            // Events view settings
             dataGridViewEvents.DataSource = events;
             dataGridViewEvents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewEvents.MultiSelect = false;
@@ -75,24 +78,60 @@ namespace MTG_CARDSHOP_ADMIN
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
 
+            // Customers view settings
+            dataGridViewCustomers.DataSource = customers;
+            dataGridViewCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewCustomers.MultiSelect = false;
+            dataGridViewCustomers.ReadOnly = true;
+            dataGridViewCustomers.AllowUserToAddRows = false;
+            dataGridViewCustomers.AllowUserToDeleteRows = false;
+            dataGridViewCustomers.AllowUserToResizeRows = false;
+            dataGridViewCustomers.AllowUserToResizeColumns = false;
+            dataGridViewCustomers.AllowUserToOrderColumns = false;
+
+            foreach (DataGridViewColumn column in dataGridViewCustomers.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            dataGridViewCustomers.Hide();
+            this.Controls.Add(dataGridViewCustomers);
+
+            groupBoxCustomers.Hide();
+            this.Controls.Add(groupBoxCustomers);
+
             radioButtonLight.Checked = true;
             radioButtonEvents.Checked = true;
 
-            dateTimePickerDate.Format = DateTimePickerFormat.Custom;
-            dateTimePickerDate.CustomFormat = "yyyy-MM-dd HH:mm";
+
+            dateTimePickerEventDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEventDate.CustomFormat = "yyyy-MM-dd HH:mm";
 
             AddDataToChart();
+
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            // Maximalizálás gomb letiltása
+            this.MaximizeBox = false;
+
+            // Minimalizálás gomb letiltása
+            this.MinimizeBox = false;
+
+            // Ezen kívül, ha azt is szeretnéd, hogy a form ne legyen átméretezhető, 
+            // akkor a következő módon is biztosíthatod: 686; 589
+            this.Resize += (s, args) => { this.Size = new Size(686, 589); };
+
         }
 
         //Adatok beállítása
         public void adatokSet()
         {
-            textBoxId.Text = "";
-            textBoxName.Text = "";
-            dateTimePickerDate.Value = DateTime.Now;
-            numericUpDownMax.Value = 0;
-            textBoxCurrent.Text = "0";
-            textBoxDescription.Text = "";
+            textBoxEventId.Text = "";
+            textBoxEventName.Text = "";
+            dateTimePickerEventDate.Value = DateTime.Now;
+            numericUpDownEventMax.Value = 0;
+            textBoxEventCurrent.Text = "0";
+            textBoxEventDescription.Text = "";
         }
 
         //Űrlap feltöltese
@@ -102,12 +141,12 @@ namespace MTG_CARDSHOP_ADMIN
             if (index >= 0)
             {
                 DataGridViewRow selectedRow = dataGridViewEvents.Rows[index];
-                textBoxId.Text = selectedRow.Cells["EventId"].Value.ToString();
-                textBoxName.Text = selectedRow.Cells["EventName"].Value.ToString();
-                dateTimePickerDate.Value = ((DateTimeOffset)selectedRow.Cells["EventDate"].Value).DateTime;
-                textBoxCurrent.Text = selectedRow.Cells["CurrentParticipants"].Value.ToString();
-                textBoxDescription.Text = selectedRow.Cells["EventDescription"].Value.ToString();
-                numericUpDownMax.Value = Convert.ToDecimal(selectedRow.Cells["MaxParticipants"].Value);
+                textBoxEventId.Text = selectedRow.Cells["EventId"].Value.ToString();
+                textBoxEventName.Text = selectedRow.Cells["EventName"].Value.ToString();
+                dateTimePickerEventDate.Value = ((DateTimeOffset)selectedRow.Cells["EventDate"].Value).DateTime;
+                textBoxEventCurrent.Text = selectedRow.Cells["CurrentParticipants"].Value.ToString();
+                textBoxEventDescription.Text = selectedRow.Cells["EventDescription"].Value.ToString();
+                numericUpDownEventMax.Value = Convert.ToDecimal(selectedRow.Cells["MaxParticipants"].Value);
             }
 
             AddDataToChart();
@@ -123,10 +162,10 @@ namespace MTG_CARDSHOP_ADMIN
         //Create event
         private async void buttonEventCreate_Click(object sender, EventArgs e)
         {
-            string name = textBoxName.Text;
-            string date = dateTimePickerDate.Value.ToString("yyyy-MM-dd HH:mm");
-            decimal max = numericUpDownMax.Value;
-            string description = textBoxDescription.Text;
+            string name = textBoxEventName.Text;
+            string date = dateTimePickerEventDate.Value.ToString("yyyy-MM-dd HH:mm");
+            decimal max = numericUpDownEventMax.Value;
+            string description = textBoxEventDescription.Text;
 
             if (name.Length == 0)
             {
@@ -170,15 +209,19 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
+        
+
+
+
         //Update event
         private void buttonEventUpdate_Click(object sender, EventArgs e)
         {
 
-            decimal id = Convert.ToInt32(textBoxId.Text);
-            string name = textBoxName.Text;
-            string date = dateTimePickerDate.Value.ToString("yyyy-MM-dd HH:mm");
-            decimal max = numericUpDownMax.Value;
-            string description = textBoxDescription.Text;
+            decimal id = Convert.ToInt32(textBoxEventId.Text);
+            string name = textBoxEventName.Text;
+            string date = dateTimePickerEventDate.Value.ToString("yyyy-MM-dd HH:mm");
+            decimal max = numericUpDownEventMax.Value;
+            string description = textBoxEventDescription.Text;
 
             if (name.Length == 0)
             {
@@ -222,7 +265,7 @@ namespace MTG_CARDSHOP_ADMIN
         //Delete event
         private void buttonEventDelete_Click(object sender, EventArgs e)
         {
-            string id = textBoxId.Text;
+            string id = textBoxEventId.Text;
             if (id.Length == 0)
             {
                 MessageBox.Show("Nincs kiválasztva Event!");
@@ -274,6 +317,43 @@ namespace MTG_CARDSHOP_ADMIN
                 chartParticipants.Show();
                 adatokSet();
                 AddDataToChart();
+            }
+
+        }
+        
+        private void radioButtonCustomers_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonCustomers.Checked == false)
+            {
+                dataGridViewCustomers.Hide();
+                groupBoxCustomers.Hide();
+            }
+            else
+            {
+                dataGridViewCustomers.Show();
+                groupBoxCustomers.Show();
+            }
+        }
+
+        private async Task getCustomers()
+        {
+            HttpResponseMessage response = await client.GetAsync(customersBaseURL);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                customers = Customer.FromJson(json);
+            }
+        }
+
+        private void dataGridViewCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index >= 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewCustomers.Rows[index];
+                textBoxCustomerId.Text = selectedRow.Cells["CustomerId"].Value.ToString();
+                textBoxCustomerName.Text = selectedRow.Cells["Name"].Value.ToString();
+                textBoxCustomerEmail.Text = selectedRow.Cells["Email"].Value.ToString();
             }
 
         }

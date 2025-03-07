@@ -22,7 +22,7 @@ namespace MTG_CARDSHOP_ADMIN
 
         [JsonProperty("event_name")]
         public string EventName { get; set; }
-
+        
         [JsonProperty("event_date")]
         public DateTimeOffset EventDate { get; set; }
 
@@ -38,15 +38,15 @@ namespace MTG_CARDSHOP_ADMIN
 
     public partial class Event
     {
-        public static List<Event> FromJson(string json) => JsonConvert.DeserializeObject<List<Event>>(json, MTG_CARDSHOP_ADMIN.Converter.Settings);
+        public static List<Event> FromJson(string json) => JsonConvert.DeserializeObject<List<Event>>(json, MTG_CARDSHOP_ADMIN.EventsConverter.Settings);
     }
 
-    public static class Serialize
+    public static class EventsSerialize
     {
-        public static string ToJson(this List<Event> self) => JsonConvert.SerializeObject(self, MTG_CARDSHOP_ADMIN.Converter.Settings);
+        public static string ToJson(this List<Event> self) => JsonConvert.SerializeObject(self, MTG_CARDSHOP_ADMIN.EventsConverter.Settings);
     }
 
-    internal static class Converter
+    internal static class EventsConverter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {
