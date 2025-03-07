@@ -29,9 +29,9 @@ namespace MTG_CARDSHOP_ADMIN
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.chartParticipants = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
@@ -87,18 +87,18 @@ namespace MTG_CARDSHOP_ADMIN
             this.chartParticipants.BackColor = System.Drawing.SystemColors.Control;
             this.chartParticipants.BorderlineColor = System.Drawing.SystemColors.Control;
             this.chartParticipants.BorderSkin.PageColor = System.Drawing.SystemColors.Control;
-            chartArea4.Name = "ChartArea1";
-            this.chartParticipants.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartParticipants.Legends.Add(legend4);
+            chartArea5.Name = "ChartArea1";
+            this.chartParticipants.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartParticipants.Legends.Add(legend5);
             this.chartParticipants.Location = new System.Drawing.Point(438, 151);
             this.chartParticipants.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chartParticipants.Name = "chartParticipants";
             this.chartParticipants.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartParticipants.Series.Add(series4);
+            series5.ChartArea = "ChartArea1";
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartParticipants.Series.Add(series5);
             this.chartParticipants.Size = new System.Drawing.Size(225, 205);
             this.chartParticipants.TabIndex = 0;
             this.chartParticipants.Text = "chart1";
@@ -439,7 +439,7 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // buttonCustomerUpdate
             // 
-            this.buttonCustomerUpdate.Location = new System.Drawing.Point(289, 106);
+            this.buttonCustomerUpdate.Location = new System.Drawing.Point(86, 107);
             this.buttonCustomerUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCustomerUpdate.Name = "buttonCustomerUpdate";
             this.buttonCustomerUpdate.Size = new System.Drawing.Size(56, 22);
@@ -449,7 +449,7 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // buttonCustomerDelete
             // 
-            this.buttonCustomerDelete.Location = new System.Drawing.Point(350, 106);
+            this.buttonCustomerDelete.Location = new System.Drawing.Point(147, 107);
             this.buttonCustomerDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCustomerDelete.Name = "buttonCustomerDelete";
             this.buttonCustomerDelete.Size = new System.Drawing.Size(56, 22);
