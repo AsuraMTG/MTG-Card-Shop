@@ -100,6 +100,10 @@ namespace MTG_CARDSHOP_ADMIN
             groupBoxCustomers.Hide();
             this.Controls.Add(groupBoxCustomers);
 
+
+            pictureBoxHELP.Hide();
+            this.Controls.Add(pictureBoxHELP);
+
             radioButtonLight.Checked = true;
             radioButtonEvents.Checked = true;
 
@@ -356,6 +360,18 @@ namespace MTG_CARDSHOP_ADMIN
                 textBoxCustomerEmail.Text = selectedRow.Cells["Email"].Value.ToString();
             }
 
+        }
+
+        private void radioButtonProducts_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonProducts.Checked == false)
+            {
+                pictureBoxHELP.Hide();
+            }
+            else
+            {
+                pictureBoxHELP.Show();
+            }
         }
     }
 }
