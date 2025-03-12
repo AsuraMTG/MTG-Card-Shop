@@ -99,12 +99,12 @@ router.get('/admin/customers', async (req, res) => {
 // Felhasználói adatok frissítése
 router.put('/admin/customers/:customerId', async (req, res) => {
     const customerId = req.params.customerId;
-    const { name, email } = req.body;
+    const { name, email, address, phone_number } = req.body;
     try {
         await db.query(
             `UPDATE customers
-             SET name = ?, email = ?
-             WHERE customer_id = ?`, [name, email, customerId]
+             SET name = ?, email = ?, address = ?, phone_number = ?
+             WHERE customer_id = ?`, [name, email, address, phone_number, customerId]
         );
         res.status(200).json({ message: 'Felhasználói adatok frissítve' });
     } catch (error) {
