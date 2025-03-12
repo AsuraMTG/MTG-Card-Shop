@@ -88,7 +88,7 @@ router.delete('/admin/events/:eventId', async (req, res) => {
 router.get('/admin/customers', async (req, res) => {
     try {
         const customers = await db.query(
-            `SELECT customer_id, name, email FROM customers`
+            `SELECT * FROM customers`
         );
         res.status(200).json(customers);
     } catch (error) {
