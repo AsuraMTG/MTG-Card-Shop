@@ -31,6 +31,8 @@ namespace MTG_CARDSHOP_ADMIN
         {
             InitializeComponent();
         }
+
+        //Chart event
         private void AddDataToChart()
         {
             chartParticipants.Series.Clear();
@@ -58,10 +60,13 @@ namespace MTG_CARDSHOP_ADMIN
 
 
         }
+
+        //Form load
         private async void Form1_Load(object sender, EventArgs e)
         {
             await getEvents();
             await getCustomers();
+
             // Events view settings
             dataGridViewEvents.DataSource = events;
             dataGridViewEvents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -127,7 +132,7 @@ namespace MTG_CARDSHOP_ADMIN
 
         }
 
-        //Adatok beállítása
+        //Adatok beállítása event
         public void adatokSet()
         {
             textBoxEventId.Text = "";
@@ -138,7 +143,7 @@ namespace MTG_CARDSHOP_ADMIN
             textBoxEventDescription.Text = "";
         }
 
-        //Űrlap feltöltese
+        //Űrlap feltöltese event
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -156,7 +161,7 @@ namespace MTG_CARDSHOP_ADMIN
             AddDataToChart();
         }
 
-        //NEW event
+        //New event
         private void buttonEventNew_Click(object sender, EventArgs e)
         {
             adatokSet();
@@ -213,10 +218,6 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        
-
-
-
         //Update event
         private void buttonEventUpdate_Click(object sender, EventArgs e)
         {
@@ -233,7 +234,7 @@ namespace MTG_CARDSHOP_ADMIN
                 return;
             }
 
-            if (MessageBox.Show("Biztosan frissíteni szeretné a felhasználót?", "Frissítés", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (MessageBox.Show("Biztosan frissíteni szeretné az Eseményt?", "Frissítés", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 updateUser(id, name, date, max, description);
             }
@@ -324,7 +325,8 @@ namespace MTG_CARDSHOP_ADMIN
             }
 
         }
-        
+
+        //Customers Show/Hide
         private void radioButtonCustomers_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonCustomers.Checked == false)
@@ -336,9 +338,24 @@ namespace MTG_CARDSHOP_ADMIN
             {
                 dataGridViewCustomers.Show();
                 groupBoxCustomers.Show();
+                adatokSetCustomer();
             }
         }
 
+        //Products Show/Hide
+        private void radioButtonProducts_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonProducts.Checked == false)
+            {
+                pictureBoxHELP.Hide();
+            }
+            else
+            {
+                pictureBoxHELP.Show();
+            }
+        }
+
+        //Read customers
         private async Task getCustomers()
         {
             HttpResponseMessage response = await client.GetAsync(customersBaseURL);
@@ -349,6 +366,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
+        //Űrlap feltöltese customer
         private void dataGridViewCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -362,33 +380,61 @@ namespace MTG_CARDSHOP_ADMIN
                 textBoxCustomerPhone.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
                 textBoxCustomerRegistration.Text = selectedRow.Cells["RegistrationDate"].Value.ToString();
             }
-
         }
 
-        private void radioButtonProducts_CheckedChanged(object sender, EventArgs e)
-        {
-            if (radioButtonProducts.Checked == false)
-            {
-                pictureBoxHELP.Hide();
-            }
-            else
-            {
-                pictureBoxHELP.Show();
-            }
-        }
-
+        //Adatok beállítása customer
         public void adatokSetCustomer()
         {
             textBoxCustomerEmail.Text = "";
             textBoxCustomerId.Text = "";
             textBoxCustomerName.Text = "";
+            textBoxCustomerPhone.Text = "";
+            textBoxCustomerRegistration.Text = "";
+            textBoxCustomerAddress.Text = "";
         }
 
+        //Update customer
         private void buttonCustomerUpdate_Click(object sender, EventArgs e)
         {
+            decimal id = Convert.ToInt32(textBoxCustomerId.Text);
+            string name = textBoxCustomerName.Text;
+            string email = textBoxCustomerEmail.Text;
+            string address = textBoxCustomerAddress.Text;
+            string phoneNumber = textBoxCustomerPhone.Text;
+
+            if (MessageBox.Show("Biztosan frissíteni szeretné a felhasználót?", "Frissítés", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                updateCustomer(id, name, email, address, phoneNumber);
+            }
 
         }
+        private async void updateCustomer(decimal id, string name, string email, string address, string phoneNumber)
+        {
+            try
+            {
+                var content = new StringContent($"{{\"name\":\"{name}\",\"email\":\"{email}\",\"address\":\"{address}\",\"phone_number\":\"{phoneNumber}\"}}", Encoding.UTF8, "application/json");
 
+                HttpResponseMessage result = await client.PutAsync($"{customersBaseURL}/{id}", content);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres frissítés!");
+                    await getCustomers();
+                    dataGridViewCustomers.DataSource = customers;
+                    adatokSetCustomer();
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a frissítés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        //Delete customer
         private void buttonCustomerDelete_Click(object sender, EventArgs e)
         {
             string id = textBoxCustomerId.Text;
@@ -402,7 +448,6 @@ namespace MTG_CARDSHOP_ADMIN
                 deleteCustomer(id);
             }
         }
-
         private async void deleteCustomer(string id)
         {
             try
