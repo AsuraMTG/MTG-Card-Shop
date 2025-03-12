@@ -358,6 +358,9 @@ namespace MTG_CARDSHOP_ADMIN
                 textBoxCustomerId.Text = selectedRow.Cells["CustomerId"].Value.ToString();
                 textBoxCustomerName.Text = selectedRow.Cells["Name"].Value.ToString();
                 textBoxCustomerEmail.Text = selectedRow.Cells["Email"].Value.ToString();
+                textBoxCustomerAddress.Text = selectedRow.Cells["Address"].Value.ToString();
+                textBoxCustomerPhone.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
+                textBoxCustomerRegistration.Text = selectedRow.Cells["RegistrationDate"].Value.ToString();
             }
 
         }
@@ -371,6 +374,55 @@ namespace MTG_CARDSHOP_ADMIN
             else
             {
                 pictureBoxHELP.Show();
+            }
+        }
+
+        public void adatokSetCustomer()
+        {
+            textBoxCustomerEmail.Text = "";
+            textBoxCustomerId.Text = "";
+            textBoxCustomerName.Text = "";
+        }
+
+        private void buttonCustomerUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCustomerDelete_Click(object sender, EventArgs e)
+        {
+            string id = textBoxCustomerId.Text;
+            if (id.Length == 0)
+            {
+                MessageBox.Show("Nincs kiválasztva Customer!");
+                return;
+            }
+            if (MessageBox.Show("Biztosan törölni szeretné a Customert?", "Törlés", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                deleteCustomer(id);
+            }
+        }
+
+        private async void deleteCustomer(string id)
+        {
+            try
+            {
+                HttpResponseMessage result = await client.DeleteAsync($"{customersBaseURL}/{id}");
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres törlés!");
+                    await getCustomers();
+                    dataGridViewCustomers.DataSource = customers;
+                    adatokSetCustomer();
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a törlés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

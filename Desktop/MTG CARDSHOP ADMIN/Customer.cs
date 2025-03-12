@@ -25,6 +25,15 @@ namespace MTG_CARDSHOP_ADMIN
 
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        [JsonProperty("address")]
+        public string Address { get; set; }
+
+        [JsonProperty("phone_number")]
+        public string PhoneNumber { get; set; }
+
+        [JsonProperty("registration_date")]
+        public DateTimeOffset RegistrationDate { get; set; }
     }
 
     public partial class Customer
@@ -34,7 +43,7 @@ namespace MTG_CARDSHOP_ADMIN
 
     public static class CustomersSerialize
     {
-        public static string ToJson(this Customer[] self) => JsonConvert.SerializeObject(self, MTG_CARDSHOP_ADMIN.CustomersConverter.Settings);
+        public static string ToJson(this List<Customer> self) => JsonConvert.SerializeObject(self, MTG_CARDSHOP_ADMIN.CustomersConverter.Settings);
     }
 
     internal static class CustomersConverter

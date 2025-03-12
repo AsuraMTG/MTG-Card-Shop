@@ -29,9 +29,9 @@ namespace MTG_CARDSHOP_ADMIN
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.chartParticipants = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.pictureBoxLogo = new System.Windows.Forms.PictureBox();
@@ -62,6 +62,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCustomers = new System.Windows.Forms.DataGridView();
             this.groupBoxCustomers = new System.Windows.Forms.GroupBox();
+            this.pictureBoxHELP = new System.Windows.Forms.PictureBox();
             this.labelCustomerEmail = new System.Windows.Forms.Label();
             this.textBoxCustomerEmail = new System.Windows.Forms.TextBox();
             this.buttonCustomerUpdate = new System.Windows.Forms.Button();
@@ -70,7 +71,12 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerName = new System.Windows.Forms.Label();
             this.textBoxCustomerId = new System.Windows.Forms.TextBox();
             this.textBoxCustomerName = new System.Windows.Forms.TextBox();
-            this.pictureBoxHELP = new System.Windows.Forms.PictureBox();
+            this.labelCustomerPhone = new System.Windows.Forms.Label();
+            this.textBoxCustomerPhone = new System.Windows.Forms.TextBox();
+            this.labelCustomerAddress = new System.Windows.Forms.Label();
+            this.textBoxCustomerAddress = new System.Windows.Forms.TextBox();
+            this.labelCustomerRegistration = new System.Windows.Forms.Label();
+            this.textBoxCustomerRegistration = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.chartParticipants)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
@@ -89,18 +95,18 @@ namespace MTG_CARDSHOP_ADMIN
             this.chartParticipants.BackColor = System.Drawing.SystemColors.Control;
             this.chartParticipants.BorderlineColor = System.Drawing.SystemColors.Control;
             this.chartParticipants.BorderSkin.PageColor = System.Drawing.SystemColors.Control;
-            chartArea6.Name = "ChartArea1";
-            this.chartParticipants.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartParticipants.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            this.chartParticipants.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartParticipants.Legends.Add(legend3);
             this.chartParticipants.Location = new System.Drawing.Point(584, 186);
             this.chartParticipants.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chartParticipants.Name = "chartParticipants";
             this.chartParticipants.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Chocolate;
-            series6.ChartArea = "ChartArea1";
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chartParticipants.Series.Add(series6);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartParticipants.Series.Add(series3);
             this.chartParticipants.Size = new System.Drawing.Size(300, 252);
             this.chartParticipants.TabIndex = 0;
             this.chartParticipants.Text = "chart1";
@@ -123,7 +129,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonLight.Location = new System.Drawing.Point(5, 27);
             this.radioButtonLight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonLight.Name = "radioButtonLight";
-            this.radioButtonLight.Size = new System.Drawing.Size(94, 20);
+            this.radioButtonLight.Size = new System.Drawing.Size(99, 21);
             this.radioButtonLight.TabIndex = 6;
             this.radioButtonLight.TabStop = true;
             this.radioButtonLight.Text = "Light Mode";
@@ -135,7 +141,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonDark.Location = new System.Drawing.Point(5, 54);
             this.radioButtonDark.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonDark.Name = "radioButtonDark";
-            this.radioButtonDark.Size = new System.Drawing.Size(95, 20);
+            this.radioButtonDark.Size = new System.Drawing.Size(98, 21);
             this.radioButtonDark.TabIndex = 7;
             this.radioButtonDark.TabStop = true;
             this.radioButtonDark.Text = "Dark Mode";
@@ -169,7 +175,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventId.AutoSize = true;
             this.labelEventId.Location = new System.Drawing.Point(5, 32);
             this.labelEventId.Name = "labelEventId";
-            this.labelEventId.Size = new System.Drawing.Size(23, 16);
+            this.labelEventId.Size = new System.Drawing.Size(25, 17);
             this.labelEventId.TabIndex = 10;
             this.labelEventId.Text = "ID:";
             // 
@@ -178,7 +184,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventName.AutoSize = true;
             this.labelEventName.Location = new System.Drawing.Point(5, 62);
             this.labelEventName.Name = "labelEventName";
-            this.labelEventName.Size = new System.Drawing.Size(47, 16);
+            this.labelEventName.Size = new System.Drawing.Size(49, 17);
             this.labelEventName.TabIndex = 12;
             this.labelEventName.Text = "Name:";
             // 
@@ -192,6 +198,7 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // groupBoxEvent
             // 
+            this.groupBoxEvent.Controls.Add(this.pictureBoxHELP);
             this.groupBoxEvent.Controls.Add(this.dateTimePickerEventDate);
             this.groupBoxEvent.Controls.Add(this.buttonEventNew);
             this.groupBoxEvent.Controls.Add(this.buttonEventUpdate);
@@ -284,7 +291,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventDescription.AutoSize = true;
             this.labelEventDescription.Location = new System.Drawing.Point(5, 176);
             this.labelEventDescription.Name = "labelEventDescription";
-            this.labelEventDescription.Size = new System.Drawing.Size(78, 16);
+            this.labelEventDescription.Size = new System.Drawing.Size(83, 17);
             this.labelEventDescription.TabIndex = 21;
             this.labelEventDescription.Text = "Description:";
             // 
@@ -302,7 +309,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventCurrentParticipants.AutoSize = true;
             this.labelEventCurrentParticipants.Location = new System.Drawing.Point(5, 146);
             this.labelEventCurrentParticipants.Name = "labelEventCurrentParticipants";
-            this.labelEventCurrentParticipants.Size = new System.Drawing.Size(124, 16);
+            this.labelEventCurrentParticipants.Size = new System.Drawing.Size(136, 17);
             this.labelEventCurrentParticipants.TabIndex = 18;
             this.labelEventCurrentParticipants.Text = "Current participants:";
             // 
@@ -324,7 +331,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventMaxParticipants.AutoSize = true;
             this.labelEventMaxParticipants.Location = new System.Drawing.Point(5, 121);
             this.labelEventMaxParticipants.Name = "labelEventMaxParticipants";
-            this.labelEventMaxParticipants.Size = new System.Drawing.Size(107, 16);
+            this.labelEventMaxParticipants.Size = new System.Drawing.Size(114, 17);
             this.labelEventMaxParticipants.TabIndex = 16;
             this.labelEventMaxParticipants.Text = "Max participants:";
             // 
@@ -333,7 +340,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventDate.AutoSize = true;
             this.labelEventDate.Location = new System.Drawing.Point(5, 94);
             this.labelEventDate.Name = "labelEventDate";
-            this.labelEventDate.Size = new System.Drawing.Size(39, 16);
+            this.labelEventDate.Size = new System.Drawing.Size(42, 17);
             this.labelEventDate.TabIndex = 14;
             this.labelEventDate.Text = "Date:";
             // 
@@ -357,7 +364,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonProducts.Location = new System.Drawing.Point(5, 76);
             this.radioButtonProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonProducts.Name = "radioButtonProducts";
-            this.radioButtonProducts.Size = new System.Drawing.Size(81, 20);
+            this.radioButtonProducts.Size = new System.Drawing.Size(85, 21);
             this.radioButtonProducts.TabIndex = 2;
             this.radioButtonProducts.TabStop = true;
             this.radioButtonProducts.Text = "Products";
@@ -370,7 +377,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonCustomers.Location = new System.Drawing.Point(5, 49);
             this.radioButtonCustomers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonCustomers.Name = "radioButtonCustomers";
-            this.radioButtonCustomers.Size = new System.Drawing.Size(92, 20);
+            this.radioButtonCustomers.Size = new System.Drawing.Size(96, 21);
             this.radioButtonCustomers.TabIndex = 1;
             this.radioButtonCustomers.TabStop = true;
             this.radioButtonCustomers.Text = "Customers";
@@ -383,7 +390,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonEvents.Location = new System.Drawing.Point(7, 22);
             this.radioButtonEvents.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonEvents.Name = "radioButtonEvents";
-            this.radioButtonEvents.Size = new System.Drawing.Size(69, 20);
+            this.radioButtonEvents.Size = new System.Drawing.Size(72, 21);
             this.radioButtonEvents.TabIndex = 0;
             this.radioButtonEvents.TabStop = true;
             this.radioButtonEvents.Text = "Events";
@@ -407,7 +414,7 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             this.dataGridViewCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCustomers.Location = new System.Drawing.Point(584, 182);
-            this.dataGridViewCustomers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridViewCustomers.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewCustomers.Name = "dataGridViewCustomers";
             this.dataGridViewCustomers.RowHeadersVisible = false;
             this.dataGridViewCustomers.RowHeadersWidth = 51;
@@ -418,7 +425,12 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // groupBoxCustomers
             // 
-            this.groupBoxCustomers.Controls.Add(this.pictureBoxHELP);
+            this.groupBoxCustomers.Controls.Add(this.labelCustomerRegistration);
+            this.groupBoxCustomers.Controls.Add(this.textBoxCustomerRegistration);
+            this.groupBoxCustomers.Controls.Add(this.labelCustomerPhone);
+            this.groupBoxCustomers.Controls.Add(this.textBoxCustomerPhone);
+            this.groupBoxCustomers.Controls.Add(this.labelCustomerAddress);
+            this.groupBoxCustomers.Controls.Add(this.textBoxCustomerAddress);
             this.groupBoxCustomers.Controls.Add(this.labelCustomerEmail);
             this.groupBoxCustomers.Controls.Add(this.textBoxCustomerEmail);
             this.groupBoxCustomers.Controls.Add(this.buttonCustomerUpdate);
@@ -431,18 +443,27 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBoxCustomers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxCustomers.Name = "groupBoxCustomers";
             this.groupBoxCustomers.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxCustomers.Size = new System.Drawing.Size(565, 164);
+            this.groupBoxCustomers.Size = new System.Drawing.Size(565, 245);
             this.groupBoxCustomers.TabIndex = 27;
             this.groupBoxCustomers.TabStop = false;
             this.groupBoxCustomers.Text = "Customer properties";
             this.groupBoxCustomers.Visible = false;
+            // 
+            // pictureBoxHELP
+            // 
+            this.pictureBoxHELP.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.pictureBoxHELP.Location = new System.Drawing.Point(6, 229);
+            this.pictureBoxHELP.Name = "pictureBoxHELP";
+            this.pictureBoxHELP.Size = new System.Drawing.Size(564, 139);
+            this.pictureBoxHELP.TabIndex = 28;
+            this.pictureBoxHELP.TabStop = false;
             // 
             // labelCustomerEmail
             // 
             this.labelCustomerEmail.AutoSize = true;
             this.labelCustomerEmail.Location = new System.Drawing.Point(5, 90);
             this.labelCustomerEmail.Name = "labelCustomerEmail";
-            this.labelCustomerEmail.Size = new System.Drawing.Size(48, 16);
+            this.labelCustomerEmail.Size = new System.Drawing.Size(51, 17);
             this.labelCustomerEmail.TabIndex = 27;
             this.labelCustomerEmail.Text = "E-Mail:";
             // 
@@ -451,35 +472,37 @@ namespace MTG_CARDSHOP_ADMIN
             this.textBoxCustomerEmail.Location = new System.Drawing.Point(115, 90);
             this.textBoxCustomerEmail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCustomerEmail.Name = "textBoxCustomerEmail";
-            this.textBoxCustomerEmail.Size = new System.Drawing.Size(263, 22);
+            this.textBoxCustomerEmail.Size = new System.Drawing.Size(281, 22);
             this.textBoxCustomerEmail.TabIndex = 26;
             // 
             // buttonCustomerUpdate
             // 
-            this.buttonCustomerUpdate.Location = new System.Drawing.Point(115, 132);
+            this.buttonCustomerUpdate.Location = new System.Drawing.Point(240, 218);
             this.buttonCustomerUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCustomerUpdate.Name = "buttonCustomerUpdate";
             this.buttonCustomerUpdate.Size = new System.Drawing.Size(75, 27);
             this.buttonCustomerUpdate.TabIndex = 24;
             this.buttonCustomerUpdate.Text = "Update";
             this.buttonCustomerUpdate.UseVisualStyleBackColor = true;
+            this.buttonCustomerUpdate.Click += new System.EventHandler(this.buttonCustomerUpdate_Click);
             // 
             // buttonCustomerDelete
             // 
-            this.buttonCustomerDelete.Location = new System.Drawing.Point(196, 132);
+            this.buttonCustomerDelete.Location = new System.Drawing.Point(321, 218);
             this.buttonCustomerDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonCustomerDelete.Name = "buttonCustomerDelete";
             this.buttonCustomerDelete.Size = new System.Drawing.Size(75, 27);
             this.buttonCustomerDelete.TabIndex = 23;
             this.buttonCustomerDelete.Text = "Delete";
             this.buttonCustomerDelete.UseVisualStyleBackColor = true;
+            this.buttonCustomerDelete.Click += new System.EventHandler(this.buttonCustomerDelete_Click);
             // 
             // labelCustomerId
             // 
             this.labelCustomerId.AutoSize = true;
             this.labelCustomerId.Location = new System.Drawing.Point(5, 32);
             this.labelCustomerId.Name = "labelCustomerId";
-            this.labelCustomerId.Size = new System.Drawing.Size(23, 16);
+            this.labelCustomerId.Size = new System.Drawing.Size(25, 17);
             this.labelCustomerId.TabIndex = 10;
             this.labelCustomerId.Text = "ID:";
             // 
@@ -488,7 +511,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerName.AutoSize = true;
             this.labelCustomerName.Location = new System.Drawing.Point(5, 62);
             this.labelCustomerName.Name = "labelCustomerName";
-            this.labelCustomerName.Size = new System.Drawing.Size(47, 16);
+            this.labelCustomerName.Size = new System.Drawing.Size(49, 17);
             this.labelCustomerName.TabIndex = 12;
             this.labelCustomerName.Text = "Name:";
             // 
@@ -506,17 +529,60 @@ namespace MTG_CARDSHOP_ADMIN
             this.textBoxCustomerName.Location = new System.Drawing.Point(115, 62);
             this.textBoxCustomerName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxCustomerName.Name = "textBoxCustomerName";
-            this.textBoxCustomerName.Size = new System.Drawing.Size(263, 22);
+            this.textBoxCustomerName.Size = new System.Drawing.Size(281, 22);
             this.textBoxCustomerName.TabIndex = 11;
             // 
-            // pictureBoxHELP
+            // labelCustomerPhone
             // 
-            this.pictureBoxHELP.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.pictureBoxHELP.Location = new System.Drawing.Point(9, 20);
-            this.pictureBoxHELP.Name = "pictureBoxHELP";
-            this.pictureBoxHELP.Size = new System.Drawing.Size(564, 139);
-            this.pictureBoxHELP.TabIndex = 28;
-            this.pictureBoxHELP.TabStop = false;
+            this.labelCustomerPhone.AutoSize = true;
+            this.labelCustomerPhone.Location = new System.Drawing.Point(5, 148);
+            this.labelCustomerPhone.Name = "labelCustomerPhone";
+            this.labelCustomerPhone.Size = new System.Drawing.Size(107, 17);
+            this.labelCustomerPhone.TabIndex = 31;
+            this.labelCustomerPhone.Text = "Phone Number:";
+            // 
+            // textBoxCustomerPhone
+            // 
+            this.textBoxCustomerPhone.Location = new System.Drawing.Point(115, 148);
+            this.textBoxCustomerPhone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCustomerPhone.Name = "textBoxCustomerPhone";
+            this.textBoxCustomerPhone.Size = new System.Drawing.Size(281, 22);
+            this.textBoxCustomerPhone.TabIndex = 30;
+            // 
+            // labelCustomerAddress
+            // 
+            this.labelCustomerAddress.AutoSize = true;
+            this.labelCustomerAddress.Location = new System.Drawing.Point(5, 120);
+            this.labelCustomerAddress.Name = "labelCustomerAddress";
+            this.labelCustomerAddress.Size = new System.Drawing.Size(64, 17);
+            this.labelCustomerAddress.TabIndex = 29;
+            this.labelCustomerAddress.Text = "Address:";
+            // 
+            // textBoxCustomerAddress
+            // 
+            this.textBoxCustomerAddress.Location = new System.Drawing.Point(115, 120);
+            this.textBoxCustomerAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCustomerAddress.Name = "textBoxCustomerAddress";
+            this.textBoxCustomerAddress.Size = new System.Drawing.Size(281, 22);
+            this.textBoxCustomerAddress.TabIndex = 28;
+            // 
+            // labelCustomerRegistration
+            // 
+            this.labelCustomerRegistration.AutoSize = true;
+            this.labelCustomerRegistration.Location = new System.Drawing.Point(5, 176);
+            this.labelCustomerRegistration.Name = "labelCustomerRegistration";
+            this.labelCustomerRegistration.Size = new System.Drawing.Size(122, 17);
+            this.labelCustomerRegistration.TabIndex = 33;
+            this.labelCustomerRegistration.Text = "Registration Date:";
+            // 
+            // textBoxCustomerRegistration
+            // 
+            this.textBoxCustomerRegistration.Location = new System.Drawing.Point(133, 174);
+            this.textBoxCustomerRegistration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCustomerRegistration.Name = "textBoxCustomerRegistration";
+            this.textBoxCustomerRegistration.ReadOnly = true;
+            this.textBoxCustomerRegistration.Size = new System.Drawing.Size(263, 22);
+            this.textBoxCustomerRegistration.TabIndex = 32;
             // 
             // Form1
             // 
@@ -594,6 +660,12 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.Label labelCustomerEmail;
         private System.Windows.Forms.TextBox textBoxCustomerEmail;
         private System.Windows.Forms.PictureBox pictureBoxHELP;
+        private System.Windows.Forms.Label labelCustomerPhone;
+        private System.Windows.Forms.TextBox textBoxCustomerPhone;
+        private System.Windows.Forms.Label labelCustomerAddress;
+        private System.Windows.Forms.TextBox textBoxCustomerAddress;
+        private System.Windows.Forms.Label labelCustomerRegistration;
+        private System.Windows.Forms.TextBox textBoxCustomerRegistration;
     }
 }
 
