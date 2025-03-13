@@ -517,17 +517,13 @@ namespace MTG_CARDSHOP_ADMIN
             {
                 DataGridViewRow selectedRow = dataGridViewProducts.Rows[index];
 
-                // Feltételezve, hogy az 'image' oszlop tartalmazza a JSON-hoz hasonló Image objektumot
-                var product = (Product)selectedRow.DataBoundItem; // Ez a termék objektumot adja vissza
+                var product = (Product)selectedRow.DataBoundItem;
 
                 if (product.Image != null)
-                {
-                    pictureBoxHELP.Image = product.Image.ToImage(); // Kép betöltése a PictureBox-ba
-                }
+                    pictureBoxHELP.Image = product.Image.ToImage();
                 else
-                {
                     MessageBox.Show("Nincs érvényes kép adat.");
-                }
+
                 textBoxProductId.Text = selectedRow.Cells["ProductId"].Value.ToString();
                 textBoxProductName.Text = selectedRow.Cells["Name"].Value.ToString();
                 textBoxProductAvailable.Text = selectedRow.Cells["Available"].Value.ToString();
@@ -539,9 +535,5 @@ namespace MTG_CARDSHOP_ADMIN
                 comboBoxProductCategory.SelectedIndex = categoryId - 1;
             }
         }
-
-
-
-
     }
 }

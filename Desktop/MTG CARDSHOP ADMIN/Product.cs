@@ -54,10 +54,8 @@ namespace MTG_CARDSHOP_ADMIN
 
         public System.Drawing.Image ToImage()
         {
-            // Alakítsuk át a List<int>-et byte[] formátumba
             byte[] imageBytes = Data.Select(i => (byte)i).ToArray();
 
-            // Használjuk a MemoryStream-et a kép létrehozásához
             using (MemoryStream ms = new MemoryStream(imageBytes))
             {
                 return System.Drawing.Image.FromStream(ms);
@@ -69,7 +67,6 @@ namespace MTG_CARDSHOP_ADMIN
             throw new NotImplementedException();
         }
     }
-
 
     public partial class Product
     {
