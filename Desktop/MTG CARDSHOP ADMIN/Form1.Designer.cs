@@ -55,6 +55,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.numericUpDownEventMax = new System.Windows.Forms.NumericUpDown();
             this.labelEventMaxParticipants = new System.Windows.Forms.Label();
             this.labelEventDate = new System.Windows.Forms.Label();
+            this.pictureBoxHELP = new System.Windows.Forms.PictureBox();
             this.groupBoxNav = new System.Windows.Forms.GroupBox();
             this.radioButtonProducts = new System.Windows.Forms.RadioButton();
             this.radioButtonCustomers = new System.Windows.Forms.RadioButton();
@@ -62,7 +63,12 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCustomers = new System.Windows.Forms.DataGridView();
             this.groupBoxCustomers = new System.Windows.Forms.GroupBox();
-            this.pictureBoxHELP = new System.Windows.Forms.PictureBox();
+            this.labelCustomerRegistration = new System.Windows.Forms.Label();
+            this.textBoxCustomerRegistration = new System.Windows.Forms.TextBox();
+            this.labelCustomerPhone = new System.Windows.Forms.Label();
+            this.textBoxCustomerPhone = new System.Windows.Forms.TextBox();
+            this.labelCustomerAddress = new System.Windows.Forms.Label();
+            this.textBoxCustomerAddress = new System.Windows.Forms.TextBox();
             this.labelCustomerEmail = new System.Windows.Forms.Label();
             this.textBoxCustomerEmail = new System.Windows.Forms.TextBox();
             this.buttonCustomerUpdate = new System.Windows.Forms.Button();
@@ -71,22 +77,39 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerName = new System.Windows.Forms.Label();
             this.textBoxCustomerId = new System.Windows.Forms.TextBox();
             this.textBoxCustomerName = new System.Windows.Forms.TextBox();
-            this.labelCustomerPhone = new System.Windows.Forms.Label();
-            this.textBoxCustomerPhone = new System.Windows.Forms.TextBox();
-            this.labelCustomerAddress = new System.Windows.Forms.Label();
-            this.textBoxCustomerAddress = new System.Windows.Forms.TextBox();
-            this.labelCustomerRegistration = new System.Windows.Forms.Label();
-            this.textBoxCustomerRegistration = new System.Windows.Forms.TextBox();
+            this.groupBoxProducts = new System.Windows.Forms.GroupBox();
+            this.textBoxProductAvailable = new System.Windows.Forms.TextBox();
+            this.textBoxProductStock = new System.Windows.Forms.TextBox();
+            this.comboBoxProductCategory = new System.Windows.Forms.ComboBox();
+            this.textBoxProductPrice = new System.Windows.Forms.TextBox();
+            this.textBoxProductName = new System.Windows.Forms.TextBox();
+            this.textBoxProductId = new System.Windows.Forms.TextBox();
+            this.buttonProductImageUpload = new System.Windows.Forms.Button();
+            this.labelProductDescription = new System.Windows.Forms.Label();
+            this.labelProductAvailable = new System.Windows.Forms.Label();
+            this.labelProductStock = new System.Windows.Forms.Label();
+            this.labelProductPrice = new System.Windows.Forms.Label();
+            this.labelProductCategory = new System.Windows.Forms.Label();
+            this.labelProductName = new System.Windows.Forms.Label();
+            this.labelProductId = new System.Windows.Forms.Label();
+            this.dataGridViewProducts = new System.Windows.Forms.DataGridView();
+            this.textBoxProductDescription = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chartParticipants)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLogo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEvents)).BeginInit();
             this.groupBoxEvent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEventMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHELP)).BeginInit();
             this.groupBoxNav.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomers)).BeginInit();
             this.groupBoxCustomers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHELP)).BeginInit();
+            this.groupBoxProducts.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducts)).BeginInit();
             this.SuspendLayout();
             // 
             // chartParticipants
@@ -198,7 +221,6 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // groupBoxEvent
             // 
-            this.groupBoxEvent.Controls.Add(this.pictureBoxHELP);
             this.groupBoxEvent.Controls.Add(this.dateTimePickerEventDate);
             this.groupBoxEvent.Controls.Add(this.buttonEventNew);
             this.groupBoxEvent.Controls.Add(this.buttonEventUpdate);
@@ -344,6 +366,16 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventDate.TabIndex = 14;
             this.labelEventDate.Text = "Date:";
             // 
+            // pictureBoxHELP
+            // 
+            this.pictureBoxHELP.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBoxHELP.Location = new System.Drawing.Point(6, 22);
+            this.pictureBoxHELP.Name = "pictureBoxHELP";
+            this.pictureBoxHELP.Size = new System.Drawing.Size(554, 200);
+            this.pictureBoxHELP.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxHELP.TabIndex = 28;
+            this.pictureBoxHELP.TabStop = false;
+            // 
             // groupBoxNav
             // 
             this.groupBoxNav.Controls.Add(this.radioButtonProducts);
@@ -449,14 +481,57 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBoxCustomers.Text = "Customer properties";
             this.groupBoxCustomers.Visible = false;
             // 
-            // pictureBoxHELP
+            // labelCustomerRegistration
             // 
-            this.pictureBoxHELP.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.pictureBoxHELP.Location = new System.Drawing.Point(6, 229);
-            this.pictureBoxHELP.Name = "pictureBoxHELP";
-            this.pictureBoxHELP.Size = new System.Drawing.Size(564, 139);
-            this.pictureBoxHELP.TabIndex = 28;
-            this.pictureBoxHELP.TabStop = false;
+            this.labelCustomerRegistration.AutoSize = true;
+            this.labelCustomerRegistration.Location = new System.Drawing.Point(5, 176);
+            this.labelCustomerRegistration.Name = "labelCustomerRegistration";
+            this.labelCustomerRegistration.Size = new System.Drawing.Size(122, 17);
+            this.labelCustomerRegistration.TabIndex = 33;
+            this.labelCustomerRegistration.Text = "Registration Date:";
+            // 
+            // textBoxCustomerRegistration
+            // 
+            this.textBoxCustomerRegistration.Location = new System.Drawing.Point(133, 174);
+            this.textBoxCustomerRegistration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCustomerRegistration.Name = "textBoxCustomerRegistration";
+            this.textBoxCustomerRegistration.ReadOnly = true;
+            this.textBoxCustomerRegistration.Size = new System.Drawing.Size(263, 22);
+            this.textBoxCustomerRegistration.TabIndex = 32;
+            // 
+            // labelCustomerPhone
+            // 
+            this.labelCustomerPhone.AutoSize = true;
+            this.labelCustomerPhone.Location = new System.Drawing.Point(5, 148);
+            this.labelCustomerPhone.Name = "labelCustomerPhone";
+            this.labelCustomerPhone.Size = new System.Drawing.Size(107, 17);
+            this.labelCustomerPhone.TabIndex = 31;
+            this.labelCustomerPhone.Text = "Phone Number:";
+            // 
+            // textBoxCustomerPhone
+            // 
+            this.textBoxCustomerPhone.Location = new System.Drawing.Point(115, 148);
+            this.textBoxCustomerPhone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCustomerPhone.Name = "textBoxCustomerPhone";
+            this.textBoxCustomerPhone.Size = new System.Drawing.Size(281, 22);
+            this.textBoxCustomerPhone.TabIndex = 30;
+            // 
+            // labelCustomerAddress
+            // 
+            this.labelCustomerAddress.AutoSize = true;
+            this.labelCustomerAddress.Location = new System.Drawing.Point(5, 120);
+            this.labelCustomerAddress.Name = "labelCustomerAddress";
+            this.labelCustomerAddress.Size = new System.Drawing.Size(64, 17);
+            this.labelCustomerAddress.TabIndex = 29;
+            this.labelCustomerAddress.Text = "Address:";
+            // 
+            // textBoxCustomerAddress
+            // 
+            this.textBoxCustomerAddress.Location = new System.Drawing.Point(115, 120);
+            this.textBoxCustomerAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxCustomerAddress.Name = "textBoxCustomerAddress";
+            this.textBoxCustomerAddress.Size = new System.Drawing.Size(281, 22);
+            this.textBoxCustomerAddress.TabIndex = 28;
             // 
             // labelCustomerEmail
             // 
@@ -532,63 +607,223 @@ namespace MTG_CARDSHOP_ADMIN
             this.textBoxCustomerName.Size = new System.Drawing.Size(281, 22);
             this.textBoxCustomerName.TabIndex = 11;
             // 
-            // labelCustomerPhone
+            // groupBoxProducts
             // 
-            this.labelCustomerPhone.AutoSize = true;
-            this.labelCustomerPhone.Location = new System.Drawing.Point(5, 148);
-            this.labelCustomerPhone.Name = "labelCustomerPhone";
-            this.labelCustomerPhone.Size = new System.Drawing.Size(107, 17);
-            this.labelCustomerPhone.TabIndex = 31;
-            this.labelCustomerPhone.Text = "Phone Number:";
+            this.groupBoxProducts.Controls.Add(this.button4);
+            this.groupBoxProducts.Controls.Add(this.button5);
+            this.groupBoxProducts.Controls.Add(this.button6);
+            this.groupBoxProducts.Controls.Add(this.button7);
+            this.groupBoxProducts.Controls.Add(this.textBoxProductDescription);
+            this.groupBoxProducts.Controls.Add(this.textBoxProductAvailable);
+            this.groupBoxProducts.Controls.Add(this.textBoxProductStock);
+            this.groupBoxProducts.Controls.Add(this.comboBoxProductCategory);
+            this.groupBoxProducts.Controls.Add(this.textBoxProductPrice);
+            this.groupBoxProducts.Controls.Add(this.textBoxProductName);
+            this.groupBoxProducts.Controls.Add(this.textBoxProductId);
+            this.groupBoxProducts.Controls.Add(this.buttonProductImageUpload);
+            this.groupBoxProducts.Controls.Add(this.labelProductDescription);
+            this.groupBoxProducts.Controls.Add(this.labelProductAvailable);
+            this.groupBoxProducts.Controls.Add(this.labelProductStock);
+            this.groupBoxProducts.Controls.Add(this.labelProductPrice);
+            this.groupBoxProducts.Controls.Add(this.labelProductCategory);
+            this.groupBoxProducts.Controls.Add(this.labelProductName);
+            this.groupBoxProducts.Controls.Add(this.labelProductId);
+            this.groupBoxProducts.Controls.Add(this.pictureBoxHELP);
+            this.groupBoxProducts.Location = new System.Drawing.Point(12, 12);
+            this.groupBoxProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxProducts.Name = "groupBoxProducts";
+            this.groupBoxProducts.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBoxProducts.Size = new System.Drawing.Size(566, 654);
+            this.groupBoxProducts.TabIndex = 34;
+            this.groupBoxProducts.TabStop = false;
+            this.groupBoxProducts.Text = "Product properties";
+            this.groupBoxProducts.Visible = false;
             // 
-            // textBoxCustomerPhone
+            // textBoxProductAvailable
             // 
-            this.textBoxCustomerPhone.Location = new System.Drawing.Point(115, 148);
-            this.textBoxCustomerPhone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxCustomerPhone.Name = "textBoxCustomerPhone";
-            this.textBoxCustomerPhone.Size = new System.Drawing.Size(281, 22);
-            this.textBoxCustomerPhone.TabIndex = 30;
+            this.textBoxProductAvailable.Location = new System.Drawing.Point(78, 364);
+            this.textBoxProductAvailable.Name = "textBoxProductAvailable";
+            this.textBoxProductAvailable.Size = new System.Drawing.Size(95, 22);
+            this.textBoxProductAvailable.TabIndex = 43;
             // 
-            // labelCustomerAddress
+            // textBoxProductStock
             // 
-            this.labelCustomerAddress.AutoSize = true;
-            this.labelCustomerAddress.Location = new System.Drawing.Point(5, 120);
-            this.labelCustomerAddress.Name = "labelCustomerAddress";
-            this.labelCustomerAddress.Size = new System.Drawing.Size(64, 17);
-            this.labelCustomerAddress.TabIndex = 29;
-            this.labelCustomerAddress.Text = "Address:";
+            this.textBoxProductStock.Location = new System.Drawing.Point(111, 336);
+            this.textBoxProductStock.Name = "textBoxProductStock";
+            this.textBoxProductStock.Size = new System.Drawing.Size(285, 22);
+            this.textBoxProductStock.TabIndex = 42;
             // 
-            // textBoxCustomerAddress
+            // comboBoxProductCategory
             // 
-            this.textBoxCustomerAddress.Location = new System.Drawing.Point(115, 120);
-            this.textBoxCustomerAddress.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxCustomerAddress.Name = "textBoxCustomerAddress";
-            this.textBoxCustomerAddress.Size = new System.Drawing.Size(281, 22);
-            this.textBoxCustomerAddress.TabIndex = 28;
+            this.comboBoxProductCategory.FormattingEnabled = true;
+            this.comboBoxProductCategory.Location = new System.Drawing.Point(78, 278);
+            this.comboBoxProductCategory.Name = "comboBoxProductCategory";
+            this.comboBoxProductCategory.Size = new System.Drawing.Size(169, 24);
+            this.comboBoxProductCategory.TabIndex = 41;
             // 
-            // labelCustomerRegistration
+            // textBoxProductPrice
             // 
-            this.labelCustomerRegistration.AutoSize = true;
-            this.labelCustomerRegistration.Location = new System.Drawing.Point(5, 176);
-            this.labelCustomerRegistration.Name = "labelCustomerRegistration";
-            this.labelCustomerRegistration.Size = new System.Drawing.Size(122, 17);
-            this.labelCustomerRegistration.TabIndex = 33;
-            this.labelCustomerRegistration.Text = "Registration Date:";
+            this.textBoxProductPrice.Location = new System.Drawing.Point(53, 308);
+            this.textBoxProductPrice.Name = "textBoxProductPrice";
+            this.textBoxProductPrice.Size = new System.Drawing.Size(285, 22);
+            this.textBoxProductPrice.TabIndex = 39;
             // 
-            // textBoxCustomerRegistration
+            // textBoxProductName
             // 
-            this.textBoxCustomerRegistration.Location = new System.Drawing.Point(133, 174);
-            this.textBoxCustomerRegistration.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBoxCustomerRegistration.Name = "textBoxCustomerRegistration";
-            this.textBoxCustomerRegistration.ReadOnly = true;
-            this.textBoxCustomerRegistration.Size = new System.Drawing.Size(263, 22);
-            this.textBoxCustomerRegistration.TabIndex = 32;
+            this.textBoxProductName.Location = new System.Drawing.Point(111, 250);
+            this.textBoxProductName.Name = "textBoxProductName";
+            this.textBoxProductName.Size = new System.Drawing.Size(448, 22);
+            this.textBoxProductName.TabIndex = 38;
+            // 
+            // textBoxProductId
+            // 
+            this.textBoxProductId.Location = new System.Drawing.Point(34, 228);
+            this.textBoxProductId.Name = "textBoxProductId";
+            this.textBoxProductId.ReadOnly = true;
+            this.textBoxProductId.Size = new System.Drawing.Size(28, 22);
+            this.textBoxProductId.TabIndex = 37;
+            this.textBoxProductId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // buttonProductImageUpload
+            // 
+            this.buttonProductImageUpload.Location = new System.Drawing.Point(441, 195);
+            this.buttonProductImageUpload.Name = "buttonProductImageUpload";
+            this.buttonProductImageUpload.Size = new System.Drawing.Size(119, 27);
+            this.buttonProductImageUpload.TabIndex = 36;
+            this.buttonProductImageUpload.Text = "Upload Image";
+            this.buttonProductImageUpload.UseVisualStyleBackColor = true;
+            // 
+            // labelProductDescription
+            // 
+            this.labelProductDescription.AutoSize = true;
+            this.labelProductDescription.Location = new System.Drawing.Point(0, 395);
+            this.labelProductDescription.Name = "labelProductDescription";
+            this.labelProductDescription.Size = new System.Drawing.Size(83, 17);
+            this.labelProductDescription.TabIndex = 35;
+            this.labelProductDescription.Text = "Description:";
+            // 
+            // labelProductAvailable
+            // 
+            this.labelProductAvailable.AutoSize = true;
+            this.labelProductAvailable.Location = new System.Drawing.Point(3, 367);
+            this.labelProductAvailable.Name = "labelProductAvailable";
+            this.labelProductAvailable.Size = new System.Drawing.Size(69, 17);
+            this.labelProductAvailable.TabIndex = 34;
+            this.labelProductAvailable.Text = "Available:";
+            // 
+            // labelProductStock
+            // 
+            this.labelProductStock.AutoSize = true;
+            this.labelProductStock.Location = new System.Drawing.Point(3, 339);
+            this.labelProductStock.Name = "labelProductStock";
+            this.labelProductStock.Size = new System.Drawing.Size(104, 17);
+            this.labelProductStock.TabIndex = 33;
+            this.labelProductStock.Text = "Stock Quantity:";
+            // 
+            // labelProductPrice
+            // 
+            this.labelProductPrice.AutoSize = true;
+            this.labelProductPrice.Location = new System.Drawing.Point(3, 311);
+            this.labelProductPrice.Name = "labelProductPrice";
+            this.labelProductPrice.Size = new System.Drawing.Size(44, 17);
+            this.labelProductPrice.TabIndex = 32;
+            this.labelProductPrice.Text = "Price:";
+            // 
+            // labelProductCategory
+            // 
+            this.labelProductCategory.AutoSize = true;
+            this.labelProductCategory.Location = new System.Drawing.Point(3, 281);
+            this.labelProductCategory.Name = "labelProductCategory";
+            this.labelProductCategory.Size = new System.Drawing.Size(69, 17);
+            this.labelProductCategory.TabIndex = 31;
+            this.labelProductCategory.Text = "Category:";
+            // 
+            // labelProductName
+            // 
+            this.labelProductName.AutoSize = true;
+            this.labelProductName.Location = new System.Drawing.Point(3, 253);
+            this.labelProductName.Name = "labelProductName";
+            this.labelProductName.Size = new System.Drawing.Size(102, 17);
+            this.labelProductName.TabIndex = 30;
+            this.labelProductName.Text = "Product Name:";
+            // 
+            // labelProductId
+            // 
+            this.labelProductId.AutoSize = true;
+            this.labelProductId.Location = new System.Drawing.Point(3, 231);
+            this.labelProductId.Name = "labelProductId";
+            this.labelProductId.Size = new System.Drawing.Size(25, 17);
+            this.labelProductId.TabIndex = 29;
+            this.labelProductId.Text = "ID:";
+            // 
+            // dataGridViewProducts
+            // 
+            this.dataGridViewProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewProducts.Location = new System.Drawing.Point(584, 182);
+            this.dataGridViewProducts.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridViewProducts.Name = "dataGridViewProducts";
+            this.dataGridViewProducts.RowHeadersVisible = false;
+            this.dataGridViewProducts.RowHeadersWidth = 51;
+            this.dataGridViewProducts.Size = new System.Drawing.Size(300, 484);
+            this.dataGridViewProducts.TabIndex = 35;
+            this.dataGridViewProducts.Visible = false;
+            this.dataGridViewProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewProducts_CellClick);
+            // 
+            // textBoxProductDescription
+            // 
+            this.textBoxProductDescription.Location = new System.Drawing.Point(90, 392);
+            this.textBoxProductDescription.Multiline = true;
+            this.textBoxProductDescription.Name = "textBoxProductDescription";
+            this.textBoxProductDescription.Size = new System.Drawing.Size(452, 207);
+            this.textBoxProductDescription.TabIndex = 44;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(6, 614);
+            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 27);
+            this.button4.TabIndex = 51;
+            this.button4.Text = "New";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(382, 614);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 27);
+            this.button5.TabIndex = 50;
+            this.button5.Text = "Update";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(464, 614);
+            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 27);
+            this.button6.TabIndex = 49;
+            this.button6.Text = "Delete";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(301, 614);
+            this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 27);
+            this.button7.TabIndex = 48;
+            this.button7.Text = "Create";
+            this.button7.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(893, 677);
+            this.Controls.Add(this.dataGridViewProducts);
+            this.Controls.Add(this.groupBoxProducts);
             this.Controls.Add(this.groupBoxCustomers);
             this.Controls.Add(this.dataGridViewCustomers);
             this.Controls.Add(this.groupBoxEvent);
@@ -608,6 +843,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBoxEvent.ResumeLayout(false);
             this.groupBoxEvent.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownEventMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHELP)).EndInit();
             this.groupBoxNav.ResumeLayout(false);
             this.groupBoxNav.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -615,7 +851,9 @@ namespace MTG_CARDSHOP_ADMIN
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCustomers)).EndInit();
             this.groupBoxCustomers.ResumeLayout(false);
             this.groupBoxCustomers.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHELP)).EndInit();
+            this.groupBoxProducts.ResumeLayout(false);
+            this.groupBoxProducts.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProducts)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -666,6 +904,27 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.TextBox textBoxCustomerAddress;
         private System.Windows.Forms.Label labelCustomerRegistration;
         private System.Windows.Forms.TextBox textBoxCustomerRegistration;
+        private System.Windows.Forms.GroupBox groupBoxProducts;
+        private System.Windows.Forms.DataGridView dataGridViewProducts;
+        private System.Windows.Forms.Label labelProductId;
+        private System.Windows.Forms.Label labelProductCategory;
+        private System.Windows.Forms.Label labelProductName;
+        private System.Windows.Forms.Label labelProductPrice;
+        private System.Windows.Forms.Label labelProductAvailable;
+        private System.Windows.Forms.Label labelProductStock;
+        private System.Windows.Forms.Label labelProductDescription;
+        private System.Windows.Forms.Button buttonProductImageUpload;
+        private System.Windows.Forms.TextBox textBoxProductId;
+        private System.Windows.Forms.TextBox textBoxProductName;
+        private System.Windows.Forms.TextBox textBoxProductPrice;
+        private System.Windows.Forms.ComboBox comboBoxProductCategory;
+        private System.Windows.Forms.TextBox textBoxProductStock;
+        private System.Windows.Forms.TextBox textBoxProductAvailable;
+        private System.Windows.Forms.TextBox textBoxProductDescription;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 

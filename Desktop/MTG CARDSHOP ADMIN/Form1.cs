@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -19,9 +20,11 @@ namespace MTG_CARDSHOP_ADMIN
     {
         public string eventsBaseURL = "http://localhost:3000/desktop/admin/events";
         public string customersBaseURL = "http://localhost:3000/desktop/admin/customers";
+        public string productsBaseURL = "http://localhost:3000/desktop/admin/products";
 
         List<Event> events = new List<Event>();
         List<Customer> customers = new List<Customer>();
+        List<Product> products = new List<Product>();
 
         readonly HttpClient client = new HttpClient();
 
@@ -66,6 +69,7 @@ namespace MTG_CARDSHOP_ADMIN
         {
             await getEvents();
             await getCustomers();
+            await getProducts();
 
             // Events view settings
             dataGridViewEvents.DataSource = events;
@@ -94,6 +98,18 @@ namespace MTG_CARDSHOP_ADMIN
             dataGridViewCustomers.AllowUserToResizeColumns = false;
             dataGridViewCustomers.AllowUserToOrderColumns = false;
 
+            // Products view settings
+            dataGridViewProducts.DataSource = products;
+            dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewProducts.MultiSelect = false;
+            dataGridViewProducts.ReadOnly = true;
+            dataGridViewProducts.AllowUserToAddRows = false;
+            dataGridViewProducts.AllowUserToDeleteRows = false;
+            dataGridViewProducts.AllowUserToResizeRows = false;
+            dataGridViewProducts.AllowUserToResizeColumns = false;
+            dataGridViewProducts.AllowUserToOrderColumns = false;
+
+
             foreach (DataGridViewColumn column in dataGridViewCustomers.Columns)
             {
                 column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
@@ -105,13 +121,13 @@ namespace MTG_CARDSHOP_ADMIN
             groupBoxCustomers.Hide();
             this.Controls.Add(groupBoxCustomers);
 
-
-            pictureBoxHELP.Hide();
-            this.Controls.Add(pictureBoxHELP);
+            groupBoxProducts.Hide();
+            this.Controls.Add(groupBoxProducts);
 
             radioButtonLight.Checked = true;
             radioButtonEvents.Checked = true;
 
+            pictureBoxHELP.SizeMode = PictureBoxSizeMode.Zoom;
 
             dateTimePickerEventDate.Format = DateTimePickerFormat.Custom;
             dateTimePickerEventDate.CustomFormat = "yyyy-MM-dd HH:mm";
@@ -130,6 +146,11 @@ namespace MTG_CARDSHOP_ADMIN
             // akkor a következő módon is biztosíthatod: 686; 589
             this.Resize += (s, args) => { this.Size = new Size(686, 589); };
 
+
+            comboBoxProductCategory.Items.Add("Booster");
+            comboBoxProductCategory.Items.Add("Display");
+            comboBoxProductCategory.Items.Add("Boundle");
+            comboBoxProductCategory.Items.Add("Commander Deck");
         }
 
         //Adatok beállítása event
@@ -348,10 +369,14 @@ namespace MTG_CARDSHOP_ADMIN
             if (radioButtonProducts.Checked == false)
             {
                 pictureBoxHELP.Hide();
+                groupBoxProducts.Hide();
+                dataGridViewProducts.Hide();
             }
             else
             {
                 pictureBoxHELP.Show();
+                groupBoxProducts.Show();
+                dataGridViewProducts.Show();
             }
         }
 
@@ -470,5 +495,53 @@ namespace MTG_CARDSHOP_ADMIN
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+
+
+
+        private async Task getProducts()
+        {
+            HttpResponseMessage response = await client.GetAsync(productsBaseURL);
+            if (response.IsSuccessStatusCode)
+            {
+                string json = await response.Content.ReadAsStringAsync();
+                products = Product.FromJson(json);
+            }
+        }
+
+        private void dataGridViewProducts_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index >= 0)
+            {
+                DataGridViewRow selectedRow = dataGridViewProducts.Rows[index];
+
+                // Feltételezve, hogy az 'image' oszlop tartalmazza a JSON-hoz hasonló Image objektumot
+                var product = (Product)selectedRow.DataBoundItem; // Ez a termék objektumot adja vissza
+
+                if (product.Image != null)
+                {
+                    pictureBoxHELP.Image = product.Image.ToImage(); // Kép betöltése a PictureBox-ba
+                }
+                else
+                {
+                    MessageBox.Show("Nincs érvényes kép adat.");
+                }
+                textBoxProductId.Text = selectedRow.Cells["ProductId"].Value.ToString();
+                textBoxProductName.Text = selectedRow.Cells["Name"].Value.ToString();
+                textBoxProductAvailable.Text = selectedRow.Cells["Available"].Value.ToString();
+                textBoxProductPrice.Text = selectedRow.Cells["Price"].Value.ToString().Split('.')[0];
+                textBoxProductStock.Text = selectedRow.Cells["StockQuantity"].Value.ToString();
+                textBoxProductDescription.Text = selectedRow.Cells["Description"].Value.ToString();
+                int categoryId = Convert.ToInt32(selectedRow.Cells["CategoryId"].Value);
+
+                comboBoxProductCategory.SelectedIndex = categoryId - 1;
+            }
+        }
+
+
+
+
     }
 }

@@ -38,7 +38,7 @@ namespace MTG_CARDSHOP_ADMIN
 
     public partial class Customer
     {
-        public static List<Customer> FromJson(string json) => JsonConvert.DeserializeObject<List<Customer>>(json, MTG_CARDSHOP_ADMIN.EventsConverter.Settings);
+        public static List<Customer> FromJson(string json) => JsonConvert.DeserializeObject<List<Customer>>(json, MTG_CARDSHOP_ADMIN.CustomersConverter.Settings);
     }
 
     public static class CustomersSerialize
