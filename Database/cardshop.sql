@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2025. Feb 25. 13:19
+-- Létrehozás ideje: 2025. Már 13. 11:22
 -- Kiszolgáló verziója: 10.4.28-MariaDB
 -- PHP verzió: 8.2.4
 
@@ -140,38 +140,20 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `category` varchar(100) NOT NULL,
+  `category_id` int(11) NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `stock_quantity` int(11) NOT NULL,
   `available` tinyint(1) NOT NULL DEFAULT 1,
   `description` text DEFAULT NULL,
-  `image_url` varchar(255) DEFAULT NULL
+  `image` longblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- A tábla adatainak kiíratása `products`
 --
 
-INSERT INTO `products` (`product_id`, `name`, `category`, `price`, `stock_quantity`, `available`, `description`, `image_url`) VALUES
-(1, 'Aetherdrift - Commander Deck - Living Energy', 'Commander Deck', 20000.00, 100, 5, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', 'https://www.metagames.hu/store/?path=/upload/images/2024_12/drift-comm-livi-1733921272.jpg');
-
--- --------------------------------------------------------
-
---
--- Tábla szerkezet ehhez a táblához `product_categories`
---
-
-CREATE TABLE `product_categories` (
-  `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- A tábla adatainak kiíratása `product_categories`
---
-
-INSERT INTO `product_categories` (`product_id`, `category_id`) VALUES
-(1, 4);
+INSERT INTO `products` (`product_id`, `name`, `category_id`, `price`, `stock_quantity`, `available`, `description`, `image`) VALUES
+(1, 'Aetherdrift - Commander Deck - Living Energy', 1, 20000.00, 100, 5, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', 0x68747470733a2f2f7777772e6d65746167616d65732e68752f73746f72652f3f706174683d2f75706c6f61642f696d616765732f323032345f31322f64726966742d636f6d6d2d6c6976692d313733333932313237322e6a7067);
 
 -- --------------------------------------------------------
 
@@ -250,14 +232,8 @@ ALTER TABLE `order_items`
 -- A tábla indexei `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
-
---
--- A tábla indexei `product_categories`
---
-ALTER TABLE `product_categories`
-  ADD PRIMARY KEY (`product_id`,`category_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `fk_products_categories` (`category_id`);
 
 --
 -- A tábla indexei `registrations`
@@ -331,11 +307,10 @@ ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
--- Megkötések a táblához `product_categories`
+-- Megkötések a táblához `products`
 --
-ALTER TABLE `product_categories`
-  ADD CONSTRAINT `product_categories_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
-  ADD CONSTRAINT `product_categories_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
+ALTER TABLE `products`
+  ADD CONSTRAINT `fk_products_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
 --
 -- Megkötések a táblához `registrations`
