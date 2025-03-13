@@ -2,32 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');  // Feltételezve, hogy az adatbázis lekérdezések külön fájlban vannak
 
-/*
-// Adminisztrátor bejelentkezés
-router.post('/admin/auth/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        // Ellenőrizzük a bejelentkezési adatokat (pl. jelszó ellenőrzése)
-        const admin = await db.query(
-            `SELECT * FROM admins WHERE username = ? AND password = ?`, [username, password]
-        );
-        if (admin.length > 0) {
-            // Bejelentkezés sikeres
-            res.status(200).json({ message: 'Admin bejelentkezve' });
-        } else {
-            res.status(401).json({ message: 'Hibás felhasználónév vagy jelszó' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a bejelentkezés során', error });
-    }
-});
-
-// Adminisztrátor kijelentkezés
-router.post('/admin/auth/logout', async (req, res) => {
-    // A kijelentkezést itt az alkalmazás logikájának megfelelően kell kezelni (pl. token törlés)
-    res.status(200).json({ message: 'Admin kijelentkezve' });
-});
-*/
 // Események kezelése
 
 // Események listázása
@@ -97,19 +71,41 @@ router.get('/admin/products', async (req, res) => {
 });
 
 // Új termék hozzáadása
+//, ?
+//, image
+//, image 
+//, image 
+
 router.post('/admin/products', async (req, res) => {
     const { name, category_id, price, stock_quantity, available, description, image } = req.body;
     try {
         const result = await db.query(
             `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)
              VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [name, category_id, price, stock_quantity, available, description, image]
+            [name, category_id, price, stock_quantity, available, description, image ]
         );
         res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
     }
 });
+/*
+router.post('/admin/products', async (req, res) => {
+    const { name, category_id} = req.body;
+    try {
+        const result = await db.query(
+            `INSERT INTO products (name, category_id)
+             VALUES (?, ?)`,
+            [name, category_id]
+        );
+        res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
+    }
+});
+*/
+
+
 
 // Termék frissítése
 router.put('/admin/products/:productId', async (req, res) => {
