@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static MTG_CARDSHOP_ADMIN.Image;
 
 namespace MTG_CARDSHOP_ADMIN
 {
@@ -127,7 +128,7 @@ namespace MTG_CARDSHOP_ADMIN
             radioButtonLight.Checked = true;
             radioButtonEvents.Checked = true;
 
-            pictureBoxHELP.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBoxProductImage.SizeMode = PictureBoxSizeMode.Zoom;
 
             dateTimePickerEventDate.Format = DateTimePickerFormat.Custom;
             dateTimePickerEventDate.CustomFormat = "yyyy-MM-dd HH:mm";
@@ -257,12 +258,12 @@ namespace MTG_CARDSHOP_ADMIN
 
             if (MessageBox.Show("Biztosan frissíteni szeretné az Eseményt?", "Frissítés", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                updateUser(id, name, date, max, description);
+                updateEvent(id, name, date, max, description);
             }
 
             AddDataToChart();
         }
-        private async void updateUser(decimal id, string name, string date, decimal max, string description)
+        private async void updateEvent(decimal id, string name, string date, decimal max, string description)
         {
             try
             {
@@ -368,15 +369,16 @@ namespace MTG_CARDSHOP_ADMIN
         {
             if (radioButtonProducts.Checked == false)
             {
-                pictureBoxHELP.Hide();
+                pictureBoxProductImage.Hide();
                 groupBoxProducts.Hide();
                 dataGridViewProducts.Hide();
             }
             else
             {
-                pictureBoxHELP.Show();
+                pictureBoxProductImage.Show();
                 groupBoxProducts.Show();
                 dataGridViewProducts.Show();
+                adatokSetProduct();
             }
         }
 
@@ -500,6 +502,22 @@ namespace MTG_CARDSHOP_ADMIN
 
 
 
+
+
+        //Adatok beállítása product
+        public void adatokSetProduct()
+        {
+            textBoxProductAvailable.Text = "";
+            textBoxProductDescription.Text = "";
+            textBoxProductName.Text = "";
+            textBoxProductPrice.Text = "";
+            textBoxProductStock.Text = "";
+            textBoxProductId.Text = "";
+            comboBoxProductCategory.Text = "";
+            pictureBoxProductImage.Image = null;
+        }
+
+
         private async Task getProducts()
         {
             HttpResponseMessage response = await client.GetAsync(productsBaseURL);
@@ -520,7 +538,7 @@ namespace MTG_CARDSHOP_ADMIN
                 var product = (Product)selectedRow.DataBoundItem;
 
                 if (product.Image != null)
-                    pictureBoxHELP.Image = product.Image.ToImage();
+                    pictureBoxProductImage.Image = product.Image.ToImage();
                 else
                     MessageBox.Show("Nincs érvényes kép adat.");
 
@@ -535,5 +553,96 @@ namespace MTG_CARDSHOP_ADMIN
                 comboBoxProductCategory.SelectedIndex = categoryId - 1;
             }
         }
+
+
+
+
+
+
+        private void buttonProductNew_Click(object sender, EventArgs e)
+        {
+            adatokSetProduct();
+        }
+
+
+
+        private string ConvertImageToBase64(PictureBox pictureBox)
+        {
+            // Check if the PictureBox contains an image
+            if (pictureBox.Image != null)
+            {
+                // Create a MemoryStream to hold the image data
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    // Save the image to the MemoryStream in its raw format
+                    pictureBox.Image.Save(ms, pictureBox.Image.RawFormat);
+
+                    // Convert the MemoryStream to a byte array
+                    byte[] imageBytes = ms.ToArray();
+
+                    // Convert the byte array to a Base64 string
+                    return Convert.ToBase64String(imageBytes);
+                }
+            }
+            else
+            {
+                // Return an empty string or handle the case where no image is loaded
+                return string.Empty;
+            }
+        }
+
+        //Create product
+        private async void buttonProductCreate_Click(object sender, EventArgs e)
+        {
+            string name = textBoxProductName.Text;
+            int category = comboBoxProductCategory.SelectedIndex;
+            int price = Convert.ToInt32(textBoxProductPrice.Text);
+            int stock = Convert.ToInt32(textBoxProductStock.Text);
+            int available = Convert.ToInt32(textBoxProductAvailable.Text);
+            string description = textBoxProductDescription.Text;
+            //string base64Image = ConvertImageToBase64(pictureBoxProductImage);
+
+
+            var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category + 1}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{description}\"}}", Encoding.UTF8, "application/json");
+            // ,\"image\":\"{pictureBoxProductImage.Image}\" ,\"image\":\"{pictureBoxProductImage.Image}\"
+            // `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)  VALUES(?, ?, ?, ?, ?, ?, ?)`
+
+            try
+            {
+                HttpResponseMessage result = await client.PostAsync(productsBaseURL, content);
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres feltöltés!");
+                    await getProducts();
+                    dataGridViewProducts.DataSource = products;
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a feltöltés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
+            }
+
+        }
+        
+
+
+
+        private void buttonProductImageUpload_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.png) | *.jpg; *.jpeg; *.png";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBoxProductImage.Image = FromFile(openFileDialog.FileName);
+            }
+            else
+                return;
+        }
+
     }
 }

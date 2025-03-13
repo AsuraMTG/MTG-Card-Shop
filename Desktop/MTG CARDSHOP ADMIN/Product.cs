@@ -66,6 +66,12 @@ namespace MTG_CARDSHOP_ADMIN
         {
             throw new NotImplementedException();
         }
+
+        internal static System.Drawing.Image FromFile(string fileName)
+        {
+            return System.Drawing.Image.FromFile(fileName);  // This uses the built-in method to load an image from a file.
+        }
+
     }
 
     public partial class Product
