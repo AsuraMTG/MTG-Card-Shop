@@ -15,7 +15,7 @@ A projekt futtatásához az alábbi Node.js modulokra van szükség:
 A szükséges modulok telepítéséhez futtasd a következő parancsot:
 
 ```bash
-npm install express mysql2 dotenv body-parser cors
+npm install express mysql2 dotenv body-parser cors multer path
 ```
 
 Az alkalmazás indításához az alábbi parancsot másoldki:
