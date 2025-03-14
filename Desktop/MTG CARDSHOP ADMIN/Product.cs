@@ -12,8 +12,6 @@ namespace MTG_CARDSHOP_ADMIN
     using System.Collections.Generic;
 
     using System.Globalization;
-    using System.IO;
-    using System.Linq;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
 
@@ -40,51 +38,21 @@ namespace MTG_CARDSHOP_ADMIN
         [JsonProperty("description")]
         public string Description { get; set; }
 
-        [JsonProperty("image")]
-        public Image Image { get; set; }
-    }
-
-    public partial class Image
-    {
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        [JsonProperty("data")]
-        public List<int> Data { get; set; }
-
-        public System.Drawing.Image ToImage()
-        {
-            byte[] imageBytes = Data.Select(i => (byte)i).ToArray();
-
-            using (MemoryStream ms = new MemoryStream(imageBytes))
-            {
-                return System.Drawing.Image.FromStream(ms);
-            }
-        }
-
-        internal static System.Drawing.Image FromStream(MemoryStream ms)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal static System.Drawing.Image FromFile(string fileName)
-        {
-            return System.Drawing.Image.FromFile(fileName);  // This uses the built-in method to load an image from a file.
-        }
-
+        [JsonProperty("imageUrl")]
+        public string ImageUrl { get; set; }
     }
 
     public partial class Product
     {
-        public static List<Product> FromJson(string json) => JsonConvert.DeserializeObject<List<Product>>(json, MTG_CARDSHOP_ADMIN.ProductsConverter.Settings);
+        public static List<Product> FromJson(string json) => JsonConvert.DeserializeObject<List<Product>>(json, MTG_CARDSHOP_ADMIN.ProductConverter.Settings);
     }
 
-    public static class ProductsSerialize
+    public static class ProductSerialize
     {
-        public static string ToJson(this List<Product> self) => JsonConvert.SerializeObject(self, MTG_CARDSHOP_ADMIN.ProductsConverter.Settings);
+        public static string ToJson(this List<Product> self) => JsonConvert.SerializeObject(self, MTG_CARDSHOP_ADMIN.ProductConverter.Settings);
     }
 
-    internal static class ProductsConverter
+    internal static class ProductConverter
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {

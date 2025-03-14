@@ -13,7 +13,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using static MTG_CARDSHOP_ADMIN.Image;
 
 namespace MTG_CARDSHOP_ADMIN
 {
@@ -527,20 +526,23 @@ namespace MTG_CARDSHOP_ADMIN
                 products = Product.FromJson(json);
             }
         }
-
+        
         private void dataGridViewProducts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
             if (index >= 0)
             {
                 DataGridViewRow selectedRow = dataGridViewProducts.Rows[index];
-
+                /*
                 var product = (Product)selectedRow.DataBoundItem;
 
                 if (product.Image != null)
                     pictureBoxProductImage.Image = product.Image.ToImage();
                 else
                     MessageBox.Show("Nincs érvényes kép adat.");
+                */
+                string imageUrl = $"http://localhost:3000/image/{selectedRow.Cells["ImageUrl"].Value}";
+                pictureBoxProductImage.Load(imageUrl);
 
                 textBoxProductId.Text = selectedRow.Cells["ProductId"].Value.ToString();
                 textBoxProductName.Text = selectedRow.Cells["Name"].Value.ToString();
@@ -600,10 +602,10 @@ namespace MTG_CARDSHOP_ADMIN
             int stock = Convert.ToInt32(textBoxProductStock.Text);
             int available = Convert.ToInt32(textBoxProductAvailable.Text);
             string description = textBoxProductDescription.Text;
-            //string base64Image = ConvertImageToBase64(pictureBoxProductImage);
+            string base64Image = ConvertImageToBase64(pictureBoxProductImage);
 
 
-            var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category + 1}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{description}\"}}", Encoding.UTF8, "application/json");
+            var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category + 1}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{description}\",\"image\":\"{base64Image}\"}}", Encoding.UTF8, "application/json");
             // ,\"image\":\"{pictureBoxProductImage.Image}\" ,\"image\":\"{pictureBoxProductImage.Image}\"
             // `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)  VALUES(?, ?, ?, ?, ?, ?, ?)`
 
@@ -644,5 +646,9 @@ namespace MTG_CARDSHOP_ADMIN
                 return;
         }
 
+        private Image FromFile(string fileName)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
