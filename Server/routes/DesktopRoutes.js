@@ -1,8 +1,98 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');  // Feltételezve, hogy az adatbázis lekérdezések külön fájlban vannak
 
-// Események kezelése
+const db = require('../db');
+
+const multer = require('multer');
+const cors = require('cors');
+const path = require('path');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, 'product_images/'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Egyedi fájlnév
+    }
+});
+
+const upload = multer({ storage });
+
+router.use(cors());
+router.use(express.json());
+router.use('/product_images', express.static(path.join(__dirname, 'product_images'))); // Publikus képek
+
+
+/*
+router.post('/admin/products', async (req, res) => {
+    const { name, category_id, price, stock_quantity, available, description, image } = req.body;
+    try {
+        const result = await db.query(
+            `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)
+             VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [name, category_id, price, stock_quantity, available, description, image]
+        );
+        res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
+    }
+});
+
+
+  router.get('/admin/products', async (req, res) => {
+    try {
+        const products = await db.query(
+            `SELECT * FROM products`
+        );
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a termékek listázása közben', error });
+    }
+});
+*/
+router.post('/admin/products', upload.single('image'), async (req, res) => {
+    //const { username, description } = req.body;
+    const { name, category_id, price, stock_quantity, available, description } = req.body;
+    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
+
+    if (!name || !description || !imageUrl) {
+        return res.status(400).json({ error: 'Minden mezőt ki kell tölteni!' });
+    }
+
+    try {
+        // Adatok beszúrása az adatbázisba
+        const [result] = await db.execute(
+            `INSERT INTO products (name, category_id, price, stock_quantity, available, description, imageUrl)
+        VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [name, category_id, price, stock_quantity, available, description, imageUrl]
+        );
+
+        res.json({
+            message: 'Feltöltés sikeres!',
+            data: { id: result.insertId, name, category_id, price, stock_quantity, available, description, imageUrl }
+        });
+
+    } catch (error) {
+        console.error('Adatbázis hiba:', error);
+        res.status(500).json({ error: 'Szerverhiba az adatbázis írás során' });
+    }
+});
+
+
+router.get('/admin/products', async (req, res) => {
+    try {
+        const products = await db.query(
+            `SELECT * FROM products`
+        );
+        res.status(200).json(products);
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt a termékek listázása közben', error });
+    }
+});
+
+
+
+
 
 // Események listázása
 router.get('/admin/events', async (req, res) => {
@@ -82,13 +172,14 @@ router.post('/admin/products', async (req, res) => {
         const result = await db.query(
             `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)
              VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [name, category_id, price, stock_quantity, available, description, image ]
+            [name, category_id, price, stock_quantity, available, description, image]
         );
         res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
     }
 });
+
 /*
 router.post('/admin/products', async (req, res) => {
     const { name, category_id} = req.body;
@@ -199,7 +290,7 @@ router.delete('/admin/registrations/:registrationId', async (req, res) => {
     const registrationId = req.params.registrationId;
     try {
         const registration = await db.query(`SELECT * FROM registrations WHERE registration_id = ?`, [registrationId]);
-        
+
         if (registration.length === 0) {
             return res.status(404).json({ message: 'Jelentkezés nem található' });
         }
@@ -214,7 +305,7 @@ router.delete('/admin/registrations/:registrationId', async (req, res) => {
 
         // Jelentkezés törlése
         await db.query(`DELETE FROM registrations WHERE registration_id = ?`, [registrationId]);
-        
+
         res.status(200).json({ message: 'Jelentkezés törölve' });
     } catch (error) {
         res.status(500).json({ message: 'Hiba történt a jelentkezés törlése közben', error });
