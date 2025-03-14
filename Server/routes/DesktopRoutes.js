@@ -21,7 +21,7 @@ const upload = multer({ storage });
 router.use(cors());
 router.use(express.json());
 router.use('/product_images', express.static(path.join(__dirname, 'product_images'))); // Publikus képek
-
+//router.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Publikus képek
 
 /*
 router.post('/admin/products', async (req, res) => {
