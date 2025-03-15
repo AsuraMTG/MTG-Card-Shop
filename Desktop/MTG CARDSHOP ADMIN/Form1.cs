@@ -8,6 +8,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -533,15 +534,9 @@ namespace MTG_CARDSHOP_ADMIN
             if (index >= 0)
             {
                 DataGridViewRow selectedRow = dataGridViewProducts.Rows[index];
-                /*
-                var product = (Product)selectedRow.DataBoundItem;
-
-                if (product.Image != null)
-                    pictureBoxProductImage.Image = product.Image.ToImage();
-                else
-                    MessageBox.Show("Nincs érvényes kép adat.");
-                */
+                
                 string imageUrl = $"http://localhost:3000/image/{selectedRow.Cells["ImageUrl"].Value}";
+                
                 pictureBoxProductImage.Load(imageUrl);
 
                 textBoxProductId.Text = selectedRow.Cells["ProductId"].Value.ToString();
@@ -558,82 +553,62 @@ namespace MTG_CARDSHOP_ADMIN
 
 
 
-
-
-
+        //New product
         private void buttonProductNew_Click(object sender, EventArgs e)
         {
             adatokSetProduct();
         }
 
-
-
-        private string ConvertImageToBase64(PictureBox pictureBox)
-        {
-            // Check if the PictureBox contains an image
-            if (pictureBox.Image != null)
-            {
-                // Create a MemoryStream to hold the image data
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    // Save the image to the MemoryStream in its raw format
-                    pictureBox.Image.Save(ms, pictureBox.Image.RawFormat);
-
-                    // Convert the MemoryStream to a byte array
-                    byte[] imageBytes = ms.ToArray();
-
-                    // Convert the byte array to a Base64 string
-                    return Convert.ToBase64String(imageBytes);
-                }
-            }
-            else
-            {
-                // Return an empty string or handle the case where no image is loaded
-                return string.Empty;
-            }
-        }
-
         //Create product
+        public string filePath;
         private async void buttonProductCreate_Click(object sender, EventArgs e)
         {
             string name = textBoxProductName.Text;
-            int category = comboBoxProductCategory.SelectedIndex;
+            int category = comboBoxProductCategory.SelectedIndex + 1;
             int price = Convert.ToInt32(textBoxProductPrice.Text);
             int stock = Convert.ToInt32(textBoxProductStock.Text);
             int available = Convert.ToInt32(textBoxProductAvailable.Text);
             string description = textBoxProductDescription.Text;
-            string base64Image = ConvertImageToBase64(pictureBoxProductImage);
 
+            string formattedDescription = description.Replace("\\n", Environment.NewLine);
 
-            var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category + 1}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{description}\",\"image\":\"{base64Image}\"}}", Encoding.UTF8, "application/json");
-            // ,\"image\":\"{pictureBoxProductImage.Image}\" ,\"image\":\"{pictureBoxProductImage.Image}\"
-            // `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)  VALUES(?, ?, ?, ?, ?, ?, ?)`
-
-            try
+            using (var client = new HttpClient())
             {
-                HttpResponseMessage result = await client.PostAsync(productsBaseURL, content);
-                if (result.IsSuccessStatusCode)
+                using (var formData = new MultipartFormDataContent())
                 {
-                    MessageBox.Show("Sikeres feltöltés!");
-                    await getProducts();
-                    dataGridViewProducts.DataSource = products;
-                }
-                else
-                {
-                    MessageBox.Show("Hiba a feltöltés során!");
+                    var fileContent = new ByteArrayContent(File.ReadAllBytes(filePath));
+                    fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("image/jpeg");
+                    formData.Add(fileContent, "image", Path.GetFileName(filePath));
+
+                    formData.Add(new StringContent(name), "name");
+                    formData.Add(new StringContent(category.ToString()), "category_id");
+                    formData.Add(new StringContent(price.ToString()), "price");
+                    formData.Add(new StringContent(stock.ToString()), "stock_quantity");
+                    formData.Add(new StringContent(available.ToString()), "available");
+                    formData.Add(new StringContent(formattedDescription), "description");
+
+                    try
+                    {
+                        HttpResponseMessage result = await client.PostAsync(productsBaseURL, formData);
+
+                        if (result.IsSuccessStatusCode)
+                        {
+                            MessageBox.Show("Sikeres feltöltés!");
+                            await getProducts();
+                            dataGridViewProducts.DataSource = products;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Hiba a feltöltés során!");
+                        }
+                    }
+                    catch (HttpRequestException ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
-            catch (HttpRequestException ex)
-            {
-                MessageBox.Show(ex.Message);
-                throw;
-            }
-
         }
-        
-
-
-
         private void buttonProductImageUpload_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -641,14 +616,14 @@ namespace MTG_CARDSHOP_ADMIN
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 pictureBoxProductImage.Image = FromFile(openFileDialog.FileName);
+                filePath = openFileDialog.FileName;
             }
             else
                 return;
         }
-
         private Image FromFile(string fileName)
         {
-            throw new NotImplementedException();
+            return Image.FromFile(fileName);
         }
     }
 }
