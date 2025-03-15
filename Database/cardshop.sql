@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1:3307
--- Létrehozás ideje: 2025. Már 14. 13:11
--- Kiszolgáló verziója: 10.4.28-MariaDB
--- PHP verzió: 8.2.4
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2025. Már 15. 13:32
+-- Kiszolgáló verziója: 10.4.32-MariaDB
+-- PHP verzió: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `kartyabolt`
+-- Adatbázis: `cardshop`
 --
-CREATE DATABASE IF NOT EXISTS `kartyabolt` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `kartyabolt`;
+CREATE DATABASE IF NOT EXISTS `cardshop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `cardshop`;
 -- --------------------------------------------------------
 
 --
@@ -130,7 +130,7 @@ CREATE TABLE `order_items` (
 --
 
 INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `price_at_order`) VALUES
-(1, 1, 1, 1, 20000.00);
+(1, 1, 2, 1, 20000.00);
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE `products` (
   `product_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `category_id` int(11) NOT NULL,
-  `price` decimal(10,2) NOT NULL,
+  `price` decimal(10,0) NOT NULL,
   `stock_quantity` int(11) NOT NULL,
   `available` tinyint(1) NOT NULL DEFAULT 1,
   `description` text DEFAULT NULL,
@@ -154,8 +154,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `category_id`, `price`, `stock_quantity`, `available`, `description`, `imageUrl`) VALUES
-(1, 'Tarkir: Dragonstorm - Commander Deck - Jeskai Striker', 4, 22000.00, 100, 25, 'Each Commander deck contains: \n\n1 Ready-to-play 100-card Commander deck with: \n1 Traditional foil face commander with borderless art \n1 Traditional foil featured commander with borderless art \n10 Double-sided tokens \n1 Collector Booster Sample Pack \n1 Reference card \n1 Deck box ', 'Jeskai.jpg'),
-(2, 'Tarkir: Dragonstorm - Commander Deck - Mardu Surge', 4, 20000.00, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', 'Mardu.jpg');
+(1, 'Tarkir: Dragonstorm - Commander Deck - Jeskai Striker', 4, 22000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041837443.jpg'),
+(2, 'Tarkir: Dragonstorm - Commander Deck - Abzan Armor', 4, 20000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041686110.jpg'),
+(3, 'Tarkir: Dragonstorm - Commander Deck - Mardu Surge', 4, 20000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041701437.jpg'),
+(4, 'Tarkir: Dragonstorm - Commander Deck - Sultai Arisen', 4, 20000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041715003.jpg'),
+(5, 'Tarkir: Dragonstorm - Commander Deck - Temur Roar', 4, 22000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041729082.jpg');
 
 -- --------------------------------------------------------
 
@@ -283,7 +286,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT a táblához `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT a táblához `registrations`
