@@ -1,82 +1,11 @@
 const express = require('express');
 const router = express.Router();
 
+const path = require('path');
+const cors = require('cors'); // Ha több domainről szeretnél hozzáférni
+const fs = require('fs');
 const db = require('../db');
 
-const multer = require('multer');
-const cors = require('cors');
-const path = require('path');
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, path.join(__dirname, 'product_images/'));
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Egyedi fájlnév
-    }
-});
-
-const upload = multer({ storage });
-
-router.use(cors());
-router.use(express.json());
-router.use('/product_images', express.static(path.join(__dirname, 'product_images'))); // Publikus képek
-//router.use('/uploads', express.static(path.join(__dirname, 'uploads'))); // Publikus képek
-
-/*
-router.post('/admin/products', async (req, res) => {
-    const { name, category_id, price, stock_quantity, available, description, image } = req.body;
-    try {
-        const result = await db.query(
-            `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)
-             VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [name, category_id, price, stock_quantity, available, description, image]
-        );
-        res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
-    }
-});
-
-
-  router.get('/admin/products', async (req, res) => {
-    try {
-        const products = await db.query(
-            `SELECT * FROM products`
-        );
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termékek listázása közben', error });
-    }
-});
-*/
-router.post('/admin/products', upload.single('image'), async (req, res) => {
-    //const { username, description } = req.body;
-    const { name, category_id, price, stock_quantity, available, description } = req.body;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null;
-
-    if (!name || !description || !imageUrl) {
-        return res.status(400).json({ error: 'Minden mezőt ki kell tölteni!' });
-    }
-
-    try {
-        // Adatok beszúrása az adatbázisba
-        const [result] = await db.execute(
-            `INSERT INTO products (name, category_id, price, stock_quantity, available, description, imageUrl)
-        VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [name, category_id, price, stock_quantity, available, description, imageUrl]
-        );
-
-        res.json({
-            message: 'Feltöltés sikeres!',
-            data: { id: result.insertId, name, category_id, price, stock_quantity, available, description, imageUrl }
-        });
-
-    } catch (error) {
-        console.error('Adatbázis hiba:', error);
-        res.status(500).json({ error: 'Szerverhiba az adatbázis írás során' });
-    }
-});
 
 
 router.get('/admin/products', async (req, res) => {
@@ -90,7 +19,67 @@ router.get('/admin/products', async (req, res) => {
     }
 });
 
+const multer = require('multer');
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const dir = path.join(__dirname, '../product_images/');
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir); // Ha nem létezik a mappa, létrehozza
+    }
+    cb(null, dir); // A fájlok ide kerülnek
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)); // Egyedi fájlnév
+  }
+});
+
+
+
+const upload = multer({ storage });
+
+router.use(cors());
+router.use(express.json());
+router.use('/product_images', express.static(path.join(__dirname, 'product_images'))); // Publikus képek
+
+router.post('/admin/products', upload.single('image'), async (req, res) => {
+    const { name, category_id, price, stock_quantity, available, description } = req.body;
+    const imageUrl = req.file ? `${req.file.filename}` : null;
+  
+    if (!name || !description || !imageUrl) {
+      return res.status(400).json({ error: 'Minden mezőt ki kell tölteni!' });
+    }
+  
+    try {
+      // SQL lekérdezés a termékek beszúrására
+      const query = `
+        INSERT INTO products (name, category_id, price, stock_quantity, available, description, imageUrl)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+      `;
+      const result = await db.query(query, [name, category_id, price, stock_quantity, available, description, imageUrl]);
+  
+      // Ha sikeres a beszúrás, visszaadjuk az adatokat
+      res.json({
+        message: 'Feltöltés sikeres!',
+        data: { 
+          id: result.insertId,  // Az új rekord azonosítója
+          name, 
+          category_id, 
+          price, 
+          stock_quantity, 
+          available, 
+          description, 
+          imageUrl 
+        }
+      });
+  
+    } catch (error) {
+      console.error('Adatbázis hiba:', error);
+      res.status(500).json({ error: 'Szerverhiba az adatbázis írás során' });
+    }
+  });
+  
+  
 
 
 
