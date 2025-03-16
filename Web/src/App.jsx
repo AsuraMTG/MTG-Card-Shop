@@ -1,26 +1,125 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import React from 'react'
 import {cors} from 'cors'
 import {axios} from 'axios'
 import { mysql } from 'mysql2'
 import { jwt, sign } from jsonwebtoken
 import { bcrypt, hash } from "bcrypt" 
+import "@saeris/typeface-beleren-bold"
 
 
 import './App.css'
 
+
+import Protected from './Pages/Protected'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+
 const baseURL = "http://localhost:3000"
 
 function App() {
-  const [count, setCount] = useState(0)
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check if the user is authenticated on component mount
+    const checkAuth = async () => {
+      const token = localStorage.getItem('token');
+      
+      if (!token) {
+        setIsAuthenticated(false);
+        setLoading(false);
+        return;
+      }
+      
+      try {
+        // Verify token validity with your backend
+        const response = await axios.get(`${baseURL}/api/verify-token`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        
+        if (response.data.valid) {
+          setIsAuthenticated(true);
+        } else {
+          // Token is invalid or expired
+          localStorage.removeItem('token');
+          setIsAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Token verification failed:', error);
+        localStorage.removeItem('token');
+        setIsAuthenticated(false);
+      }
+      
+      setLoading(false);
+    };
+    
+    checkAuth();
+  }, []);
+
+  // Login handler function
+  const handleLogin = (token) => {
+    localStorage.setItem('token', token);
+    setIsAuthenticated(true);
+  };
+
+  // Logout handler function
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsAuthenticated(false);
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+
+  
   return (
     <>
-      <button onClick={() => setCount((count) => count + 1)}>
-        count is {count}
-      </button>
+    <h1>MTG Card Shop</h1>
+    <Router>
+      <Routes>
+        <Route path="/login" element={
+          isAuthenticated ? <Navigate to="/" /> : <Login onLogin={handleLogin} />
+        } />
+        <Route path="/register" element={
+          isAuthenticated ? <Navigate to="/" /> : <Register />
+        } />
+        <Route path="/" element={
+          isAuthenticated ? (
+            <div>
+              {/* Your main app content */}
+              <button onClick={handleLogout}>Logout</button>
+              {/* Other components */}
+            </div>
+          ) : (
+            <Navigate to="/login" />
+          )
+        } />
+        {/* Add other routes as needed */}
+      </Routes>
+    </Router>
     </>
-  )
+  );
+
+
+  // const [count, setCount] = useState(0)
+
+  // return (
+  //   <>
+
+  //     {token ? <Protected /> : <Login/> : <Register/>}
+
+  //     <button onClick={() => setCount((count) => count + 1)}>
+  //       count is {count}
+  //     </button>
+  //   </>
+  // )
 }
 
 export default App
