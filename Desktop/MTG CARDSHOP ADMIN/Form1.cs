@@ -548,6 +548,7 @@ namespace MTG_CARDSHOP_ADMIN
                 int categoryId = Convert.ToInt32(selectedRow.Cells["CategoryId"].Value);
 
                 comboBoxProductCategory.SelectedIndex = categoryId - 1;
+                comboBoxProductCategory.Text = comboBoxProductCategory.Items[categoryId - 1].ToString();
             }
         }
 
@@ -624,6 +625,50 @@ namespace MTG_CARDSHOP_ADMIN
         private Image FromFile(string fileName)
         {
             return Image.FromFile(fileName);
+        }
+
+        private async void buttonProductUpdate_Click(object sender, EventArgs e)
+        {
+            decimal id = Convert.ToInt32(textBoxProductId.Text);
+            string name = textBoxProductName.Text;
+            int category = comboBoxProductCategory.SelectedIndex + 1;
+            int price = Convert.ToInt32(textBoxProductPrice.Text);
+            int stock = Convert.ToInt32(textBoxProductStock.Text);
+            int available = Convert.ToInt32(textBoxProductAvailable.Text);
+            string description = textBoxProductDescription.Text;  // Az új sorok megmaradnak
+
+            // Az új sorok helyesen megmaradnak, nem kell kicserélni őket.
+            UpdateProduct(id, name, category, price, stock, available, description);
+        }
+        private async void UpdateProduct(decimal id, string name, int category, int price, int stock, int available, string description)
+        {
+            try
+            {
+                // Az új sorok escape-elése JSON-ban
+                string escapedDescription = description.Replace(Environment.NewLine, "\\n");
+
+                // A JSON szöveg formázása
+                var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{escapedDescription}\"}}", Encoding.UTF8, "application/json");
+
+                MessageBox.Show($"CATEGORY: {category}");
+                HttpResponseMessage result = await client.PutAsync($"{productsBaseURL}/{id}", content);
+
+                if (result.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Sikeres frissítés!");
+                    await getProducts();
+                    dataGridViewProducts.DataSource = products;
+                    adatokSetProduct();
+                }
+                else
+                {
+                    MessageBox.Show("Hiba a frissítés során!");
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

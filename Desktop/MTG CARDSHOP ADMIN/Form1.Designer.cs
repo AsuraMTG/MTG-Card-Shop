@@ -152,7 +152,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonLight.Location = new System.Drawing.Point(5, 27);
             this.radioButtonLight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonLight.Name = "radioButtonLight";
-            this.radioButtonLight.Size = new System.Drawing.Size(99, 21);
+            this.radioButtonLight.Size = new System.Drawing.Size(94, 20);
             this.radioButtonLight.TabIndex = 6;
             this.radioButtonLight.TabStop = true;
             this.radioButtonLight.Text = "Light Mode";
@@ -164,7 +164,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonDark.Location = new System.Drawing.Point(5, 54);
             this.radioButtonDark.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonDark.Name = "radioButtonDark";
-            this.radioButtonDark.Size = new System.Drawing.Size(98, 21);
+            this.radioButtonDark.Size = new System.Drawing.Size(95, 20);
             this.radioButtonDark.TabIndex = 7;
             this.radioButtonDark.TabStop = true;
             this.radioButtonDark.Text = "Dark Mode";
@@ -198,7 +198,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventId.AutoSize = true;
             this.labelEventId.Location = new System.Drawing.Point(5, 32);
             this.labelEventId.Name = "labelEventId";
-            this.labelEventId.Size = new System.Drawing.Size(25, 17);
+            this.labelEventId.Size = new System.Drawing.Size(23, 16);
             this.labelEventId.TabIndex = 10;
             this.labelEventId.Text = "ID:";
             // 
@@ -207,7 +207,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventName.AutoSize = true;
             this.labelEventName.Location = new System.Drawing.Point(5, 62);
             this.labelEventName.Name = "labelEventName";
-            this.labelEventName.Size = new System.Drawing.Size(49, 17);
+            this.labelEventName.Size = new System.Drawing.Size(47, 16);
             this.labelEventName.TabIndex = 12;
             this.labelEventName.Text = "Name:";
             // 
@@ -313,7 +313,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventDescription.AutoSize = true;
             this.labelEventDescription.Location = new System.Drawing.Point(5, 176);
             this.labelEventDescription.Name = "labelEventDescription";
-            this.labelEventDescription.Size = new System.Drawing.Size(83, 17);
+            this.labelEventDescription.Size = new System.Drawing.Size(78, 16);
             this.labelEventDescription.TabIndex = 21;
             this.labelEventDescription.Text = "Description:";
             // 
@@ -331,7 +331,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventCurrentParticipants.AutoSize = true;
             this.labelEventCurrentParticipants.Location = new System.Drawing.Point(5, 146);
             this.labelEventCurrentParticipants.Name = "labelEventCurrentParticipants";
-            this.labelEventCurrentParticipants.Size = new System.Drawing.Size(136, 17);
+            this.labelEventCurrentParticipants.Size = new System.Drawing.Size(124, 16);
             this.labelEventCurrentParticipants.TabIndex = 18;
             this.labelEventCurrentParticipants.Text = "Current participants:";
             // 
@@ -353,7 +353,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventMaxParticipants.AutoSize = true;
             this.labelEventMaxParticipants.Location = new System.Drawing.Point(5, 121);
             this.labelEventMaxParticipants.Name = "labelEventMaxParticipants";
-            this.labelEventMaxParticipants.Size = new System.Drawing.Size(114, 17);
+            this.labelEventMaxParticipants.Size = new System.Drawing.Size(107, 16);
             this.labelEventMaxParticipants.TabIndex = 16;
             this.labelEventMaxParticipants.Text = "Max participants:";
             // 
@@ -362,7 +362,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelEventDate.AutoSize = true;
             this.labelEventDate.Location = new System.Drawing.Point(5, 94);
             this.labelEventDate.Name = "labelEventDate";
-            this.labelEventDate.Size = new System.Drawing.Size(42, 17);
+            this.labelEventDate.Size = new System.Drawing.Size(39, 16);
             this.labelEventDate.TabIndex = 14;
             this.labelEventDate.Text = "Date:";
             // 
@@ -396,7 +396,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonProducts.Location = new System.Drawing.Point(5, 76);
             this.radioButtonProducts.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonProducts.Name = "radioButtonProducts";
-            this.radioButtonProducts.Size = new System.Drawing.Size(85, 21);
+            this.radioButtonProducts.Size = new System.Drawing.Size(81, 20);
             this.radioButtonProducts.TabIndex = 2;
             this.radioButtonProducts.TabStop = true;
             this.radioButtonProducts.Text = "Products";
@@ -409,7 +409,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonCustomers.Location = new System.Drawing.Point(5, 49);
             this.radioButtonCustomers.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonCustomers.Name = "radioButtonCustomers";
-            this.radioButtonCustomers.Size = new System.Drawing.Size(96, 21);
+            this.radioButtonCustomers.Size = new System.Drawing.Size(92, 20);
             this.radioButtonCustomers.TabIndex = 1;
             this.radioButtonCustomers.TabStop = true;
             this.radioButtonCustomers.Text = "Customers";
@@ -422,7 +422,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.radioButtonEvents.Location = new System.Drawing.Point(7, 22);
             this.radioButtonEvents.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.radioButtonEvents.Name = "radioButtonEvents";
-            this.radioButtonEvents.Size = new System.Drawing.Size(72, 21);
+            this.radioButtonEvents.Size = new System.Drawing.Size(69, 20);
             this.radioButtonEvents.TabIndex = 0;
             this.radioButtonEvents.TabStop = true;
             this.radioButtonEvents.Text = "Events";
@@ -486,7 +486,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerRegistration.AutoSize = true;
             this.labelCustomerRegistration.Location = new System.Drawing.Point(5, 176);
             this.labelCustomerRegistration.Name = "labelCustomerRegistration";
-            this.labelCustomerRegistration.Size = new System.Drawing.Size(122, 17);
+            this.labelCustomerRegistration.Size = new System.Drawing.Size(114, 16);
             this.labelCustomerRegistration.TabIndex = 33;
             this.labelCustomerRegistration.Text = "Registration Date:";
             // 
@@ -504,7 +504,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerPhone.AutoSize = true;
             this.labelCustomerPhone.Location = new System.Drawing.Point(5, 148);
             this.labelCustomerPhone.Name = "labelCustomerPhone";
-            this.labelCustomerPhone.Size = new System.Drawing.Size(107, 17);
+            this.labelCustomerPhone.Size = new System.Drawing.Size(100, 16);
             this.labelCustomerPhone.TabIndex = 31;
             this.labelCustomerPhone.Text = "Phone Number:";
             // 
@@ -521,7 +521,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerAddress.AutoSize = true;
             this.labelCustomerAddress.Location = new System.Drawing.Point(5, 120);
             this.labelCustomerAddress.Name = "labelCustomerAddress";
-            this.labelCustomerAddress.Size = new System.Drawing.Size(64, 17);
+            this.labelCustomerAddress.Size = new System.Drawing.Size(61, 16);
             this.labelCustomerAddress.TabIndex = 29;
             this.labelCustomerAddress.Text = "Address:";
             // 
@@ -538,7 +538,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerEmail.AutoSize = true;
             this.labelCustomerEmail.Location = new System.Drawing.Point(5, 90);
             this.labelCustomerEmail.Name = "labelCustomerEmail";
-            this.labelCustomerEmail.Size = new System.Drawing.Size(51, 17);
+            this.labelCustomerEmail.Size = new System.Drawing.Size(48, 16);
             this.labelCustomerEmail.TabIndex = 27;
             this.labelCustomerEmail.Text = "E-Mail:";
             // 
@@ -577,7 +577,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerId.AutoSize = true;
             this.labelCustomerId.Location = new System.Drawing.Point(5, 32);
             this.labelCustomerId.Name = "labelCustomerId";
-            this.labelCustomerId.Size = new System.Drawing.Size(25, 17);
+            this.labelCustomerId.Size = new System.Drawing.Size(23, 16);
             this.labelCustomerId.TabIndex = 10;
             this.labelCustomerId.Text = "ID:";
             // 
@@ -586,7 +586,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelCustomerName.AutoSize = true;
             this.labelCustomerName.Location = new System.Drawing.Point(5, 62);
             this.labelCustomerName.Name = "labelCustomerName";
-            this.labelCustomerName.Size = new System.Drawing.Size(49, 17);
+            this.labelCustomerName.Size = new System.Drawing.Size(47, 16);
             this.labelCustomerName.TabIndex = 12;
             this.labelCustomerName.Text = "Name:";
             // 
@@ -652,17 +652,18 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // buttonProductUpdate
             // 
-            this.buttonProductUpdate.Location = new System.Drawing.Point(382, 614);
+            this.buttonProductUpdate.Location = new System.Drawing.Point(467, 614);
             this.buttonProductUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonProductUpdate.Name = "buttonProductUpdate";
             this.buttonProductUpdate.Size = new System.Drawing.Size(75, 27);
             this.buttonProductUpdate.TabIndex = 50;
             this.buttonProductUpdate.Text = "Update";
             this.buttonProductUpdate.UseVisualStyleBackColor = true;
+            this.buttonProductUpdate.Click += new System.EventHandler(this.buttonProductUpdate_Click);
             // 
             // buttonProductDelete
             // 
-            this.buttonProductDelete.Location = new System.Drawing.Point(464, 614);
+            this.buttonProductDelete.Location = new System.Drawing.Point(240, 614);
             this.buttonProductDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonProductDelete.Name = "buttonProductDelete";
             this.buttonProductDelete.Size = new System.Drawing.Size(75, 27);
@@ -672,7 +673,7 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             // buttonProductCreate
             // 
-            this.buttonProductCreate.Location = new System.Drawing.Point(301, 614);
+            this.buttonProductCreate.Location = new System.Drawing.Point(386, 614);
             this.buttonProductCreate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonProductCreate.Name = "buttonProductCreate";
             this.buttonProductCreate.Size = new System.Drawing.Size(75, 27);
@@ -749,7 +750,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductDescription.AutoSize = true;
             this.labelProductDescription.Location = new System.Drawing.Point(0, 395);
             this.labelProductDescription.Name = "labelProductDescription";
-            this.labelProductDescription.Size = new System.Drawing.Size(83, 17);
+            this.labelProductDescription.Size = new System.Drawing.Size(78, 16);
             this.labelProductDescription.TabIndex = 35;
             this.labelProductDescription.Text = "Description:";
             // 
@@ -758,7 +759,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductAvailable.AutoSize = true;
             this.labelProductAvailable.Location = new System.Drawing.Point(3, 367);
             this.labelProductAvailable.Name = "labelProductAvailable";
-            this.labelProductAvailable.Size = new System.Drawing.Size(69, 17);
+            this.labelProductAvailable.Size = new System.Drawing.Size(67, 16);
             this.labelProductAvailable.TabIndex = 34;
             this.labelProductAvailable.Text = "Available:";
             // 
@@ -767,7 +768,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductStock.AutoSize = true;
             this.labelProductStock.Location = new System.Drawing.Point(3, 339);
             this.labelProductStock.Name = "labelProductStock";
-            this.labelProductStock.Size = new System.Drawing.Size(104, 17);
+            this.labelProductStock.Size = new System.Drawing.Size(95, 16);
             this.labelProductStock.TabIndex = 33;
             this.labelProductStock.Text = "Stock Quantity:";
             // 
@@ -776,7 +777,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductPrice.AutoSize = true;
             this.labelProductPrice.Location = new System.Drawing.Point(3, 311);
             this.labelProductPrice.Name = "labelProductPrice";
-            this.labelProductPrice.Size = new System.Drawing.Size(44, 17);
+            this.labelProductPrice.Size = new System.Drawing.Size(41, 16);
             this.labelProductPrice.TabIndex = 32;
             this.labelProductPrice.Text = "Price:";
             // 
@@ -785,7 +786,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductCategory.AutoSize = true;
             this.labelProductCategory.Location = new System.Drawing.Point(3, 281);
             this.labelProductCategory.Name = "labelProductCategory";
-            this.labelProductCategory.Size = new System.Drawing.Size(69, 17);
+            this.labelProductCategory.Size = new System.Drawing.Size(65, 16);
             this.labelProductCategory.TabIndex = 31;
             this.labelProductCategory.Text = "Category:";
             // 
@@ -794,7 +795,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductName.AutoSize = true;
             this.labelProductName.Location = new System.Drawing.Point(3, 253);
             this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(102, 17);
+            this.labelProductName.Size = new System.Drawing.Size(96, 16);
             this.labelProductName.TabIndex = 30;
             this.labelProductName.Text = "Product Name:";
             // 
@@ -803,7 +804,7 @@ namespace MTG_CARDSHOP_ADMIN
             this.labelProductId.AutoSize = true;
             this.labelProductId.Location = new System.Drawing.Point(3, 231);
             this.labelProductId.Name = "labelProductId";
-            this.labelProductId.Size = new System.Drawing.Size(25, 17);
+            this.labelProductId.Size = new System.Drawing.Size(23, 16);
             this.labelProductId.TabIndex = 29;
             this.labelProductId.Text = "ID:";
             // 
