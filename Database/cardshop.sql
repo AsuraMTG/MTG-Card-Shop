@@ -64,7 +64,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `name`, `email`, `address`, `phone_number`, `registration_date`) VALUES
-(1, 'John Doe', 'johndoe@example.com', '1234 Elm Street, Springfield, IL', '555-1234', '2025-01-30 08:53:41'),
+(1, 'Ja Morant', 'call12@example.com', '1234 Memphis, Tennessi MEM', '555-1234', '2025-01-30 08:53:41'),
 (3, 'Peter Petrelli', 'peter.petrelli@example.com', '123 Main St, Springfield, IL, 62701, USA', '+1 (555) 123-3452', '2025-02-25 13:16:54');
 
 -- --------------------------------------------------------
@@ -88,7 +88,7 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_date`, `event_description`, `max_participants`, `current_participants`) VALUES
 (1, 'Magic Tournament', '2025-02-20 10:00:00', 'A competitive Magic: The Gathering tournament.', 50, 2),
-(2, 'Commander Night', '2025-02-25 18:00:00', 'Casual Commander games for all levels of players.', 30, 2);
+(2, 'Commander Night', '2025-03-16 17:00:00', 'Casual Commander games for all levels of players.', 30, 2);
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,8 @@ INSERT INTO `products` (`product_id`, `name`, `category_id`, `price`, `stock_qua
 (2, 'Tarkir: Dragonstorm - Commander Deck - Abzan Armor', 4, 20000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041686110.jpg'),
 (3, 'Tarkir: Dragonstorm - Commander Deck - Mardu Surge', 4, 20000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041701437.jpg'),
 (4, 'Tarkir: Dragonstorm - Commander Deck - Sultai Arisen', 4, 20000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041715003.jpg'),
-(5, 'Tarkir: Dragonstorm - Commander Deck - Temur Roar', 4, 22000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041729082.jpg');
+(5, 'Tarkir: Dragonstorm - Commander Deck - Temur Roar', 4, 22000, 100, 25, 'Each Commander deck contains: \r\n\r\n1 Ready-to-play 100-card Commander deck with: \r\n1 Traditional foil face commander with borderless art \r\n1 Traditional foil featured commander with borderless art \r\n10 Double-sided tokens \r\n1 Collector Booster Sample Pack \r\n1 Reference card \r\n1 Deck box ', '1742041729082.jpg'),
+(6, 'Tarkir: Dragonstorm - Play Display ', 2, 58000, 100, 59, 'Contents:\n30 Tarkir: Dragonstorm Play Boosters; each Play Booster contains 14 Magic: The Gathering cards\nEach Play Booster may contain these cards: TDM 1–286, 292–398; SPG 104–113\n1–4 cards of rarity Rare or higher (2: 26%; 3: 2%; 4: <1%),\n3–5 Uncommon cards\n6–9 Common cards\nTraditional Foil Land replaces a Land in 20% of boosters.\n1 card of any rarity is Traditional Foil\nFoil Borderless Mythic Planeswalker in <1% of boosters', '1742129797413.jpg');
 
 -- --------------------------------------------------------
 
@@ -286,7 +287,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT a táblához `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT a táblához `registrations`
