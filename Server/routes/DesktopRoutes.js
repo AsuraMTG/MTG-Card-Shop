@@ -8,6 +8,47 @@ const db = require('../db');
 
 
 
+
+
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        const dir = path.join(__dirname, '../product_images/');
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir); // Ha nem létezik a mappa, létrehozza
+        }
+        cb(null, dir); // A fájlok ide kerülnek
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Egyedi fájlnév
+    }
+});
+
+const upload = multer({ storage });
+
+router.use(cors());
+router.use(express.json());
+router.use('/product_images', express.static(path.join(__dirname, 'product_images'))); // Publikus képek
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Termékek lekérdezése
 router.get('/admin/products', async (req, res) => {
     try {
         const products = await db.query(
@@ -19,67 +60,84 @@ router.get('/admin/products', async (req, res) => {
     }
 });
 
-const multer = require('multer');
+// Termek letrehozasa
+router.post('/admin/products', upload.single('image'), async (req, res) => {
+    const { name, category_id, price, stock_quantity, available, description } = req.body;
+    const imageUrl = req.file ? `${req.file.filename}` : null;
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const dir = path.join(__dirname, '../product_images/');
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir); // Ha nem létezik a mappa, létrehozza
+    if (!name || !description || !imageUrl) {
+        return res.status(400).json({ error: 'Minden mezőt ki kell tölteni!' });
     }
-    cb(null, dir); // A fájlok ide kerülnek
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)); // Egyedi fájlnév
-  }
+
+    try {
+        // SQL lekérdezés a termékek beszúrására
+        const query = `
+        INSERT INTO products (name, category_id, price, stock_quantity, available, description, imageUrl)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+      `;
+        const result = await db.query(query, [name, category_id, price, stock_quantity, available, description, imageUrl]);
+
+        // Ha sikeres a beszúrás, visszaadjuk az adatokat
+        res.json({
+            message: 'Feltöltés sikeres!',
+            data: {
+                id: result.insertId,  // Az új rekord azonosítója
+                name,
+                category_id,
+                price,
+                stock_quantity,
+                available,
+                description,
+                imageUrl
+            }
+        });
+
+    } catch (error) {
+        console.error('Adatbázis hiba:', error);
+        res.status(500).json({ error: 'Szerverhiba az adatbázis írás során' });
+    }
+});
+
+
+router.put('/admin/products/:id', async (req, res) => {
+
+    const product_id = req.params.id;
+
+    const { name, category_id, price, stock_quantity, available, description } = req.body;
+
+    // Check if category_id is provided, else set it to NULL
+    const categoryToSet = category_id || null;
+    try {
+        const result = await db.query(
+            `UPDATE products
+            SET name = ?, category_id = ?, price = ?, stock_quantity = ?, available = ?, description = ?
+            WHERE product_id = ?`,
+            [name, categoryToSet, price, stock_quantity, available, description, product_id]
+        );
+        res.status(200).json({ message: 'Esemény frissítve' });
+    } catch (error) {
+        res.status(500).json({ message: 'Hiba történt az esemény frissítése közben', error });
+    }
 });
 
 
 
-const upload = multer({ storage });
 
-router.use(cors());
-router.use(express.json());
-router.use('/product_images', express.static(path.join(__dirname, 'product_images'))); // Publikus képek
 
-router.post('/admin/products', upload.single('image'), async (req, res) => {
-    const { name, category_id, price, stock_quantity, available, description } = req.body;
-    const imageUrl = req.file ? `${req.file.filename}` : null;
-  
-    if (!name || !description || !imageUrl) {
-      return res.status(400).json({ error: 'Minden mezőt ki kell tölteni!' });
-    }
-  
-    try {
-      // SQL lekérdezés a termékek beszúrására
-      const query = `
-        INSERT INTO products (name, category_id, price, stock_quantity, available, description, imageUrl)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
-      `;
-      const result = await db.query(query, [name, category_id, price, stock_quantity, available, description, imageUrl]);
-  
-      // Ha sikeres a beszúrás, visszaadjuk az adatokat
-      res.json({
-        message: 'Feltöltés sikeres!',
-        data: { 
-          id: result.insertId,  // Az új rekord azonosítója
-          name, 
-          category_id, 
-          price, 
-          stock_quantity, 
-          available, 
-          description, 
-          imageUrl 
-        }
-      });
-  
-    } catch (error) {
-      console.error('Adatbázis hiba:', error);
-      res.status(500).json({ error: 'Szerverhiba az adatbázis írás során' });
-    }
-  });
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -136,87 +194,6 @@ router.delete('/admin/events/:eventId', async (req, res) => {
     }
 });
 
-//
-// Termékek lekérdezése
-router.get('/admin/products', async (req, res) => {
-    try {
-        const products = await db.query(
-            `SELECT * FROM products`
-        );
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termékek listázása közben', error });
-    }
-});
-
-// Új termék hozzáadása
-//, ?
-//, image
-//, image 
-//, image 
-
-router.post('/admin/products', async (req, res) => {
-    const { name, category_id, price, stock_quantity, available, description, image } = req.body;
-    try {
-        const result = await db.query(
-            `INSERT INTO products (name, category_id, price, stock_quantity, available, description, image)
-             VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [name, category_id, price, stock_quantity, available, description, image]
-        );
-        res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
-    }
-});
-
-/*
-router.post('/admin/products', async (req, res) => {
-    const { name, category_id} = req.body;
-    try {
-        const result = await db.query(
-            `INSERT INTO products (name, category_id)
-             VALUES (?, ?)`,
-            [name, category_id]
-        );
-        res.status(201).json({ message: 'Termék hozzáadva', productId: result.insertId });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termék hozzáadása közben', error });
-    }
-});
-*/
-
-
-
-// Termék frissítése
-router.put('/admin/products/:productId', async (req, res) => {
-    const productId = req.params.productId;
-    const { name, category_id, price, stock_quantity, available, description, image } = req.body;
-    try {
-        const result = await db.query(
-            `UPDATE products
-             SET name = ?, category_id = ?, price = ?, stock_quantity = ?, available = ?, description = ?, image = ?
-             WHERE product_id = ?`,
-            [name, category_id, price, stock_quantity, available, description, image, productId]
-        );
-        res.status(200).json({ message: 'Termék frissítve' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termék frissítése közben', error });
-    }
-});
-
-// Termék törlése
-router.delete('/admin/products/:productId', async (req, res) => {
-    const productId = req.params.productId;
-    try {
-        await db.query(`DELETE FROM products WHERE product_id = ?`, [productId]);
-        res.status(200).json({ message: 'Termék törölve' });
-    } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termék törlése közben', error });
-    }
-});
-
-
-// Felhasználók kezelése
 
 // Felhasználók listázása
 router.get('/admin/customers', async (req, res) => {
