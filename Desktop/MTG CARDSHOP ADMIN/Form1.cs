@@ -19,9 +19,15 @@ namespace MTG_CARDSHOP_ADMIN
 {
     public partial class Form1 : Form
     {
+        // -------------------* Variables
+
         public string eventsBaseURL = "http://localhost:3000/desktop/admin/events";
         public string customersBaseURL = "http://localhost:3000/desktop/admin/customers";
         public string productsBaseURL = "http://localhost:3000/desktop/admin/products";
+
+
+
+        // -------------------* Lists
 
         List<Event> events = new List<Event>();
         List<Customer> customers = new List<Customer>();
@@ -36,7 +42,99 @@ namespace MTG_CARDSHOP_ADMIN
             InitializeComponent();
         }
 
-        //Chart event
+        // -------------------* Form Load
+        private async void Form1_Load(object sender, EventArgs e)
+        {
+            await getEvents();
+
+            dataGridViewEvents.DataSource = events;
+            dataGridViewEvents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewEvents.MultiSelect = false;
+            dataGridViewEvents.ReadOnly = true;
+            dataGridViewEvents.AllowUserToAddRows = false;
+            dataGridViewEvents.AllowUserToDeleteRows = false;
+            dataGridViewEvents.AllowUserToResizeRows = false;
+            dataGridViewEvents.AllowUserToResizeColumns = false;
+            dataGridViewEvents.AllowUserToOrderColumns = false;
+
+            foreach (DataGridViewColumn column in dataGridViewEvents.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            await getCustomers();
+
+            dataGridViewCustomers.DataSource = customers;
+            dataGridViewCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewCustomers.MultiSelect = false;
+            dataGridViewCustomers.ReadOnly = true;
+            dataGridViewCustomers.AllowUserToAddRows = false;
+            dataGridViewCustomers.AllowUserToDeleteRows = false;
+            dataGridViewCustomers.AllowUserToResizeRows = false;
+            dataGridViewCustomers.AllowUserToResizeColumns = false;
+            dataGridViewCustomers.AllowUserToOrderColumns = false;
+
+            foreach (DataGridViewColumn column in dataGridViewCustomers.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            await getProducts();
+
+            dataGridViewProducts.DataSource = products;
+            dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewProducts.MultiSelect = false;
+            dataGridViewProducts.ReadOnly = true;
+            dataGridViewProducts.AllowUserToAddRows = false;
+            dataGridViewProducts.AllowUserToDeleteRows = false;
+            dataGridViewProducts.AllowUserToResizeRows = false;
+            dataGridViewProducts.AllowUserToResizeColumns = false;
+            dataGridViewProducts.AllowUserToOrderColumns = false;
+
+            foreach (DataGridViewColumn column in dataGridViewProducts.Columns)
+            {
+                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            }
+
+            dataGridViewCustomers.Hide();
+            this.Controls.Add(dataGridViewCustomers);
+
+            groupBoxCustomers.Hide();
+            this.Controls.Add(groupBoxCustomers);
+
+            groupBoxProducts.Hide();
+            this.Controls.Add(groupBoxProducts);
+
+            radioButtonLight.Checked = true;
+            radioButtonEvents.Checked = true;
+
+            pictureBoxProductImage.SizeMode = PictureBoxSizeMode.Zoom;
+
+            dateTimePickerEventDate.Format = DateTimePickerFormat.Custom;
+            dateTimePickerEventDate.CustomFormat = "yyyy-MM-dd HH:mm";
+
+            AddDataToChart();
+
+            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+
+            this.MaximizeBox = false;
+
+            this.MinimizeBox = false;
+
+            this.Resize += (s, args) => { this.Size = new Size(686, 589); };
+
+
+            comboBoxProductCategory.Items.Add("Booster");
+            comboBoxProductCategory.Items.Add("Display");
+            comboBoxProductCategory.Items.Add("Boundle");
+            comboBoxProductCategory.Items.Add("Commander Deck");
+        }
+
+
+
+        // --------------------* Event Section Start
+
+        // ----* Chart event
         private void AddDataToChart()
         {
             chartParticipants.Series.Clear();
@@ -65,96 +163,7 @@ namespace MTG_CARDSHOP_ADMIN
 
         }
 
-        //Form load
-        private async void Form1_Load(object sender, EventArgs e)
-        {
-            await getEvents();
-            await getCustomers();
-            await getProducts();
-
-            // Events view settings
-            dataGridViewEvents.DataSource = events;
-            dataGridViewEvents.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewEvents.MultiSelect = false;
-            dataGridViewEvents.ReadOnly = true;
-            dataGridViewEvents.AllowUserToAddRows = false;
-            dataGridViewEvents.AllowUserToDeleteRows = false;
-            dataGridViewEvents.AllowUserToResizeRows = false;
-            dataGridViewEvents.AllowUserToResizeColumns = false;
-            dataGridViewEvents.AllowUserToOrderColumns = false;
-
-            foreach (DataGridViewColumn column in dataGridViewEvents.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            }
-
-            // Customers view settings
-            dataGridViewCustomers.DataSource = customers;
-            dataGridViewCustomers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewCustomers.MultiSelect = false;
-            dataGridViewCustomers.ReadOnly = true;
-            dataGridViewCustomers.AllowUserToAddRows = false;
-            dataGridViewCustomers.AllowUserToDeleteRows = false;
-            dataGridViewCustomers.AllowUserToResizeRows = false;
-            dataGridViewCustomers.AllowUserToResizeColumns = false;
-            dataGridViewCustomers.AllowUserToOrderColumns = false;
-
-            // Products view settings
-            dataGridViewProducts.DataSource = products;
-            dataGridViewProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewProducts.MultiSelect = false;
-            dataGridViewProducts.ReadOnly = true;
-            dataGridViewProducts.AllowUserToAddRows = false;
-            dataGridViewProducts.AllowUserToDeleteRows = false;
-            dataGridViewProducts.AllowUserToResizeRows = false;
-            dataGridViewProducts.AllowUserToResizeColumns = false;
-            dataGridViewProducts.AllowUserToOrderColumns = false;
-
-
-            foreach (DataGridViewColumn column in dataGridViewCustomers.Columns)
-            {
-                column.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            }
-
-            dataGridViewCustomers.Hide();
-            this.Controls.Add(dataGridViewCustomers);
-
-            groupBoxCustomers.Hide();
-            this.Controls.Add(groupBoxCustomers);
-
-            groupBoxProducts.Hide();
-            this.Controls.Add(groupBoxProducts);
-
-            radioButtonLight.Checked = true;
-            radioButtonEvents.Checked = true;
-
-            pictureBoxProductImage.SizeMode = PictureBoxSizeMode.Zoom;
-
-            dateTimePickerEventDate.Format = DateTimePickerFormat.Custom;
-            dateTimePickerEventDate.CustomFormat = "yyyy-MM-dd HH:mm";
-
-            AddDataToChart();
-
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
-
-            // Maximalizálás gomb letiltása
-            this.MaximizeBox = false;
-
-            // Minimalizálás gomb letiltása
-            this.MinimizeBox = false;
-
-            // Ezen kívül, ha azt is szeretnéd, hogy a form ne legyen átméretezhető, 
-            // akkor a következő módon is biztosíthatod: 686; 589
-            this.Resize += (s, args) => { this.Size = new Size(686, 589); };
-
-
-            comboBoxProductCategory.Items.Add("Booster");
-            comboBoxProductCategory.Items.Add("Display");
-            comboBoxProductCategory.Items.Add("Boundle");
-            comboBoxProductCategory.Items.Add("Commander Deck");
-        }
-
-        //Adatok beállítása event
+        // ----* Adatok beállítása event
         public void adatokSet()
         {
             textBoxEventId.Text = "";
@@ -165,7 +174,7 @@ namespace MTG_CARDSHOP_ADMIN
             textBoxEventDescription.Text = "";
         }
 
-        //Űrlap feltöltese event
+        // ----* Űrlap feltöltese event
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -183,14 +192,14 @@ namespace MTG_CARDSHOP_ADMIN
             AddDataToChart();
         }
 
-        //New event
+        // ----* New event
         private void buttonEventNew_Click(object sender, EventArgs e)
         {
             adatokSet();
             AddDataToChart();
         }
 
-        //Create event
+        // ----* Create event
         private async void buttonEventCreate_Click(object sender, EventArgs e)
         {
             string name = textBoxEventName.Text;
@@ -229,7 +238,7 @@ namespace MTG_CARDSHOP_ADMIN
             AddDataToChart();
         }
 
-        //Read events
+        // ----* Read events
         private async Task getEvents()
         {
             HttpResponseMessage response = await client.GetAsync(eventsBaseURL);
@@ -240,7 +249,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Update event
+        // ----* Update event
         private void buttonEventUpdate_Click(object sender, EventArgs e)
         {
 
@@ -289,7 +298,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Delete event
+        // ----* Delete event
         private void buttonEventDelete_Click(object sender, EventArgs e)
         {
             string id = textBoxEventId.Text;
@@ -328,7 +337,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Events Show/Hide
+        // ----* Events Show/Hide
         private void radioButtonEvents_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonEvents.Checked == false)
@@ -348,7 +357,7 @@ namespace MTG_CARDSHOP_ADMIN
 
         }
 
-        //Customers Show/Hide
+        // ----* Customers Show/Hide
         private void radioButtonCustomers_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonCustomers.Checked == false)
@@ -364,7 +373,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Products Show/Hide
+        // ----* Products Show/Hide
         private void radioButtonProducts_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonProducts.Checked == false)
@@ -382,7 +391,11 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Read customers
+
+
+        // --------------------* Customer Section Start
+
+        // ----* Read customers
         private async Task getCustomers()
         {
             HttpResponseMessage response = await client.GetAsync(customersBaseURL);
@@ -393,7 +406,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Űrlap feltöltese customer
+        // ----* Űrlap feltöltese customer
         private void dataGridViewCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -409,7 +422,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Adatok beállítása customer
+        // ----* Adatok beállítása customer
         public void adatokSetCustomer()
         {
             textBoxCustomerEmail.Text = "";
@@ -420,7 +433,7 @@ namespace MTG_CARDSHOP_ADMIN
             textBoxCustomerAddress.Text = "";
         }
 
-        //Update customer
+        // ----* Update customer
         private void buttonCustomerUpdate_Click(object sender, EventArgs e)
         {
             decimal id = Convert.ToInt32(textBoxCustomerId.Text);
@@ -461,7 +474,7 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-        //Delete customer
+        // ----* Delete customer
         private void buttonCustomerDelete_Click(object sender, EventArgs e)
         {
             string id = textBoxCustomerId.Text;
@@ -500,11 +513,9 @@ namespace MTG_CARDSHOP_ADMIN
 
 
 
+        // --------------------* Product Section Start
 
-
-
-
-        //Adatok beállítása product
+        // ----* Adatok beállítása product
         public void adatokSetProduct()
         {
             textBoxProductAvailable.Text = "";
@@ -517,7 +528,7 @@ namespace MTG_CARDSHOP_ADMIN
             pictureBoxProductImage.Image = null;
         }
 
-
+        // ----* Read products
         private async Task getProducts()
         {
             HttpResponseMessage response = await client.GetAsync(productsBaseURL);
@@ -527,7 +538,8 @@ namespace MTG_CARDSHOP_ADMIN
                 products = Product.FromJson(json);
             }
         }
-        
+
+        // ----* Űrlap feltöltese product
         private void dataGridViewProducts_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
@@ -538,7 +550,7 @@ namespace MTG_CARDSHOP_ADMIN
                 string imageUrl = $"http://localhost:3000/image/{selectedRow.Cells["ImageUrl"].Value}";
                 
                 pictureBoxProductImage.Load(imageUrl);
-
+                buttonProductImageUpload.Hide();
                 textBoxProductId.Text = selectedRow.Cells["ProductId"].Value.ToString();
                 textBoxProductName.Text = selectedRow.Cells["Name"].Value.ToString();
                 textBoxProductAvailable.Text = selectedRow.Cells["Available"].Value.ToString();
@@ -552,16 +564,19 @@ namespace MTG_CARDSHOP_ADMIN
             }
         }
 
-
-
-        //New product
+        // ----* New product
         private void buttonProductNew_Click(object sender, EventArgs e)
         {
             adatokSetProduct();
+            buttonProductImageUpload.Show();
         }
 
-        //Create product
+        // ----* Create product
         public string filePath;
+        private Image FromFile(string fileName)
+        {
+            return Image.FromFile(fileName);
+        }
         private async void buttonProductCreate_Click(object sender, EventArgs e)
         {
             string name = textBoxProductName.Text;
@@ -610,6 +625,8 @@ namespace MTG_CARDSHOP_ADMIN
                 }
             }
         }
+
+        // ----* Update product
         private void buttonProductImageUpload_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -622,12 +639,7 @@ namespace MTG_CARDSHOP_ADMIN
             else
                 return;
         }
-        private Image FromFile(string fileName)
-        {
-            return Image.FromFile(fileName);
-        }
-
-        private async void buttonProductUpdate_Click(object sender, EventArgs e)
+        private void buttonProductUpdate_Click(object sender, EventArgs e)
         {
             decimal id = Convert.ToInt32(textBoxProductId.Text);
             string name = textBoxProductName.Text;
@@ -635,22 +647,24 @@ namespace MTG_CARDSHOP_ADMIN
             int price = Convert.ToInt32(textBoxProductPrice.Text);
             int stock = Convert.ToInt32(textBoxProductStock.Text);
             int available = Convert.ToInt32(textBoxProductAvailable.Text);
-            string description = textBoxProductDescription.Text;  // Az új sorok megmaradnak
+            string description = textBoxProductDescription.Text;
 
-            // Az új sorok helyesen megmaradnak, nem kell kicserélni őket.
-            UpdateProduct(id, name, category, price, stock, available, description);
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                MessageBox.Show("A nev nem lehet üres!");
+                return;
+            }
+
+            string formattedDescription = System.Text.RegularExpressions.Regex.Replace(description, @"\r\n|\n|\r", "\\n");
+
+            UpdateProduct(id, name, category, price, stock, available, formattedDescription);
         }
         private async void UpdateProduct(decimal id, string name, int category, int price, int stock, int available, string description)
         {
             try
             {
-                // Az új sorok escape-elése JSON-ban
-                string escapedDescription = description.Replace(Environment.NewLine, "\\n");
-
-                // A JSON szöveg formázása
-                var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{escapedDescription}\"}}", Encoding.UTF8, "application/json");
-
-                MessageBox.Show($"CATEGORY: {category}");
+                var content = new StringContent($"{{\"name\":\"{name}\",\"category_id\":\"{category}\",\"price\":\"{price}\",\"stock_quantity\":\"{stock}\",\"available\":\"{available}\",\"description\":\"{description}\"}}", Encoding.UTF8, "application/json");
+                MessageBox.Show(description);
                 HttpResponseMessage result = await client.PutAsync($"{productsBaseURL}/{id}", content);
 
                 if (result.IsSuccessStatusCode)

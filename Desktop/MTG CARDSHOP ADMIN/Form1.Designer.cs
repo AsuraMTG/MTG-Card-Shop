@@ -80,7 +80,6 @@ namespace MTG_CARDSHOP_ADMIN
             this.groupBoxProducts = new System.Windows.Forms.GroupBox();
             this.buttonProductNew = new System.Windows.Forms.Button();
             this.buttonProductUpdate = new System.Windows.Forms.Button();
-            this.buttonProductDelete = new System.Windows.Forms.Button();
             this.buttonProductCreate = new System.Windows.Forms.Button();
             this.textBoxProductDescription = new System.Windows.Forms.TextBox();
             this.textBoxProductAvailable = new System.Windows.Forms.TextBox();
@@ -611,7 +610,6 @@ namespace MTG_CARDSHOP_ADMIN
             // 
             this.groupBoxProducts.Controls.Add(this.buttonProductNew);
             this.groupBoxProducts.Controls.Add(this.buttonProductUpdate);
-            this.groupBoxProducts.Controls.Add(this.buttonProductDelete);
             this.groupBoxProducts.Controls.Add(this.buttonProductCreate);
             this.groupBoxProducts.Controls.Add(this.textBoxProductDescription);
             this.groupBoxProducts.Controls.Add(this.textBoxProductAvailable);
@@ -660,16 +658,6 @@ namespace MTG_CARDSHOP_ADMIN
             this.buttonProductUpdate.Text = "Update";
             this.buttonProductUpdate.UseVisualStyleBackColor = true;
             this.buttonProductUpdate.Click += new System.EventHandler(this.buttonProductUpdate_Click);
-            // 
-            // buttonProductDelete
-            // 
-            this.buttonProductDelete.Location = new System.Drawing.Point(240, 614);
-            this.buttonProductDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonProductDelete.Name = "buttonProductDelete";
-            this.buttonProductDelete.Size = new System.Drawing.Size(75, 27);
-            this.buttonProductDelete.TabIndex = 49;
-            this.buttonProductDelete.Text = "Delete";
-            this.buttonProductDelete.UseVisualStyleBackColor = true;
             // 
             // buttonProductCreate
             // 
@@ -927,7 +915,6 @@ namespace MTG_CARDSHOP_ADMIN
         private System.Windows.Forms.TextBox textBoxProductDescription;
         private System.Windows.Forms.Button buttonProductNew;
         private System.Windows.Forms.Button buttonProductUpdate;
-        private System.Windows.Forms.Button buttonProductDelete;
         private System.Windows.Forms.Button buttonProductCreate;
     }
 }
