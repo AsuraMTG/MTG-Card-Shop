@@ -1,5 +1,5 @@
 {
-  "name": "cardshopweb",
+  "name": "web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@saeris/typeface-beleren-bold": "^1.0.1",
     "axios": "^1.8.3",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",

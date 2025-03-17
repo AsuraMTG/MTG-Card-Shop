@@ -4,7 +4,7 @@ import React from 'react'
 import {cors} from 'cors'
 import {axios} from 'axios'
 import { mysql } from 'mysql2'
-import { jwt, sign } from jsonwebtoken
+import { jwt, sign } from 'jsonwebtoken'
 import { bcrypt, hash } from "bcrypt" 
 import "@saeris/typeface-beleren-bold"
 
