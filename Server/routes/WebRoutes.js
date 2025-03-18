@@ -94,4 +94,18 @@ router.get('/events/my-events', async (req, res) => {
     }
 });
 
+// Felhasználó regisztrálása 
+
+router.post('/web/registration', (req, res) => {
+
+})
+
+
+
+// Felhasználó bejelentkeztetése
+
+router.post('/web/login', (req, res) => {
+    
+})
+
 module.exports = router;
