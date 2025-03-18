@@ -4,7 +4,7 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleRegister = async () => {
+    /*const handleRegister = async () => {
         const baseUrl = 'http://localhost:3000/Register';
         const body = JSON.stringify({ username, password });
         const headers = { 'Content-Type': 'application/json' };
@@ -19,7 +19,7 @@ const Login = () => {
         } catch (error) {
             console.error("Registration failed", error);
         }
-    };
+    }; */
     const handleLogin = async () => {
         const baseUrl = 'http://localhost:3000/Login';
         const body = JSON.stringify({ username, password });
@@ -37,6 +37,33 @@ const Login = () => {
         }
     };
 
+
+    /*return (
+        <div className="login-container">
+          <div className="login-card">
+            <div className="user-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <h2>Login</h2>
+            {error && <div className="error-message">{error}</div>}
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+              <button type="submit" className="login-button">Login</button>
+            </form>
+          </div>
+        </div>
+      );*/
     return (
         <form onSubmit={handleLogin}>
             <label htmlFor="username">Username</label>
