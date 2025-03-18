@@ -11,19 +11,22 @@
   },
   "dependencies": {
     "@saeris/typeface-beleren-bold": "^1.0.1",
+    "aws-sdk": "^2.1692.0",
     "axios": "^1.8.3",
     "bcrypt": "^5.1.1",
     "bootstrap": "^5.3.3",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
+    "mock-aws-s3": "^4.0.2",
     "mysql2": "^3.13.0",
+    "nock": "^14.0.0",
     "path": "^0.12.7",
     "react": "^19.0.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.3.0",
-    "styled-components": "^6.1.15"
+    "styled-components": "^6.1.16"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
