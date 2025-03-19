@@ -11,7 +11,7 @@ import "@saeris/typeface-beleren-bold"
 
 import './App.css'
 
-
+// pages import!
 import Protected from './Pages/Protected'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
