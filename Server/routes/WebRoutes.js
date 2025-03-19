@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../db');  // Feltételezve, hogy az adatbázis kapcsolódás és lekérdezések külön fájlban vannak
+const { default: Register } = require('../../Web/src/Pages/Register');
 
 // Események listázása, amelyekre még lehet jelentkezni (a maximális résztvevők számának figyelembevételével)
 router.get('/events', async (req, res) => {
@@ -96,16 +97,38 @@ router.get('/events/my-events', async (req, res) => {
 
 // Felhasználó regisztrálása 
 
-router.post('/web/registration', (req, res) => {
+router.post('/web/registration', async (req, res) => { // a többiek szerverét megnézni.
 
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        const user = { name: req.body.name, password: req.body.password }
+        customerId.push(user)
+        res.status(201).json({message: 'Sikeres regisztráció.'})
+        
+    } catch (error) {
+        res.status(500).json({message: 'Hiba történt a regisztráció során', error})
+    }
 })
 
 
 
 // Felhasználó bejelentkeztetése
 
-router.post('/web/login', (req, res) => {
-    
+router.post('/web/login', async (req, res) => {
+    const customerId = req.body.customer_id;
+    const user = user.find(user => user.name === req.body.name)
+    if (user == null) {
+        return res.status(400).json({message: "A felhasználó nem található"})
+    }
+    try {
+        if (await bcrypt.compare(req.body.password, user.password)) {
+            res.status(201).json({message: "siker"})
+        } else {
+            res.status(500).json({message: "rossz jelszó"})
+        }
+    } catch (error) {
+        res.status(500).json({message: 'Hiba történt a bejelentkezés során', error})
+    }
 })
 
 module.exports = router;

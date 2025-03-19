@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mapbox/node-pre-gyp": "^2.0.0",
     "@saeris/typeface-beleren-bold": "^1.0.1",
     "aws-sdk": "^2.1692.0",
     "axios": "^1.8.3",
