@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');  // Feltételezve, hogy az adatbázis kapcsolódás és lekérdezések külön fájlban vannak
-const { default: Register } = require('../../Web/src/Pages/Register');
+const db = require('../db_web');  // Feltételezve, hogy az adatbázis kapcsolódás és lekérdezések külön fájlban vannak
+//const { default: Register } = require('../../Web/src/Pages/Register');
 
 // Események listázása, amelyekre még lehet jelentkezni (a maximális résztvevők számának figyelembevételével)
 router.get('/events', async (req, res) => {

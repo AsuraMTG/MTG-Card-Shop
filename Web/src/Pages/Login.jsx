@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState('Pistike');
     const [password, setPassword] = useState('');
 
     /*const handleRegister = async () => {
