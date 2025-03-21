@@ -3,7 +3,7 @@ import dotenv from 'dotenv';  // Importáljuk a dotenv csomagot
 
 dotenv.config();  // Környezeti változók betöltése a .env fájlból
 
-// MySQL kapcsolat létrehozása
+// MySQL kapcsolat létrehozása /wcreate connection
 const pool = mysql.createConnection({
     host: 'localhost',      // Az adatbázis hosztja
     user: 'root',           // Az adatbázis felhasználóneve
@@ -25,6 +25,8 @@ export function query(sql, params) {
         });
     });
 }
+
+
 
 // Tranzakciók kezelése
 export async function transaction(queries) {
