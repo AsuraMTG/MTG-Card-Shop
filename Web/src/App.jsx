@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import React from 'react'
-import {cors} from 'cors'
-import {axios} from 'axios'
-import { mysql } from 'mysql2'
-import { jwt, sign } from 'jsonwebtoken'
-import { bcrypt, hash } from "bcrypt" 
+import axios from 'axios'
+//import { jwt, sign } from 'jsonwebtoken'
+//import { bcrypt, hash } from "bcrypt" 
 import "@saeris/typeface-beleren-bold"
 
 
@@ -14,7 +11,7 @@ import './App.css'
 // pages import!
 import Protected from './Pages/Protected'
 import Login from './Pages/Login'
-import Register from './Pages/Register'
+import Register from './Pages/Registernew'
 
 const baseURL = "http://localhost:3000"
 

@@ -15,7 +15,7 @@ function Register() {
     }
     
     try {
-      const response = await fetch('http://localhost:3000/Register', {
+      const response = await fetch('http://localhost:3000/web/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,16 +1,29 @@
+import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState('Pistike');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-    /*const handleRegister = async () => {
-        const baseUrl = 'http://localhost:3000/Register';
+    const handleRegister = async () => {
         const body = JSON.stringify({ username, password });
         const headers = { 'Content-Type': 'application/json' };
+        
 
-        try {
-            const response = await fetch(baseUrl, { method: 'POST', headers, body });
+          navigate('http://localhost:3000/web/register');
+      
+        // If logged in, show the login page
+      /*  return (
+          <div>
+            {handleLogin}
+          </div>
+        ); */
+      };
+
+        /*try {
+            const response = await axios(baseUrl, { method: 'POST', headers, body });
             const data = await response.json();
             console.log(data);
             if (data.token) {
@@ -18,15 +31,14 @@ const Login = () => {
             }
         } catch (error) {
             console.error("Registration failed", error);
-        }
-    }; */
+        }*/ 
     const handleLogin = async () => {
-        const baseUrl = 'http://localhost:3000/Login';
+        const baseUrl = 'http://localhost:3000/web/login';
         const body = JSON.stringify({ username, password });
         const headers = { 'Content-Type': 'application/json' };
 
         try {
-            const response = await fetch(baseUrl, { method: 'POST', headers, body });
+            const response = await axios(baseUrl, { method: 'POST', headers, body });
             const data = await response.json();
             console.log(data);
             if (data.token) {
@@ -49,7 +61,7 @@ const Login = () => {
             </div>
             <h2>Login</h2>
             {error && <div className="error-message">{error}</div>}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleLogin}>
               <div className="form-group">
                 <input
                   type="password"
