@@ -8,10 +8,6 @@ const Login = () => {
     const navigate = useNavigate();
 
     const handleRegister = async () => {
-        const body = JSON.stringify({ username, password });
-        const headers = { 'Content-Type': 'application/json' };
-        
-
           navigate('http://localhost:3000/web/register');
       
         // If logged in, show the login page

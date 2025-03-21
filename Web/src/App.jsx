@@ -11,7 +11,7 @@ import './App.css'
 // pages import!
 import Protected from './Pages/Protected'
 import Login from './Pages/Login'
-import Register from './Pages/Registernew'
+import Register from './Pages/Register'
 
 const baseURL = "http://localhost:3000"
 
@@ -23,6 +23,7 @@ function App() {
   useEffect(() => {
     // Check if the user is authenticated on component mount
     const checkAuth = async () => {
+      //localStorage.removeItem("token");
       const token = localStorage.getItem('token');
       
       if (!token) {
@@ -68,6 +69,7 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsAuthenticated(false);
+    <Navigate to="/" />
   };
 
   if (loading) {
@@ -79,23 +81,24 @@ function App() {
   return (
     <>
     <h1>MTG Card Shop</h1>
+    <button onClick={handleLogout}>Logout</button>
     <Router>
       <Routes>
-        <Route path="/login" element={
+        <Route path="/web/login" element={
           isAuthenticated ? <Navigate to="/" /> : <Login onLogin={handleLogin} />
         } />
-        <Route path="/register" element={
+        <Route path="/web/register" element={
           isAuthenticated ? <Navigate to="/" /> : <Register />
         } />
         <Route path="/" element={
           isAuthenticated ? (
             <div>
               {/* Your main app content */}
-              <button onClick={handleLogout}>Logout</button>
+              
               {/* Other components */}
             </div>
           ) : (
-            <Navigate to="/login" />
+            <Navigate to="/web/login" />
           )
         } />
         {/* Add other routes as needed */}

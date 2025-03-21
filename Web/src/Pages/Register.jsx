@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import '../Components/Register' // ezzel most mizu?
+import axios from 'axios';
+import { useState } from 'react';
 
 function Register() {
   const [password, setPassword] = useState('');
@@ -15,12 +15,10 @@ function Register() {
     }
     
     try {
-      const response = await fetch('http://localhost:3000/web/register', {
-        method: 'POST',
+      const response = await axios.post('/web/register', {
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ password }),
+        }
       });
       
       const data = await response.json();
