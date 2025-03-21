@@ -6,6 +6,8 @@ Ez a dokumentáció bemutatja a **Kártyabolt** projekt adatbázisának struktú
 
 ## Adatbázis Tábla Struktúra
 
+![Database](./resources/database_tables.png)
+
 ### `categories` - Kategóriák
 Ez a tábla a termékek kategóriáit tartalmazza.
 
