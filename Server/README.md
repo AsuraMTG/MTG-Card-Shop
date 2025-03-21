@@ -18,6 +18,19 @@ A szükséges modulok telepítéséhez futtasd a következő parancsot:
 npm install express mysql2 dotenv body-parser cors multer path
 ```
 
+A ```.env``` tartalma:
+
+```.env
+    DB_HOST="localhost"
+    DB_PORT="3307"
+    DB_USER ="root"
+    DB_PASSWORD = ""
+    DATABASE = "cardshop"
+    PORT = "3000"
+    //Ezt a 'Server' mappaba kell elhelyezni!
+```
+
+
 Az alkalmazás indításához az alábbi parancsot másoldki:
 
 ```bash
