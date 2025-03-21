@@ -1,45 +1,58 @@
-import mysql from 'mysql2';  // Importáljuk a mysql2 csomagot
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors'); // Ha több domainről szeretnél hozzáférni
+const WebRoutes = require('./routes/WebRoutes');  // Webes végpontok
+const DesktopRoutes = require('./routes/DesktopRoutes'); // Adminisztrátori végpontok
 
-// MySQL kapcsolat létrehozása
-const pool = mysql.createConnection({
-    host: 'localhost',      // Az adatbázis hosztja
-    user: 'root',           // Az adatbázis felhasználóneve
-    password: '',           // Az adatbázis jelszava
-    database: 'cardshop',   // Az adatbázis neve
-    port: 3307
+const path = require('path');
+const app = express();
+
+
+
+// Middleware-ek beállítása
+app.use(bodyParser.json()); // JSON formátumú kérés feldolgozása
+app.use(bodyParser.urlencoded({ extended: true })); // URL-enkódolt adatok
+app.use(cors());  // Ha szükséges, CORS engedélyezése
+
+// Alapértelmezett route, ha valaki nem talál semmit
+app.get('/', (req, res) => {
+  res.send('Webshop API működik!');
 });
 
-// Tranzakciók kezelése
-export async function transaction(queries) {
-    const connection = await pool.promise().getConnection();
-    try {
-        await connection.beginTransaction();
-
-        for (const queryObj of queries) {
-            const { sql, params } = queryObj;
-            await connection.query(sql, params);
-        }
-
-        await connection.commit(); // Minden lekérdezés sikeresen lefutott, commit
-        connection.release();
-        return true; // Visszaadjuk, hogy sikeres volt a tranzakció
-
-    } catch (err) {
-        await connection.rollback(); // Hibás tranzakció esetén rollback
-        connection.release();
-        console.error("Hiba történt a tranzakció során: ", err);
-        throw err; // Hibát dobunk, hogy azt az alkalmazás kezelni tudja
+app.get('/image/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const imagePath = path.join(__dirname, 'product_images', filename);
+  console.log(imagePath);
+  res.sendFile(imagePath, (err) => {
+    if (err) {
+      res.status(404).json({ error: 'Kép nem található!' });
     }
-}
+  });
+});
 
-// Csatlakozás tesztelése
-export function testConnection() {
-    pool.getConnection((err, connection) => {
-        if (err) {
-            console.error('Hiba történt a MySQL szerverhez való csatlakozáskor: ', err.stack);
-            return;
-        }
-        console.log('Csatlakozva a MySQL szerverhez, kapcsolat ID: ' + connection.threadId);
-        connection.release();  // Szabadon engedjük a kapcsolatot, hogy újra felhasználható legyen
-    });
-}
+
+
+
+
+
+
+
+// Webes végpontok használata (felhasználói végpontok)
+app.use('/web', WebRoutes);
+
+// Adminisztrátori (asztali) végpontok használata
+app.use('/desktop', DesktopRoutes);
+
+
+
+// Hiba kezelő middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Valami hiba történt az alkalmazásban!' });
+});
+
+// Szerver indítása
+const PORT = process.env.PORT || 3000;  // Alapértelmezett port
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
