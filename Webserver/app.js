@@ -1,10 +1,11 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors'); // Ha több domainről szeretnél hozzáférni
-const WebRoutes = require('./routes/WebRoutes');  // Webes végpontok
-const DesktopRoutes = require('./routes/DesktopRoutes'); // Adminisztrátori végpontok
+import express  from 'express';
+import bodyParser  from 'body-parser';
+import cors  from 'cors'; // Ha több domainről szeretnél hozzáférni
+import WebRoutes from './routes/WebRoutes.js';  // Webes végpontok
 
-const path = require('path');
+// DesktopRoutes kell? Mire? 
+
+import path from 'path';
 const app = express();
 
 
@@ -38,10 +39,10 @@ app.get('/image/:filename', (req, res) => {
 
 
 // Webes végpontok használata (felhasználói végpontok)
-app.use('/web', WebRoutes);
+app.use('/routes', WebRoutes);
 
 // Adminisztrátori (asztali) végpontok használata
-app.use('/desktop', DesktopRoutes);
+//app.use('/desktop', DesktopRoutes);             Not defined 
 
 
 

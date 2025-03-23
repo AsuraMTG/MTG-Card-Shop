@@ -1,3 +1,6 @@
+// át kell pakolni ennek a tartalmát a webserver.js-be
+
+
 const mysql = require('mysql2');
 require('dotenv').config();  // Környezeti változók betöltése a .env fájlból
 

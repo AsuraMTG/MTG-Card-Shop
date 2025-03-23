@@ -37,3 +37,5 @@ app.use((req,res)=>{
 app.listen(3002,()=>{
     console.log("fut");
 });
+
+export default app;
