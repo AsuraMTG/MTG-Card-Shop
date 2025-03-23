@@ -10,12 +10,12 @@ const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         const dir = path.join(__dirname, '../product_images/');
         if (!fs.existsSync(dir)) {
-            fs.mkdirSync(dir); // Ha nem létezik a mappa, létrehozza
+            fs.mkdirSync(dir);
         }
-        cb(null, dir); // A fájlok ide kerülnek
+        cb(null, dir);
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Egyedi fájlnév
+        cb(null, Date.now() + path.extname(file.originalname));
     }
 });
 
