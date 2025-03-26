@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './Register.css';
+
 
 const Login = () => {
     const [username, setUsername] = useState('Pistike');
@@ -46,9 +48,9 @@ const Login = () => {
     };
 
 
-    /*return (
-        <div className="login-container">
-          <div className="login-card">
+    return (
+        <div className="container">
+          <div className="card">
             <div className="user-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -56,7 +58,6 @@ const Login = () => {
               </svg>
             </div>
             <h2>Login</h2>
-            {error && <div className="error-message">{error}</div>}
             <form onSubmit={handleLogin}>
               <div className="form-group">
                 <input
@@ -71,8 +72,8 @@ const Login = () => {
             </form>
           </div>
         </div>
-      );*/
-    return (
+      );
+    /*return (
         <form onSubmit={handleLogin}>
             <label htmlFor="username">Username</label>
             <input type="text" id="username" name="username" onChange={(e) => setUsername(e.target.value)} />
@@ -83,7 +84,7 @@ const Login = () => {
             <button type="submit" onClick={handleLogin}>Login</button>
             <button type="button" onClick={handleRegister}>Register</button>
         </form>
-    );
+    );*/
 };
 
 export default Login;

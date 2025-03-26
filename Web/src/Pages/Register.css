@@ -1,4 +1,4 @@
-.register-container {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     background-color: #f0f2f5;
   }
   
-  .register-card {
+  .card {
     background-color: #a6c0e3;
     border-radius: 8px;
     padding: 2rem;
@@ -51,7 +51,7 @@
     box-sizing: border-box;
   }
   
-  .register-button {
+  .button {
     width: 100%;
     padding: 10px;
     background-color: #3b82f6;
@@ -63,7 +63,7 @@
     margin-top: 1rem;
   }
   
-  .register-button:hover {
+  .button:hover {
     background-color: #2563eb;
   }
   
