@@ -1,22 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Ha több domainről szeretnél hozzáférni
-const WebRoutes = require('./routes/WebRoutes');  // Webes végpontok
-const DesktopRoutes = require('./routes/DesktopRoutes'); // Adminisztrátori végpontok
-
+const cors = require('cors'); 
 const path = require('path');
+const DesktopRoutes = require('./routes/DesktopRoutes');
+
 const app = express();
 
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+app.use(cors());
 
-
-// Middleware-ek beállítása
-app.use(bodyParser.json()); // JSON formátumú kérés feldolgozása
-app.use(bodyParser.urlencoded({ extended: true })); // URL-enkódolt adatok
-app.use(cors());  // Ha szükséges, CORS engedélyezése
-
-// Alapértelmezett route, ha valaki nem talál semmit
 app.get('/', (req, res) => {
-  res.send('Webshop API működik!');
+  res.send('Welcome to MTG CardShop!');
 });
 
 app.get('/image/:filename', (req, res) => {
@@ -25,34 +20,19 @@ app.get('/image/:filename', (req, res) => {
   console.log(imagePath);
   res.sendFile(imagePath, (err) => {
     if (err) {
-      res.status(404).json({ error: 'Kép nem található!' });
+      res.status(404).json({ error: 'Image not found!' });
     }
   });
 });
 
-
-
-
-
-
-
-
-// Webes végpontok használata (felhasználói végpontok)
-app.use('/web', WebRoutes);
-
-// Adminisztrátori (asztali) végpontok használata
 app.use('/desktop', DesktopRoutes);
 
-
-
-// Hiba kezelő middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({ message: 'Valami hiba történt az alkalmazásban!' });
+  res.status(500).json({ message: 'Something went wrong with the application!' });
 });
 
-// Szerver indítása
-const PORT = process.env.PORT || 3000;  // Alapértelmezett port
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

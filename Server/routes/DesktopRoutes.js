@@ -25,7 +25,7 @@ router.use(cors());
 router.use(express.json());
 router.use('/product_images', express.static(path.join(__dirname, 'product_images')));
 
-// Termékek lekérdezése
+// Query products
 router.get('/admin/products', async (req, res) => {
     try {
         const products = await db.query(
@@ -33,17 +33,17 @@ router.get('/admin/products', async (req, res) => {
         );
         res.status(200).json(products);
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a termékek listázása közben', error });
+        res.status(500).json({ message: 'An error occurred while listing products.', error });
     }
 });
 
-// Termek letrehozasa
+// Create products
 router.post('/admin/products', upload.single('image'), async (req, res) => {
     const { name, category_id, price, stock_quantity, available, description } = req.body;
     const imageUrl = req.file ? `${req.file.filename}` : null;
 
     if (!name || !description || !imageUrl) {
-        return res.status(400).json({ error: 'Minden mezőt ki kell tölteni!' });
+        return res.status(400).json({ error: 'All fields must be filled in!' });
     }
 
     try {
@@ -54,19 +54,19 @@ router.post('/admin/products', upload.single('image'), async (req, res) => {
         const result = await db.query(query, [name, category_id, price, stock_quantity, available, description, imageUrl]);
 
         res.json({
-            message: 'Feltöltés sikeres!',
+            message: 'Upload successful!',
             data: {
                 id: result.insertId, name, category_id, price, stock_quantity, available, description, imageUrl
             }
         });
         
     } catch (error) {
-        console.error('Adatbázis hiba:', error);
-        res.status(500).json({ error: 'Szerverhiba az adatbázis írás során' });
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'Server error while writing to database' });
     }
 });
 
-// Termek frissitese
+// Product update
 router.put('/admin/products/:id', async (req, res) => {
     const product_id = req.params.id;
     const { name, category_id, price, stock_quantity, available, description } = req.body;
@@ -79,13 +79,13 @@ router.put('/admin/products/:id', async (req, res) => {
             WHERE product_id = ?`,
             [name, categoryToSet, price, stock_quantity, available, description, product_id]
         );
-        res.status(200).json({ message: 'Esemény frissítve' });
+        res.status(200).json({ message: 'Event updated' });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt az esemény frissítése közben', error });
+        res.status(500).json({ message: 'An error occurred while updating the event.', error });
     }
 });
 
-// Események listázása
+// List events
 router.get('/admin/events', async (req, res) => {
     try {
         const events = await db.query(
@@ -93,11 +93,11 @@ router.get('/admin/events', async (req, res) => {
         );
         res.status(200).json(events);
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt az események listázása közben', error });
+        res.status(500).json({ message: 'An error occurred while listing events.', error });
     }
 });
 
-// Új esemény hozzáadása
+// Add new event
 router.post('/admin/events', async (req, res) => {
     const { event_name, event_date, event_description, max_participants } = req.body;
     try {
@@ -105,13 +105,13 @@ router.post('/admin/events', async (req, res) => {
             `INSERT INTO events (event_name, event_date, event_description, max_participants, current_participants)
              VALUES (?, ?, ?, ?, 0)`, [event_name, event_date, event_description, max_participants]
         );
-        res.status(201).json({ message: 'Esemény hozzáadva', eventId: result.insertId });
+        res.status(201).json({ message: 'Event added', eventId: result.insertId });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt az esemény hozzáadása közben', error });
+        res.status(500).json({ message: 'An error occurred while adding the event.', error });
     }
 });
 
-// Esemény frissítése
+// Update event
 router.put('/admin/events/:eventId', async (req, res) => {
     const eventId = req.params.eventId;
     const { event_name, event_date, event_description, max_participants } = req.body;
@@ -121,25 +121,25 @@ router.put('/admin/events/:eventId', async (req, res) => {
              SET event_name = ?, event_date = ?, event_description = ?, max_participants = ?
              WHERE event_id = ?`, [event_name, event_date, event_description, max_participants, eventId]
         );
-        res.status(200).json({ message: 'Esemény frissítve' });
+        res.status(200).json({ message: 'Event updated' });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt az esemény frissítése közben', error });
+        res.status(500).json({ message: 'An error occurred while updating the event.', error });
     }
 });
 
-// Esemény törlése
+// Delete event
 router.delete('/admin/events/:eventId', async (req, res) => {
     const eventId = req.params.eventId;
     try {
         await db.query(`DELETE FROM events WHERE event_id = ?`, [eventId]);
-        res.status(200).json({ message: 'Esemény törölve' });
+        res.status(200).json({ message: 'Event cancelled' });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt az esemény törlése közben', error });
+        res.status(500).json({ message: 'An error occurred while deleting the event.', error });
     }
 });
 
 
-// Felhasználók listázása
+// List users
 router.get('/admin/customers', async (req, res) => {
     try {
         const customers = await db.query(
@@ -147,11 +147,11 @@ router.get('/admin/customers', async (req, res) => {
         );
         res.status(200).json(customers);
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a felhasználók listázása közben', error });
+        res.status(500).json({ message: 'An error occurred while listing users.', error });
     }
 });
 
-// Felhasználói adatok frissítése
+// Update user data
 router.put('/admin/customers/:customerId', async (req, res) => {
     const customerId = req.params.customerId;
     const { name, email, address, phone_number } = req.body;
@@ -161,24 +161,24 @@ router.put('/admin/customers/:customerId', async (req, res) => {
              SET name = ?, email = ?, address = ?, phone_number = ?
              WHERE customer_id = ?`, [name, email, address, phone_number, customerId]
         );
-        res.status(200).json({ message: 'Felhasználói adatok frissítve' });
+        res.status(200).json({ message: 'User data updated' });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a felhasználói adatok frissítése közben', error });
+        res.status(500).json({ message: 'An error occurred while updating user data.', error });
     }
 });
 
-// Felhasználó törlése
+// Delete user
 router.delete('/admin/customers/:customerId', async (req, res) => {
     const customerId = req.params.customerId;
     try {
         await db.query(`DELETE FROM customers WHERE customer_id = ?`, [customerId]);
-        res.status(200).json({ message: 'Felhasználó törölve' });
+        res.status(200).json({ message: 'User deleted' });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a felhasználó törlése közben', error });
+        res.status(500).json({ message: 'An error occurred while deleting the user.', error });
     }
 });
 
-// Eseményekhez tartozó jelentkezések listázása
+// List applications for events
 router.get('/admin/registrations', async (req, res) => {
     try {
         const registrations = await db.query(
@@ -189,21 +189,20 @@ router.get('/admin/registrations', async (req, res) => {
         );
         res.status(200).json(registrations);
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a jelentkezések listázása közben', error });
+        res.status(500).json({ message: 'An error occurred while listing applications.', error });
     }
 });
 
-// Jelentkezés törlése
+// Cancel application
 router.delete('/admin/registrations/:registrationId', async (req, res) => {
     const registrationId = req.params.registrationId;
     try {
         const registration = await db.query(`SELECT * FROM registrations WHERE registration_id = ?`, [registrationId]);
 
         if (registration.length === 0) {
-            return res.status(404).json({ message: 'Jelentkezés nem található' });
+            return res.status(404).json({ message: 'Application not found' });
         }
 
-        // Az esemény résztvevőinek számát csökkentjük
         const eventId = registration[0].event_id;
         await db.query(
             `UPDATE events
@@ -211,12 +210,11 @@ router.delete('/admin/registrations/:registrationId', async (req, res) => {
              WHERE event_id = ?`, [eventId]
         );
 
-        // Jelentkezés törlése
         await db.query(`DELETE FROM registrations WHERE registration_id = ?`, [registrationId]);
 
-        res.status(200).json({ message: 'Jelentkezés törölve' });
+        res.status(200).json({ message: 'Application deleted' });
     } catch (error) {
-        res.status(500).json({ message: 'Hiba történt a jelentkezés törlése közben', error });
+        res.status(500).json({ message: 'An error occurred while deleting the application.', error });
     }
 });
 
