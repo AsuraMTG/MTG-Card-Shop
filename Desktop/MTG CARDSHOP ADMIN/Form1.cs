@@ -684,5 +684,292 @@ namespace MTG_CARDSHOP_ADMIN
                 MessageBox.Show(ex.Message);
             }
         }
+
+
+
+        // --------------------* Dark and Light Mode Section Start
+
+        // ----* SetDarkMode
+        private void SetDarkMode()
+        {
+            this.BackColor = Color.FromArgb(45, 45, 48);
+            this.ForeColor = Color.White;
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is GroupBox)
+                {
+                    GroupBox groupBox = control as GroupBox;
+                    groupBox.BackColor = Color.FromArgb(45, 45, 48);
+                    groupBox.ForeColor = Color.White;
+                }
+
+                if (control is Button)
+                {
+                    Button button = control as Button;
+                    button.BackColor = Color.FromArgb(66, 66, 66);
+                    button.ForeColor = Color.White;
+                }
+                else if (control is TextBox || control is RichTextBox)
+                {
+                    control.BackColor = Color.FromArgb(28, 28, 28);
+                    control.ForeColor = Color.White;
+                }
+                else if (control is Label)
+                {
+                    control.ForeColor = Color.White;
+                }
+                else if (control is ComboBox)
+                {
+                    control.BackColor = Color.FromArgb(28, 28, 28);
+                    control.ForeColor = Color.White;
+                }
+                else if (control is DataGridView)
+                {
+                    DataGridView dgv = control as DataGridView;
+                    dgv.BackgroundColor = Color.FromArgb(28, 28, 28);
+                    dgv.DefaultCellStyle.BackColor = Color.FromArgb(45, 45, 48);
+                    dgv.DefaultCellStyle.ForeColor = Color.White;
+                    dgv.GridColor = Color.FromArgb(64, 64, 64);
+                    dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(28, 28, 28);
+                    dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                    dgv.RowsDefaultCellStyle.BackColor = Color.FromArgb(45, 45, 48);
+                    dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(35, 35, 38);
+                }
+                else if (control is PictureBox)
+                {
+                    control.BackColor = Color.FromArgb(45, 45, 48);
+                    pictureBoxProductImage.BackColor = Color.FromArgb(45, 45, 48);
+                }
+            }
+        }
+        private void radioButtonDark_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonDark.Checked)
+            {
+                SetDarkMode();
+
+                buttonCustomerDelete.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonCustomerUpdate.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonEventCreate.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonEventDelete.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonEventNew.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonEventUpdate.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonProductCreate.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonProductImageUpload.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonProductNew.BackColor = Color.FromArgb(45, 45, 48);
+
+                buttonProductUpdate.BackColor = Color.FromArgb(45, 45, 48);
+
+                textBoxCustomerAddress.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxCustomerAddress.ForeColor = Color.White;
+
+                textBoxCustomerEmail.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxCustomerEmail.ForeColor = Color.White;
+
+                textBoxCustomerId.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxCustomerId.ForeColor = Color.White;
+
+                textBoxCustomerName.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxCustomerName.ForeColor = Color.White;
+
+                textBoxCustomerPhone.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxCustomerPhone.ForeColor = Color.White;
+
+                textBoxCustomerRegistration.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxCustomerRegistration.ForeColor = Color.White;
+
+                numericUpDownEventMax.BackColor = Color.FromArgb(45, 45, 48);
+                numericUpDownEventMax.ForeColor = Color.White;
+
+                dateTimePickerEventDate.BackColor = Color.FromArgb(45, 45, 48);
+                dateTimePickerEventDate.ForeColor = Color.White;
+
+                comboBoxProductCategory.BackColor = Color.FromArgb(45, 45, 48);
+                comboBoxProductCategory.ForeColor = Color.White;
+
+                textBoxEventName.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxEventName.ForeColor = Color.White;
+
+                textBoxEventCurrent.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxEventCurrent.ForeColor = Color.White;
+
+                textBoxEventDescription.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxEventDescription.ForeColor = Color.White;
+
+                textBoxEventId.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxEventId.ForeColor = Color.White;
+
+                textBoxProductAvailable.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxProductAvailable.ForeColor = Color.White;
+
+                textBoxProductDescription.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxProductDescription.ForeColor = Color.White;
+
+                textBoxProductId.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxProductId.ForeColor = Color.White;
+
+                textBoxProductName.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxProductName.ForeColor = Color.White;
+
+                textBoxProductPrice.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxProductPrice.ForeColor = Color.White;
+
+                textBoxProductStock.BackColor = Color.FromArgb(45, 45, 48);
+                textBoxProductStock.ForeColor = Color.White;
+
+            }
+        }
+
+        // ----* SetLightMode
+        private void SetLightMode()
+        {
+            this.BackColor = Color.White;
+            this.ForeColor = Color.Black;
+
+            foreach (Control control in this.Controls)
+            {
+                if (control is GroupBox)
+                {
+                    GroupBox groupBox = control as GroupBox;
+                    groupBox.BackColor = Color.White;
+                    groupBox.ForeColor = Color.Black;
+                }
+
+                if (control is Button)
+                {
+                    Button button = control as Button;
+                    button.BackColor = Color.LightGray; // Lighter button background
+                    button.ForeColor = Color.White; // White text
+                }
+                else if (control is TextBox || control is RichTextBox)
+                {
+                    // Apply Light mode for TextBox and RichTextBox
+                    control.BackColor = Color.White;
+                    control.ForeColor = Color.Black;
+                    //control.BorderStyle = BorderStyle.Fixed3D; // Apply a valid border style for these controls
+                }
+                else if (control is Label)
+                {
+                    control.ForeColor = Color.Black;
+                }
+                else if (control is ComboBox)
+                {
+                    // Apply Light mode for ComboBox (no BorderStyle, just background and text color)
+                    control.BackColor = Color.White;
+                    control.ForeColor = Color.Black;
+                }
+                else if (control is DataGridView)
+                {
+                    DataGridView dgv = control as DataGridView;
+                    dgv.BackgroundColor = Color.White;
+                    dgv.DefaultCellStyle.BackColor = Color.White;
+                    dgv.DefaultCellStyle.ForeColor = Color.Black;
+                    dgv.GridColor = Color.Gray;
+                    dgv.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+                    dgv.ColumnHeadersDefaultCellStyle.ForeColor = Color.Black;
+                    dgv.RowsDefaultCellStyle.BackColor = Color.White;
+                    dgv.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
+                }
+                else if (control is PictureBox)
+                {
+                    control.BackColor = Color.White; // Set to light if needed
+
+                    pictureBoxProductImage.BackColor = Color.White;
+                }
+            }
+        }
+        private void radioButtonLight_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButtonLight.Checked)
+            {
+                SetLightMode();
+
+                buttonCustomerDelete.BackColor = Color.White;
+
+                buttonCustomerUpdate.BackColor = Color.White;
+
+                buttonEventCreate.BackColor = Color.White;
+
+                buttonEventDelete.BackColor = Color.White;
+
+                buttonEventNew.BackColor = Color.White;
+
+                buttonEventUpdate.BackColor = Color.White;
+
+                buttonProductCreate.BackColor = Color.White;
+
+                buttonProductImageUpload.BackColor = Color.White;
+
+                buttonProductNew.BackColor = Color.White;
+
+                buttonProductUpdate.BackColor = Color.White;
+
+                textBoxCustomerAddress.BackColor = Color.White;
+                textBoxCustomerAddress.ForeColor = Color.Black;
+
+                textBoxCustomerEmail.BackColor = Color.White;
+                textBoxCustomerEmail.ForeColor = Color.Black;
+
+                textBoxCustomerId.BackColor = Color.White;
+                textBoxCustomerId.ForeColor = Color.Black;
+
+                textBoxCustomerName.BackColor = Color.White;
+                textBoxCustomerName.ForeColor = Color.Black;
+
+                textBoxCustomerPhone.BackColor = Color.White;
+                textBoxCustomerPhone.ForeColor = Color.Black;
+
+                textBoxCustomerRegistration.BackColor = Color.White;
+                textBoxCustomerRegistration.ForeColor = Color.Black;
+
+                numericUpDownEventMax.BackColor = Color.White;
+                numericUpDownEventMax.ForeColor = Color.Black;
+
+                dateTimePickerEventDate.BackColor = Color.White;
+                dateTimePickerEventDate.ForeColor = Color.Black;
+
+                comboBoxProductCategory.BackColor = Color.White;
+                comboBoxProductCategory.ForeColor = Color.Black;
+
+                textBoxEventName.BackColor = Color.White;
+                textBoxEventName.ForeColor = Color.Black;
+
+                textBoxEventCurrent.BackColor = Color.White;
+                textBoxEventCurrent.ForeColor = Color.Black;
+
+                textBoxEventDescription.BackColor = Color.White;
+                textBoxEventDescription.ForeColor = Color.Black;
+
+                textBoxEventId.BackColor = Color.White;
+                textBoxEventId.ForeColor = Color.Black;
+
+                textBoxProductAvailable.BackColor = Color.White;
+                textBoxProductAvailable.ForeColor = Color.Black;
+
+                textBoxProductDescription.BackColor = Color.White;
+                textBoxProductDescription.ForeColor = Color.Black;
+
+                textBoxProductId.BackColor = Color.White;
+                textBoxProductId.ForeColor = Color.Black;
+
+                textBoxProductName.BackColor = Color.White;
+                textBoxProductName.ForeColor = Color.Black;
+
+                textBoxProductPrice.BackColor = Color.White;
+                textBoxProductPrice.ForeColor = Color.Black;
+
+                textBoxProductStock.BackColor = Color.White;
+                textBoxProductStock.ForeColor = Color.Black;
+            }
+        }
     }
 }
