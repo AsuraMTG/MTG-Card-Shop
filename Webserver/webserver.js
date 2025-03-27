@@ -2,19 +2,13 @@
 import express  from 'express';
 import mysql from 'mysql2';  // Importáljuk a mysql2 csomagot
 import cors from 'cors';
-import bodyParser  from 'body-parser';
 import WebRoutes from './routes/WebRoutes.js';  // Webes végpontok
 import path from 'path';
 import dotenv from 'dotenv' // Környezeti változók betöltése a .env fájlból
+import bcrypt from 'bcrypt'
 const app = express();
 app.use(cors());
 app.use(express.json());
-
-// Middleware-ek beállítása
-app.use(bodyParser.json()); // JSON formátumú kérés feldolgozása
-app.use(bodyParser.urlencoded({ extended: true })); // URL-enkódolt adatok
-
-
 
 // Alapértelmezett route, ha valaki nem talál semmit
 app.get('/', (req, res) => {
@@ -38,13 +32,6 @@ app.get('/web/events', async (req, res) => {
     }
 });
 
-app.use((req,res)=>{
-    res.send("404");
-})
-app.listen(3002,()=>{
-    console.log("fut");
-});
-
 app.get('/image/:filename', (req, res) => {
     const filename = req.params.filename;
     const imagePath = path.join(__dirname, 'product_images', filename);
@@ -57,7 +44,7 @@ app.get('/image/:filename', (req, res) => {
 });
 
 // Webes végpontok használata (felhasználói végpontok)
-app.use('/routes', WebRoutes);
+app.use('/web', WebRoutes);
 
 
 // Hiba kezelő middleware
@@ -140,19 +127,69 @@ const pool = mysql.createPool({
     queueLimit: 0  // Nincs korlátozva a várakozó kapcsolatok száma
 });
 
-// In ES Module style
-const query = () => {function query(sql, params) {
-    return new Promise((resolve, reject) => {
-        pool.query(sql, params, (err, results) => {
-            if (err) {
-                console.error("Hiba a lekérdezés végrehajtása során: ", err);
-                reject(err);
-            } else {
-                resolve(results);
-            }
-        });
+const username = "new_user";
+const plainPassword = "user_password"
+
+const registerUser = (username, plainPassword => {
+    bcrypt.hash(plainPassword, 10, (err, hashedPassword) => {
+        if (err) {
+            console.error("hash password error: ", err)
+            return;
+        }
+
+        const query = () => {function query(sql, params) {      // ez most mit csinál? 
+            return new Promise((resolve, reject) => {           //
+                pool.query(
+                    'INSERT INTO customers (username, password) VALUES (?, ?)',
+                    sql, params,[username, hashedPassword], (err, results) => {
+                    if (err) {
+                        console.error("Hiba a lekérdezés végrehajtása során: ", err);
+                        reject(err);
+                    } else {
+                        resolve(results);
+                    }
+                });
+                console.log("Felhasználó regisztrálva lett egy hash password-el")
+            });
+        } };
     });
-} };
+});
+
+const loginUser = (username, enteredPassword) => {
+    pool.query(
+        'SELECT password FROM customers WHERE name = ?',
+        [username],
+        (err, results) => {
+            if (err) {
+                console.error("Error querying database", err);
+                return;
+            }
+            if (results.length === 0) {
+                console.log("User not found");
+                return;
+            }
+
+            const storedHashedPassword = results[0].password;
+
+            // Compare the entered password with the stored hashed password
+            bcrypt.compare(enteredPassword, storedHashedPassword, (err, results) => {
+                if (err) {
+                    console.error("A jelszó nem egyezik", err);
+                    return;
+                }
+                if (results) {
+                    console.log("succesful login!")
+                }else{
+                    console.log("rossz jelszó")
+                }
+            })
+        }
+    )
+}
+
+
+
+
 
 const transaction = () => {async function transaction(queries) {
     const connection = await pool.promise().getConnection();
@@ -187,7 +224,8 @@ const testConnection = () => {function testConnection() {
     });
 }};
 
-app.query = query;
+app.registerUser = registerUser;
+app.loginUser = loginUser ;
 app.transaction = transaction;
 app.testConnection = testConnection;
 

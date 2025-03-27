@@ -1,6 +1,7 @@
 import express from 'express';  // express importálása
 import bcrypt from 'bcrypt';    // bcrypt importálása
 import db from '../webserver.js'; // Feltételezve, hogy az adatbázis kapcsolódás és lekérdezések külön fájlban vannak
+import app from '../webserver.js';
 
 const router = express.Router();
 
@@ -96,8 +97,8 @@ router.get('/events/my-events', async (req, res) => {
     }
 });
 
-// Felhasználó regisztrálása
-router.post('/web/register', async (req, res) => { 
+// Felhasználó regisztrálása    #1
+/*router.post('/web/register', async (req, res) => { 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = { name: req.body.name, password: hashedPassword };
@@ -106,10 +107,17 @@ router.post('/web/register', async (req, res) => {
     } catch (error) {
         res.status(500).json({message: 'Hiba történt a regisztráció során', error});
     }
+});*/
+// #2
+router.post('/web/register', async (req, res) => {
+    const { username, password } = req.body;
+    registerUser(username, password, email);
+    res.send('User registered');
 });
 
-// Felhasználó bejelentkeztetése
-router.post('/web/login', async (req, res) => {
+
+// Felhasználó bejelentkeztetése    #1
+/*router.post('/web/login', async (req, res) => {
     const customerId = req.body.customer_id;
     const user = user.find(user => user.name === req.body.name);
     if (user == null) {
@@ -124,6 +132,13 @@ router.post('/web/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({message: 'Hiba történt a bejelentkezés során', error});
     }
-});
+});*/
+//  #2
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    loginUser(username, password);
+    res.send('Login attempted');
+  });
 
 export default router;  // Az exportálás ES Modules szintaxissal
