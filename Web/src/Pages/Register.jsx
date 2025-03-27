@@ -4,7 +4,10 @@ import { useState } from 'react';
 function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,8 +39,8 @@ function Register() {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-card">
+    <div className="container">
+      <div className="card">
         <div className="user-icon">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -45,8 +48,26 @@ function Register() {
           </svg>
         </div>
         <h2>Register</h2>
-        {error && <div className="error-message">{error}</div>}
         <form onSubmit={handleSubmit}>
+          <div className='form-group'>
+            <input 
+              type="text"
+              placeholder='Username'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className='form-group'>
+            <input 
+              type='email'
+              
+              placeholder='Email'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required  
+            />
+          </div>
           <div className="form-group">
             <input
               type="password"
@@ -65,10 +86,10 @@ function Register() {
               required
             />
           </div>
-          <button type="submit" className="register-button">Register</button>
+          <button type="submit" className="button">Register</button>
         </form>
         <div className="login-link">
-          Already registered? <a href="/login">Sign in</a>
+          Already registered? <a href="/web/login">Sign in</a>
         </div>
       </div>
     </div>

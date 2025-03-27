@@ -5,7 +5,7 @@ import './Register.css';
 
 
 const Login = () => {
-    const [username, setUsername] = useState('Pistike');
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ const Login = () => {
         }*/ 
     const handleLogin = async () => {
         const baseUrl = 'http://localhost:3000/web/login';
-        const body = JSON.stringify({ username, password });
+        const body = JSON.stringify({ name, password });
         const headers = { 'Content-Type': 'application/json' };
 
         try {
@@ -59,6 +59,15 @@ const Login = () => {
             </div>
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
+            <div className='form-group'>
+                <input 
+                  type="text"
+                  placeholder='Username'
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
               <div className="form-group">
                 <input
                   type="password"
@@ -70,6 +79,9 @@ const Login = () => {
               </div>
               <button type="submit" className="login-button">Login</button>
             </form>
+            <div className="login-link">
+              Don't have an account yet? <a href="/web/register">Register</a>
+            </div>
           </div>
         </div>
       );

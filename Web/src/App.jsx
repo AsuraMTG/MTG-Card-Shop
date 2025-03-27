@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import axios from 'axios'
+//import mysql from 'mysql2'
 //import { jwt, sign } from 'jsonwebtoken'
 //import { bcrypt, hash } from "bcrypt" 
 import "@saeris/typeface-beleren-bold"
