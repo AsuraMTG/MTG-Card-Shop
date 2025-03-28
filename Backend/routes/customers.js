@@ -42,7 +42,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Regisztráció - új customer hozzáadása
-router.post('/', async (req, res) => {
+router.post('/web/register', async (req, res) => {
     const { name, email, address, phone_number, password } = req.body;
 
     try {
