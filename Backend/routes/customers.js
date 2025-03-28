@@ -41,22 +41,22 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Regisztráció - új customer hozzáadása
 router.post('/', async (req, res) => {
-    const customerId = req.params.id;
     const { name, email, address, phone_number, password } = req.body;
 
     try {
         await pool.query(
-            `INSERT INTO customers (customer_id, name, email, address, phone_number, password) VALUES (NULL, ?, ?, ?, ?, ?)`,
+            `INSERT INTO customers (name, email, address, phone_number, password)
+             VALUES (?, ?, ?, ?, ?)`,
             [name, email, address, phone_number, password]
         );
-        res.sendStatus(204); // No content, as the update was successful.
+        res.status(201).json({ message: 'User successfully registered.' });
     } catch (error) {
-        res.status(500).json({ message: 'An error occurred while updating user data.', error });
+        res.status(500).json({ message: 'An error occurred while registering the user.', error });
     }
 });
-
-
+// Login - customer beléptetése
 router.post('/login', async (req, res) => {
     const {username, password} = req.body;
     try{
