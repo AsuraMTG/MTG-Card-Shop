@@ -1,9 +1,11 @@
 import express from 'express';
 import categoriesRoutes from './routes/categories.js';
-//import customersRoutes from './routes/customers.js';
+import customersRoutes from './routes/customers.js';
 //import eventsRoutes from './routes/events.js';
 //import registrationsRoutes from './routes/registrations.js';
 import productsRoutes from './routes/products.js';
+import eventsRoutes from './routes/events.js';
+import eventregistrations from './routes/eventregistrations.js';
 //import ordersRoutes from './routes/orders.js';
 //import orderItemsRoutes from './routes/order_items.js';
 import bodyParser from 'body-parser';
@@ -38,13 +40,14 @@ app.get('/image/:filename', (req, res) => {
 
 // Route handlers
 app.use('/categories', categoriesRoutes);
-//app.use('/customers', customersRoutes);
+app.use('/customers', customersRoutes);
 //app.use('/events', eventsRoutes);
 //app.use('/registrations', registrationsRoutes);
 app.use('/products', productsRoutes);
+app.use('/events', eventsRoutes);
 //app.use('/orders', ordersRoutes);
 //app.use('/order_items', orderItemsRoutes);
-
+app.use('/eventregistrations', eventregistrations);
 app.use('/', (req, res) => {
   res.send('Üdvözöljük a Magic: The Gathering kártya boltban!');
 });

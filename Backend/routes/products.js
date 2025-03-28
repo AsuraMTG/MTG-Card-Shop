@@ -27,25 +27,24 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// Serve product images statically
 router.use(cors());
 router.use(express.json());
 router.use('/product_images', express.static(path.join(__dirname, 'product_images')));
 
-
-
 // Query products
 router.get('/', async (req, res) => {
-    try {
-        const products = await pool.query(
-            `SELECT * FROM products`
-        );
-        res.status(200).json(products);
-    } catch (error) {
-        res.status(500).json({ message: 'An error occurred while listing products.', error });
-    }
+    const [rows] = await pool.query('SELECT * FROM products');
+    res.json(rows);
 });
 
-// Create products
+// Get a specific product by ID
+router.get('/:id', async (req, res) => {
+    const [rows] = await pool.query('SELECT * FROM products WHERE product_id = ?', [req.params.id]);
+    res.json(rows[0]);
+});
+
+// Create a new product
 router.post('/', upload.single('image'), async (req, res) => {
     const { name, category_id, price, stock_quantity, available, description } = req.body;
     const imageUrl = req.file ? `${req.file.filename}` : null;
@@ -59,13 +58,17 @@ router.post('/', upload.single('image'), async (req, res) => {
         INSERT INTO products (name, category_id, price, stock_quantity, available, description, imageUrl)
         VALUES (?, ?, ?, ?, ?, ?, ?)
       `;
-        const result = await pool.query(query, [name, category_id, price, stock_quantity, available, description, imageUrl]);
+        const [result] = await pool.query(query, [name, category_id, price, stock_quantity, available, description, imageUrl]);
 
         res.json({
-            message: 'Upload successful!',
-            data: {
-                id: result.insertId, name, category_id, price, stock_quantity, available, description, imageUrl
-            }
+            id: result.insertId,
+            name,
+            category_id,
+            price,
+            stock_quantity,
+            available,
+            description,
+            imageUrl
         });
         
     } catch (error) {
@@ -74,23 +77,29 @@ router.post('/', upload.single('image'), async (req, res) => {
     }
 });
 
-// Product update
+// Update an existing product
 router.put('/:id', async (req, res) => {
-    const product_id = req.params.id;
     const { name, category_id, price, stock_quantity, available, description } = req.body;
+    const product_id = req.params.id;
 
     const categoryToSet = category_id || null;
     try {
-        const result = await pool.query(
+        await pool.query(
             `UPDATE products
             SET name = ?, category_id = ?, price = ?, stock_quantity = ?, available = ?, description = ?
             WHERE product_id = ?`,
             [name, categoryToSet, price, stock_quantity, available, description, product_id]
         );
-        res.status(200).json({ message: 'Event updated' });
+        res.sendStatus(204);
     } catch (error) {
-        res.status(500).json({ message: 'An error occurred while updating the event.', error });
+        res.status(500).json({ message: 'An error occurred while updating the product.', error });
     }
+});
+
+// Delete a product by ID
+router.delete('/:id', async (req, res) => {
+    await pool.query('DELETE FROM products WHERE product_id = ?', [req.params.id]);
+    res.sendStatus(204);
 });
 
 export default router;
