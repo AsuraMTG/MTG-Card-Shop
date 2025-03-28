@@ -6,9 +6,9 @@ import { pool } from '../db.js';
 
 const router = express.Router();
 
-router.post('/registrations/register', async (req, res) => {
+router.post('/register', async (req, res) => {
     console.log(req.body);
-    const { username, password } = req.body;
+    const { username, password, email } = req.body;
     registerUser(username, password, email);
     res.send('User registered');
 });

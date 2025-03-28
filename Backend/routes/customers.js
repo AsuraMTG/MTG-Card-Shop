@@ -41,6 +41,49 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+router.post('/', async (req, res) => {
+    const customerId = req.params.id;
+    const { name, email, address, phone_number, password } = req.body;
+
+    try {
+        await pool.query(
+            `INSERT INTO customers (customer_id, name, email, address, phone_number, password) VALUES (NULL, ?, ?, ?, ?, ?)`,
+            [name, email, address, phone_number, password]
+        );
+        res.sendStatus(204); // No content, as the update was successful.
+    } catch (error) {
+        res.status(500).json({ message: 'An error occurred while updating user data.', error });
+    }
+});
+
+
+router.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    pool.query(
+        'SELECT * FROM customers WHERE name = ?',
+        username,
+        (err, result) => {
+            if (err) {
+                res.send({ err: err });
+            }
+
+            if (result.length > 0) {
+                if (password == result[0].password) {
+                    //-- a tárolt jelszó és a kapott megegyezik
+                    res.json({ auth: true, token: token, result: result });
+                } else {
+                    //-- nem egyezika két jelszó
+                    res.json({ auth: false, message: 'wrong username/password combination' });
+                }
+            } else {
+                res.json({ auth: false, message: 'No user found' });
+            }
+        }
+    );
+}
+);
+
 // Delete customer
 router.delete('/:id', async (req, res) => {
     const customerId = req.params.id;

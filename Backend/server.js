@@ -1,8 +1,7 @@
 import express from 'express';
 import categoriesRoutes from './routes/categories.js';
 import customersRoutes from './routes/customers.js';
-//import eventsRoutes from './routes/events.js';
-//import registrationsRoutes from './routes/registrations.js';
+import registrationsRoutes from './routes/registrations.js';
 import productsRoutes from './routes/products.js';
 import eventsRoutes from './routes/events.js';
 import eventregistrations from './routes/eventregistrations.js';
@@ -42,7 +41,7 @@ app.get('/image/:filename', (req, res) => {
 app.use('/categories', categoriesRoutes);
 app.use('/customers', customersRoutes);
 //app.use('/events', eventsRoutes);
-//app.use('/registrations', registrationsRoutes);
+app.use('/registrations', registrationsRoutes);
 app.use('/products', productsRoutes);
 app.use('/events', eventsRoutes);
 //app.use('/orders', ordersRoutes);
