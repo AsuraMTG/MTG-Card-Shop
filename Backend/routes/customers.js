@@ -57,33 +57,31 @@ router.post('/', async (req, res) => {
 });
 
 
-router.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-    pool.query(
-        'SELECT * FROM customers WHERE name = ?',
-        username,
-        (err, result) => {
-            if (err) {
-                res.send({ err: err });
-            }
+router.post('/login', async (req, res) => {
+    const {username, password} = req.body;
+    try{
+        const[rows] = await pool.query(
+            'SELECT * FROM customers WHERE name = ?',
+            [username]
+        );
 
-            if (result.length > 0) {
-                if (password == result[0].password) {
-                    //-- a tárolt jelszó és a kapott megegyezik
-                    res.json({ auth: true, token: token, result: result });
-                } else {
-                    //-- nem egyezika két jelszó
-                    res.json({ auth: false, message: 'wrong username/password combination' });
-                }
+        if (rows.length > 0) {
+            const user = rows[0];
+            if (password === user.password) 
+            {
+                res.json({auth: true, result: user});
             } else {
-                res.json({ auth: false, message: 'No user found' });
+                res.json({auth: true, message: 'a két jelszó nem egyezik'})
             }
+        } else{
+            res.json({ auth: false, message: 'No user found' });
         }
-    );
-}
-);
 
+    } catch (err){
+        res.status(500).json({ message: 'An error occurred during login.', error: err });
+    }
+});
+        
 // Delete customer
 router.delete('/:id', async (req, res) => {
     const customerId = req.params.id;
