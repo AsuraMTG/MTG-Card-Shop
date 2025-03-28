@@ -3,22 +3,48 @@ import categoriesRoutes from './routes/categories.js';
 //import customersRoutes from './routes/customers.js';
 //import eventsRoutes from './routes/events.js';
 //import registrationsRoutes from './routes/registrations.js';
-//import productsRoutes from './routes/products.js';
+import productsRoutes from './routes/products.js';
 //import ordersRoutes from './routes/orders.js';
 //import orderItemsRoutes from './routes/order_items.js';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 const app = express();
+
+// Get the directory name using import.meta.url
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 app.use(express.json());
 
+// Use body-parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
-// route-ok
+// Route to serve images
+app.get('/image/:filename', (req, res) => {
+  const filename = req.params.filename;
+  const imagePath = path.join(__dirname, 'product_images', filename);
+  console.log(imagePath);
+  res.sendFile(imagePath, (err) => {
+    if (err) {
+      res.status(404).json({ error: 'Image not found!' });
+    }
+  });
+});
+
+// Route handlers
 app.use('/categories', categoriesRoutes);
 //app.use('/customers', customersRoutes);
 //app.use('/events', eventsRoutes);
 //app.use('/registrations', registrationsRoutes);
-//app.use('/products', productsRoutes);
+app.use('/products', productsRoutes);
 //app.use('/orders', ordersRoutes);
 //app.use('/order_items', orderItemsRoutes);
+
 app.use('/', (req, res) => {
   res.send('Üdvözöljük a Magic: The Gathering kártya boltban!');
 });
