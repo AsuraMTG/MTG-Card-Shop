@@ -21,9 +21,9 @@ namespace MTG_CARDSHOP_ADMIN
     {
         // -------------------* Variables
 
-        public string eventsBaseURL = "http://localhost:3000/desktop/admin/events";
-        public string customersBaseURL = "http://localhost:3000/desktop/admin/customers";
-        public string productsBaseURL = "http://localhost:3000/desktop/admin/products";
+        public string eventsBaseURL = "http://localhost:3000/events";
+        public string customersBaseURL = "http://localhost:3000/customers";
+        public string productsBaseURL = "http://localhost:3000/products";
 
 
 
