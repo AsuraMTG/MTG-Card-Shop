@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Már 15. 13:32
--- Kiszolgáló verziója: 10.4.32-MariaDB
--- PHP verzió: 8.2.12
+-- Host: localhost
+-- Generation Time: Mar 28, 2025 at 08:10 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,14 +18,15 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Adatbázis: `cardshop`
+-- Database: `cardshop`
 --
 CREATE DATABASE IF NOT EXISTS `cardshop` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `cardshop`;
+
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -35,7 +36,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`category_id`, `category_name`, `category_description`) VALUES
@@ -47,12 +48,13 @@ INSERT INTO `categories` (`category_id`, `category_name`, `category_description`
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
   `customer_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `address` text DEFAULT NULL,
   `phone_number` varchar(50) DEFAULT NULL,
@@ -60,17 +62,17 @@ CREATE TABLE `customers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `customers`
+-- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`customer_id`, `name`, `email`, `address`, `phone_number`, `registration_date`) VALUES
-(1, 'Ja Morant', 'call12@example.com', '1234 Memphis, Tennessi MEM', '555-1234', '2025-01-30 08:53:41'),
-(3, 'Peter Petrelli', 'peter.petrelli@example.com', '123 Main St, Springfield, IL, 62701, USA', '+1 (555) 123-3452', '2025-02-25 13:16:54');
+INSERT INTO `customers` (`customer_id`, `name`, `password`, `email`, `address`, `phone_number`, `registration_date`) VALUES
+(1, 'Ja Morant', '', 'call12@example.com', '1234 Memphis, Tennessi MEM', '555-1234', '2025-01-30 08:53:41'),
+(3, 'Peter Petrelli', '', 'peter.petrelli@example.com', '123 Main St, Springfield, IL, 62701, USA', '+1 (555) 123-3452', '2025-02-25 13:16:54');
 
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `events`
+-- Table structure for table `events`
 --
 
 CREATE TABLE `events` (
@@ -83,7 +85,7 @@ CREATE TABLE `events` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `events`
+-- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_date`, `event_description`, `max_participants`, `current_participants`) VALUES
@@ -93,7 +95,7 @@ INSERT INTO `events` (`event_id`, `event_name`, `event_date`, `event_description
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -105,7 +107,7 @@ CREATE TABLE `orders` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `orders`
+-- Dumping data for table `orders`
 --
 
 INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `total_amount`, `status`) VALUES
@@ -114,7 +116,7 @@ INSERT INTO `orders` (`order_id`, `customer_id`, `order_date`, `total_amount`, `
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `order_items`
+-- Table structure for table `order_items`
 --
 
 CREATE TABLE `order_items` (
@@ -126,7 +128,7 @@ CREATE TABLE `order_items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `order_items`
+-- Dumping data for table `order_items`
 --
 
 INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`, `price_at_order`) VALUES
@@ -135,7 +137,7 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `products`
+-- Table structure for table `products`
 --
 
 CREATE TABLE `products` (
@@ -150,7 +152,7 @@ CREATE TABLE `products` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `products`
+-- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`product_id`, `name`, `category_id`, `price`, `stock_quantity`, `available`, `description`, `imageUrl`) VALUES
@@ -164,7 +166,7 @@ INSERT INTO `products` (`product_id`, `name`, `category_id`, `price`, `stock_qua
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `registrations`
+-- Table structure for table `registrations`
 --
 
 CREATE TABLE `registrations` (
@@ -175,7 +177,7 @@ CREATE TABLE `registrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- A tábla adatainak kiíratása `registrations`
+-- Dumping data for table `registrations`
 --
 
 INSERT INTO `registrations` (`registration_id`, `event_id`, `customer_id`, `registration_date`) VALUES
@@ -185,7 +187,7 @@ INSERT INTO `registrations` (`registration_id`, `event_id`, `customer_id`, `regi
 (6, 1, 3, '2025-02-25 13:19:18');
 
 --
--- Eseményindítók `registrations`
+-- Triggers `registrations`
 --
 DELIMITER $$
 CREATE TRIGGER `update_current_participants_after_registration` AFTER INSERT ON `registrations` FOR EACH ROW BEGIN
@@ -197,37 +199,37 @@ $$
 DELIMITER ;
 
 --
--- Indexek a kiírt táblákhoz
+-- Indexes for dumped tables
 --
 
 --
--- A tábla indexei `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`category_id`);
 
 --
--- A tábla indexei `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`customer_id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- A tábla indexei `events`
+-- Indexes for table `events`
 --
 ALTER TABLE `events`
   ADD PRIMARY KEY (`event_id`);
 
 --
--- A tábla indexei `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`),
   ADD KEY `customer_id` (`customer_id`);
 
 --
--- A tábla indexei `order_items`
+-- Indexes for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD PRIMARY KEY (`order_item_id`),
@@ -235,14 +237,14 @@ ALTER TABLE `order_items`
   ADD KEY `product_id` (`product_id`);
 
 --
--- A tábla indexei `products`
+-- Indexes for table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `fk_products_categories` (`category_id`);
 
 --
--- A tábla indexei `registrations`
+-- Indexes for table `registrations`
 --
 ALTER TABLE `registrations`
   ADD PRIMARY KEY (`registration_id`),
@@ -250,76 +252,76 @@ ALTER TABLE `registrations`
   ADD KEY `event_id` (`event_id`);
 
 --
--- A kiírt táblák AUTO_INCREMENT értéke
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT a táblához `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `customers`
+-- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT a táblához `events`
+-- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
   MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT a táblához `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT a táblához `order_items`
+-- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
   MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT a táblához `products`
+-- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT a táblához `registrations`
+-- AUTO_INCREMENT for table `registrations`
 --
 ALTER TABLE `registrations`
   MODIFY `registration_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- Megkötések a kiírt táblákhoz
+-- Constraints for dumped tables
 --
 
 --
--- Megkötések a táblához `orders`
+-- Constraints for table `orders`
 --
 ALTER TABLE `orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`);
 
 --
--- Megkötések a táblához `order_items`
+-- Constraints for table `order_items`
 --
 ALTER TABLE `order_items`
   ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
   ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
--- Megkötések a táblához `products`
+-- Constraints for table `products`
 --
 ALTER TABLE `products`
   ADD CONSTRAINT `fk_products_categories` FOREIGN KEY (`category_id`) REFERENCES `categories` (`category_id`);
 
 --
--- Megkötések a táblához `registrations`
+-- Constraints for table `registrations`
 --
 ALTER TABLE `registrations`
   ADD CONSTRAINT `event_id` FOREIGN KEY (`event_id`) REFERENCES `events` (`event_id`),
