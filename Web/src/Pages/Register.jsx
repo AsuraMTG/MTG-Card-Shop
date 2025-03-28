@@ -61,7 +61,6 @@ function Register() {
           <div className='form-group'>
             <input 
               type='email'
-              
               placeholder='Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}

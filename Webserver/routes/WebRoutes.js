@@ -4,7 +4,6 @@ import db from '../webserver.js'; // Feltételezve, hogy az adatbázis kapcsoló
 import app from '../webserver.js';
 
 const router = express.Router();
-
 // Események listázása, amelyekre még lehet jelentkezni (a maximális résztvevők számának figyelembevételével)
 router.get('/events', async (req, res) => {
     try {
@@ -110,6 +109,7 @@ router.get('/events/my-events', async (req, res) => {
 });*/
 // #2
 router.post('/web/register', async (req, res) => {
+    console.log(req.body);
     const { username, password } = req.body;
     registerUser(username, password, email);
     res.send('User registered');
@@ -135,8 +135,9 @@ router.post('/web/register', async (req, res) => {
 });*/
 //  #2
 
-router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+router.post('/web/login', async (req, res) => {
+    console.log(req.body);
+    const { username, password,email } = req.body;
     loginUser(username, password);
     res.send('Login attempted');
   });

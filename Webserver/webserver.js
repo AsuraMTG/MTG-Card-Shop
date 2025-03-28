@@ -6,6 +6,7 @@ import WebRoutes from './routes/WebRoutes.js';  // Webes végpontok
 import path from 'path';
 import dotenv from 'dotenv' // Környezeti változók betöltése a .env fájlból
 import bcrypt from 'bcrypt'
+import { request } from 'http';
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -15,6 +16,12 @@ app.get('/', (req, res) => {
     res.send('Webshop API működik!');
 });
 
+app.use((req, res) => {
+    if (req.url.includes('web')) {
+        console.log("webkérés");
+        
+    }
+})
 
 app.get('/web/login', (req, res)=>{
     res.send("login");
