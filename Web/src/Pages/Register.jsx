@@ -6,6 +6,8 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const [tel, setTel] = useState('');
   const [error, setError] = useState('');
   
 
@@ -64,6 +66,24 @@ function Register() {
               placeholder='Email'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required  
+            />
+          </div>
+          <div className='form-group'>
+            <input 
+              type='text'
+              placeholder='Address'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              required  
+            />
+          </div>
+          <div className='form-group'>
+            <input 
+              type='tel'
+              placeholder='Telephone Number'
+              value={tel}
+              onChange={(e) => setTel(e.target.value)}
               required  
             />
           </div>
