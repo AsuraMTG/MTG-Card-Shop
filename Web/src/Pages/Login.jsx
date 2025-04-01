@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Register.css';
+import Navbar from "../Components/Navbar";
 
 
 const Login = () => {
@@ -49,6 +50,8 @@ const Login = () => {
 
 
     return (
+      <div>
+        <div><Navbar /></div>
         <div className="container">
           <div className="card">
             <div className="user-icon">
@@ -83,6 +86,7 @@ const Login = () => {
               Don't have an account yet? <a href="/web/register">Register</a>
             </div>
           </div>
+        </div>
         </div>
       );
     /*return (

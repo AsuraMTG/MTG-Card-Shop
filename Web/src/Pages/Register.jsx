@@ -7,7 +7,7 @@ function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
-  const [tel, setTel] = useState('');
+  const [phone_number, setPhone_number] = useState('');
   const [error, setError] = useState('');
   
 
@@ -20,19 +20,22 @@ function Register() {
     }
     
     try {
-      const response = await axios.post('/web/register', {
+      const response = await axios.post('http://localhost:3000/customers/web/register', {
+        name, email, address, phone_number, password,
+      }, {
         headers: {
           'Content-Type': 'application/json',
-        }
-      });
+        },
+      }
+    );
       
-      const data = await response.json();
+     // const data = await response.json();
       
-      if (response.ok) {
+      if (response.status === 201) {
         // Redirect to login page or handle successful registration
         window.location.href = '/login';
       } else {
-        setError(data.message || 'Registration failed');
+        setError(response.data.message || 'Registration failed');
       }
     } catch (err) {
       setError('An error occurred during registration');
@@ -82,8 +85,8 @@ function Register() {
             <input 
               type='tel'
               placeholder='Telephone Number'
-              value={tel}
-              onChange={(e) => setTel(e.target.value)}
+              value={phone_number}
+              onChange={(e) => setPhone_number(e.target.value)}
               required  
             />
           </div>
