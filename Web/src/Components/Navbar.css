@@ -19,7 +19,7 @@
   
   .nav-link {
     text-decoration: none;
-    color: white; /* Text color */
+    color: black; /* Text color */
     font-size: 16px;
     font-weight: 500;
     padding: 8px 16px;
@@ -29,4 +29,5 @@
   
   .nav-link:hover {
     background-color: #0096A6; /* Lighter teal on hover */
+    color: white;
   }
