@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Product from '../Components/Product'; // Import the Product component
 import './MainPage.css';
@@ -15,6 +16,18 @@ function MainPage() {
     const fetchProducts = async () => {
       setLoading(true);
       try {
+
+        axios.get("http://localhost:3000/products")
+        .then((response) => {
+          setProducts(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.error("Error getting products", error);
+          setError("Failed to load products");
+          setLoading(false);
+        });
+      
         // In a real application, use your actual API endpoint
         // const response = await fetch('http://your-api.com/products');
         // const data = await response.json();
@@ -23,7 +36,7 @@ function MainPage() {
         const mockFetch = new Promise((resolve) => {
           setTimeout(() => {
             resolve([
-              { id: 1, name: 'Termék neve', description: 'Termék leírása', price: 'xy /FT', image: '/api/placeholder/200/200' },
+              { id: 1, name: 'Termék neve', description: 'Termék leírása', price: 'xy /FT', image: "http://localhost:3000/image/1742041837443.jpg" },
               { id: 2, name: 'Termék neve', description: 'Termék leírása', price: 'xy /FT', image: '/api/placeholder/200/200' },
               { id: 3, name: 'Termék neve', description: 'Termék leírása', price: 'xy /FT', image: '/api/placeholder/200/200' },
               { id: 4, name: 'Termék neve', description: 'Termék leírása', price: 'xy /FT', image: '/api/placeholder/200/200' }
@@ -33,8 +46,6 @@ function MainPage() {
         });
         
         const data = await mockFetch;
-        setProducts(data);
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
         setError('Failed to load products. Please try again later.');
@@ -119,11 +130,11 @@ function MainPage() {
           <div className="no-products">No products match your search.</div>
         ) : (
           <div className="product-grid">
-            {filteredProducts.map(product => (
+            {filteredProducts.map((product, index) => (
               <Product 
-                key={product.id} 
-                product={product} 
-                onAddToCart={addToCart} 
+              key={product.id || index}  // Use index as a fallback if id is not available or not unique
+              product={product} 
+              onAddToCart={addToCart} 
               />
             ))}
           </div>
@@ -132,7 +143,7 @@ function MainPage() {
 
       {/* Footer */}
       <footer className="footer">
-        <p>© 2025 Your Store Name</p>
+        <p>© 2025 MTG CardShop</p>
       </footer>
     </div>
   );

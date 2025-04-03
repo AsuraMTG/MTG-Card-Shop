@@ -2,14 +2,23 @@ import React from 'react';
 import './Product.css';
 
 function Product({ product, onAddToCart }) {
+  const formattedPrice = Number(product.price)
   return (
-    <div className="product-card">
+    <div>
+      <div className="product-card">
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        <img src={`http://localhost:3000/image/${product.imageUrl}`}
+         alt={product.name}
+         onError={(e) => e.target.src = '/api/placeholder/200/200'} />
       </div>
       <h3 className="product-name">{product.name}</h3>
       <p className="product-description">{product.description}</p>
-      <p className="product-price">{product.price}</p>
+      <p className="product-price">
+        {new Intl.NumberFormat('hu-HU', {
+          style: 'currency',
+          currency: 'HUF',
+        }).format(Number(product.price))}
+      </p>
       <button 
         className="add-to-cart-button"
         onClick={() => onAddToCart(product)}
@@ -17,6 +26,8 @@ function Product({ product, onAddToCart }) {
         Kosárba
       </button>
     </div>
+    </div>
+
   );
 }
 
