@@ -11,6 +11,7 @@ import './App.css'
 
 // pages import!
 import MainPage from './Pages/MainPage'
+import CartPage from './Pages/Cart'
 import Protected from './Pages/Protected'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
@@ -88,6 +89,9 @@ function App() {
       <Routes>
         <Route path="/" element={ //MainPage
           isAuthenticated ? <Navigate to="/" /> : <MainPage />
+        } />
+        <Route path='/cart' element={
+          isAuthenticated ? <Navigate to="/cart" /> : <CartPage /> 
         } />
         <Route path="/web/login" element={
           isAuthenticated ? <Navigate to="/" /> : <Login onLogin={handleLogin} />

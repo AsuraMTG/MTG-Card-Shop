@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Product from '../Components/Product'; // Import the Product component
+import Cart from '../Components/InCartProduct';
 import './MainPage.css';
 
 function MainPage() {
@@ -60,6 +61,9 @@ function MainPage() {
     if (savedCartItems) {
       setCartItems(JSON.parse(savedCartItems));
     }
+
+    const storedCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    setCartItems(storedCart);
   }, []);
 
   // Handle search
@@ -67,13 +71,16 @@ function MainPage() {
     product.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Add to cart function
-  const addToCart = (product) => {
-    const updatedCart = [...cartItems, product];
+  const addToCart = (newItem) => {
+    const updatedCart = [...cartItems, newItem];
     setCartItems(updatedCart);
-    // Save to localStorage for persistence
     localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-    alert(`${product.name} added to cart!`);
+  };
+
+  const removeFromCart = (itemId) => {
+    const updatedCart = cartItems.filter(item => item.id !== itemId);
+    setCartItems(updatedCart);
+    localStorage.setItem('cartItems', JSON.stringify(updatedCart));
   };
 
   // Theme switcher function
@@ -110,7 +117,7 @@ function MainPage() {
         
         {/* Cart icon with counter */}
         <div className="cart-icon">
-          <a href="/cart">🛒</a>
+          <Cart cartItems={cartItems}/>  
           {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
         </div>
       </header>
