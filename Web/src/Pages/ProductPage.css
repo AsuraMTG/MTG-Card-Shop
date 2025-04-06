@@ -1,0 +1,94 @@
+/* ProductPage.css      A main.jsx-et is változtatja valamiért
+.product-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f5f0; 
+  }
+  
+  .product-details {
+    display: flex;
+    gap: 20px;
+    max-width: 800px;
+  }
+  
+  .product-image img {
+    width: 400px;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .product-name {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .product-description {
+    font-size: 16px;
+    color: #666;
+  }
+  
+  .product-price {
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .quantity-selector label {
+    font-size: 16px;
+  }
+  
+  .quantity-selector input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .close-button {
+    background-color: #ff5757;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-to-cart-button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .loading-state {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+  }
+  
+  .error-state {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+  }

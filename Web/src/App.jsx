@@ -10,11 +10,13 @@ import "@saeris/typeface-beleren-bold"
 import './App.css'
 
 // pages import!
+import { CartProvider } from './Components/CartContext'
 import MainPage from './Pages/MainPage'
 import CartPage from './Pages/Cart'
 import Protected from './Pages/Protected'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
+import ProductPage from './Pages/ProductPage';
 
 const baseURL = "http://localhost:3000"
 
@@ -83,6 +85,7 @@ function App() {
   
   return (
     <>
+    <CartProvider>
     <h1>MTG Card Shop</h1>
     <button onClick={handleLogout}>Logout</button>
     <Router>
@@ -99,6 +102,9 @@ function App() {
         <Route path="/web/register" element={
           isAuthenticated ? <Navigate to="/" /> : <Register />
         } />
+        <Route path="/products/:id" element={
+          <ProductPage />
+        } />
         <Route path="/" element={
           isAuthenticated ? (
             <div>
@@ -113,6 +119,7 @@ function App() {
         {/* Add other routes as needed */}
       </Routes>
     </Router>
+    </CartProvider>
     </>
   );
 

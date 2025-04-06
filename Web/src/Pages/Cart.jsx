@@ -1,18 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom'; // For navigation
 import './Cart.css';
+import { useCart } from '../Components/CartContext';
 
-const CartPage = ({ cartItems = [] }) => {
+const CartPage = () => {
+  const { cartItems, removeFromCart } = useCart();
   const navigate = useNavigate();
 
-  // Function to handle removing an item from the cart
-  const removeFromCart = (itemId) => {
-    // Logic to remove the item from cartItems state
-    // For now, let's assume cartItems is passed as a prop
-    // You can implement state management (e.g., Redux or Context) later
-    alert(`Item removed from cart!`);
-    navigate('http://localhost:3000'); // Navigate back to the main page
-  };
 
   return (
     <div className="cart-page">
@@ -36,6 +30,9 @@ const CartPage = ({ cartItems = [] }) => {
       ) : (
         <p className="empty-cart">A kosár üres.</p>
       )}
+      <button className="back-button" onClick={() => navigate('/')}>
+        Vissza a főoldalra
+      </button>
     </div>
   );
 };

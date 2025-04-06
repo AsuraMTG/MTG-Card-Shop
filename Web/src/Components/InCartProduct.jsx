@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from './CartContext';
+import './InCartProduct.css';
 
-const Cart = ({ cartItems, removeFromCart }) => {
+const Cart = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { cartItems, removeFromCart } = useCart();
 
   const handleMouseEnter = () => setIsHovered(true);
   const handleMouseLeave = () => setIsHovered(false);
