@@ -49,29 +49,13 @@ function MainPage() {
 
   return (
     <div className={`main-page theme-${activeTheme}`}>
-      {/* Header with logo and search */}
+      <Navbar/>
       <header className="header">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-          <button className="search-button">
-            <span className="search-icon">🔍</span>
-          </button>
-        </div>
-        
-        {/* Theme switcher */}
         <div className="theme-switcher">
           <button onClick={() => changeTheme('default')} className={activeTheme === 'default' ? 'active' : ''}>Default</button>
           <button onClick={() => changeTheme('dark')} className={activeTheme === 'dark' ? 'active' : ''}>Dark</button>
           <button onClick={() => changeTheme('nature')} className={activeTheme === 'nature' ? 'active' : ''}>Nature</button>
-        </div>
-        
-        {/* Cart icon with counter */}
+        </div>        
         <div className="cart-icon">
           <Cart cartItems={cartItems} removeFromCart={() => {}} /> {/* Placeholder for now */}
           {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
