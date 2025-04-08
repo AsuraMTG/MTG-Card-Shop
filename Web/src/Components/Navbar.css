@@ -1,33 +1,141 @@
+/* Navbar.css */
 .navbar {
-    background-color: #007B84; /* Dark teal color */
-    padding: 10px 0;
+  background-color: #007B84;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.navbar-left, .navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icon {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #0096A6;
+}
+
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #ff4d4d;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-container form {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  background: transparent;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  color: #007B84;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-wrap: wrap;
+    gap: 10px;
   }
-  
-  .container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  .navbar-left, .navbar-right {
+    width: 100%;
+    justify-content: space-between;
   }
-  
-  .nav-links {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    gap: 20px; /* Space between links */
+
+  .navbar-left {
+    order: 1;
   }
-  
+
+  .navbar-right {
+    order: 2;
+  }
+
+  .search-container {
+    order: 3;
+    padding: 10px;
+  }
+
   .nav-link {
-    text-decoration: none;
-    color: black; /* Text color */
-    font-size: 16px;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 20px; /* Rounded corners */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
+    padding: 6px 12px;
+    font-size: 14px;
   }
-  
-  .nav-link:hover {
-    background-color: #0096A6; /* Lighter teal on hover */
-    color: white;
+}
+
+@media (max-width: 480px) {
+  .nav-link {
+    font-size: 12px;
+    padding: 5px 10px;
   }
+}

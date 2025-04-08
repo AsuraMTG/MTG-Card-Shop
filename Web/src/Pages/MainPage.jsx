@@ -4,6 +4,7 @@ import Product from '../Components/Product'; // Import the Product component
 import Cart from '../Components/InCartProduct';
 import './MainPage.css';
 import { useCart } from '../Components/CartContext';
+import Navbar from '../Components/Navbar';
 
 function MainPage() {
   const [products, setProducts] = useState([]);

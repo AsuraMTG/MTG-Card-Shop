@@ -17,6 +17,7 @@ import Protected from './Pages/Protected'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import ProductPage from './Pages/ProductPage';
+import Calendar from './Pages/Calendar'
 
 const baseURL = "http://localhost:3000"
 
@@ -104,6 +105,9 @@ function App() {
         } />
         <Route path="/products/:id" element={
           <ProductPage />
+        } />
+                <Route path="/calendar" element={
+          <Calendar />
         } />
         <Route path="/" element={
           isAuthenticated ? (
