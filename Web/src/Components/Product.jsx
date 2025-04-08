@@ -7,7 +7,7 @@ function Product({ product, onAddToCart }) {
   return (
     <div>
       <div className="product-card">
-        <Link to={`/products/${product.id}`} className="product-link">
+        <Link to={`/products/${product.product_id}`} className="product-link">
           <div className="product-image">
             <img src={`http://localhost:3000/image/${product.imageUrl}`}
               alt={product.name}
