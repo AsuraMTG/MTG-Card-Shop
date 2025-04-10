@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './ProductPage.css';
 import { useParams } from 'react-router-dom';
+import { CartProvider } from '../Components/CartContext';
+import Navbar from '../Components/Navbar';
 
 function ProductPage() {
   const [product, setProduct] = useState(null);
@@ -41,6 +43,8 @@ function ProductPage() {
   const formattedPrice = Number(product.price);
 
   return (
+    <>
+    <Navbar />
     <div className="product-page">
       <div className="product-page-details">
         <Link to={`/products/${product.id}`} className="product-page-link">
@@ -70,10 +74,18 @@ function ProductPage() {
             <input type="number" value="1" min="1" max={product.stock} />
             <button className="close-button">X</button>
           </div>
-          <button className="product-page-add-to-cart-button">Kosárba</button>
+          <button className="product-page-add-to-cart-button"
+                    onClick={(e) => {
+                      e.stopPropagation(); // Ez megakadályozza, hogy a kosárba gomb kattintása navigálást is okozzon
+                      onAddToCart(product);
+                    }}
+          >Kosárba
+
+          </button>
         </div>
       </div>
     </div>
+    </>
   );
 }
 
