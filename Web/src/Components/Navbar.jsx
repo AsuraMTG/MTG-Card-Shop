@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import Cart from '../Components/InCartProduct';
 import { useCart } from './CartContext';
 import './Navbar.css';
 
@@ -10,11 +11,14 @@ const Navbar = () => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    // Handle search functionality here
-    navigate('/?search=' + searchQuery);
+    if (searchQuery.trim() !== '') {
+      navigate('/?search=' + encodeURIComponent(searchQuery));
+    }
   };
 
   return (
+    <>
+    <h1><Link to="/"  >MTG Card Shop</Link></h1>
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-left">
@@ -52,24 +56,8 @@ const Navbar = () => {
         </div>
       </div>
       
-      <div className="search-container">
-        <form onSubmit={handleSearch}>
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="search-input"
-          />
-          <button type="submit" className="search-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </button>
-        </form>
-      </div>
     </nav>
+    </>
   );
 };
 

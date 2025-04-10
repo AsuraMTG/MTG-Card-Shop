@@ -10,9 +10,6 @@ function ProductPage() {
   const [error, setError] = useState(null);
   const { id } = useParams(); 
 
-
-
-  // Fetch product details based on the product ID
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -45,22 +42,21 @@ function ProductPage() {
 
   return (
     <div className="product-page">
-      <div className="product-details">
-        {/* Product Image */}
-        <Link to={`/products/${product.id}`} className="product-link">
-        <div className="product-image">
-          <img
-            src={`http://localhost:3000/image/${product.imageUrl}`}
-            alt={product.name}
-            onError={(e) => (e.target.src = '/api/placeholder/400/400')}
-          />
-        </div>
+      <div className="product-page-details">
+        <Link to={`/products/${product.id}`} className="product-page-link">
+          <div className="product-page-image">
+            <img
+              src={`http://localhost:3000/image/${product.imageUrl}`}
+              alt={product.name}
+              onError={(e) => (e.target.src = '/api/placeholder/400/400')}
+            />
+          </div>
+        </Link>
 
-        {/* Product Information */}
-        <div className="product-info">
-          <h2 className="product-name">{product.name}</h2>
-          <p className="product-description">{product.description}</p>
-          <div className="product-price">
+        <div className="product-page-info">
+          <h2 className="product-page-name">{product.name}</h2>
+          <p className="product-page-description">{product.description}</p>
+          <div className="product-page-price">
             <span>Ár:</span>
             <strong>
               {new Intl.NumberFormat('hu-HU', {
@@ -74,9 +70,8 @@ function ProductPage() {
             <input type="number" value="1" min="1" max={product.stock} />
             <button className="close-button">X</button>
           </div>
-          <button className="add-to-cart-button">Kosárba</button>
+          <button className="product-page-add-to-cart-button">Kosárba</button>
         </div>
-        </Link>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom'
 import axios from 'axios'
 //import mysql from 'mysql2'
 //import { jwt, sign } from 'jsonwebtoken'
@@ -71,12 +71,6 @@ function App() {
     setIsAuthenticated(true);
   };
 
-  // Logout handler function
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setIsAuthenticated(false);
-    <Navigate to="/" />
-  };
 
   if (loading) {
     return <div>Loading...</div>;
@@ -87,12 +81,9 @@ function App() {
   return (
     <>
     <CartProvider>
-    <h1>MTG Card Shop</h1>
-    <button onClick={handleLogout}>Logout</button>
     <Router>
       <Routes>
-        <Route path="/" element={ //MainPage
-          isAuthenticated ? <Navigate to="/" /> : <MainPage />
+        <Route path="/" element={<MainPage />
         } />
         <Route path='/cart' element={
           isAuthenticated ? <Navigate to="/cart" /> : <CartPage /> 
@@ -106,7 +97,7 @@ function App() {
         <Route path="/products/:id" element={
           <ProductPage />
         } />
-                <Route path="/calendar" element={
+        <Route path="/calendar" element={
           <Calendar />
         } />
         <Route path="/" element={
