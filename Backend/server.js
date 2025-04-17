@@ -7,7 +7,7 @@ import eventsRoutes from './routes/events.js';
 import eventregistrations from './routes/eventregistrations.js';
 //import ordersRoutes from './routes/orders.js';
 //import orderItemsRoutes from './routes/order_items.js';
-import bodyParser from 'body-parser';
+//import bodyParser from 'body-parser'; T
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -18,11 +18,13 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use(express.json());
+//app.use(express.json()); T
 
 // Use body-parser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Route to serve images
@@ -53,5 +55,6 @@ app.use('/', (req, res) => {
 
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Szerver fut a ${PORT}-es porton`);
+  console.log(`Szerver fut a http://localhost:${PORT} címen`);
+  console.log(`Kép elérési út: http://localhost:${PORT}/image/`);
 });

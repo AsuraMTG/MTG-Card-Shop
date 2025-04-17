@@ -1,7 +1,12 @@
 import express from 'express';
+import jwt from 'jsonwebtoken';
 import { pool } from '../db.js';
+import { verifyToken } from '../verifyToken.js'; // Token ellenőrzés importálása
+import bcrypt from 'bcrypt'; // bcrypt importálása a jelszó hash-eléshez
 
 const router = express.Router();
+
+const SECRET_KEY = 'super_secret_jelszo'; // ez kerüljön környezeti változóba élesben
 
 // List all customers
 router.get('/', async (req, res) => {
@@ -67,8 +72,10 @@ router.post('/login', async (req, res) => {
 
         if (rows.length > 0) {
             const user = rows[0];
+            // Ellenőrizzük a jelszót
             if (password === user.password) 
             {
+                // Jelszó helyes
                 res.json({auth: true, result: user});
             } else {
                 res.json({auth: true, message: 'a két jelszó nem egyezik'})

@@ -2,8 +2,6 @@
 import express from 'express';
 import { pool } from '../db.js';
 
-// username = name lehet? 
-
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
