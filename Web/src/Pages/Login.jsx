@@ -32,7 +32,7 @@ const Login = () => {
             console.error("Registration failed", error);
         }*/ 
     const handleLogin = async () => {
-        const baseUrl = 'http://localhost:3000/web/login';
+        const baseUrl = 'http://localhost:3000/login';
         const body = JSON.stringify({ name, password });
         const headers = { 'Content-Type': 'application/json' };
 

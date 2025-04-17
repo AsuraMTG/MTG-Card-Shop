@@ -20,7 +20,7 @@ function Register() {
     }
     
     try {
-      const response = await axios.post('http://localhost:3000/customers/web/register', {
+      const response = await axios.post('http://localhost:3000/customers/register', {
         name, email, address, phone_number, password,
       }, {
         headers: {
@@ -111,7 +111,7 @@ function Register() {
           <button type="submit" className="button">Register</button>
         </form>
         <div className="login-link">
-          Already registered? <a href="/web/login">Sign in</a>
+          Already registered? <a href="/login">Sign in</a>
         </div>
       </div>
     </div>

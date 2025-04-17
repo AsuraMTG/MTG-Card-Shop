@@ -57,7 +57,7 @@ const Calendar = () => {
     for (let day = 1; day <= daysInMonth; day++) {
       // Filter events for this specific day
       const dayEvents = events.filter(event => {
-        const eventDate = new Date(event.date);
+        const eventDate = new Date(event.event_date);
         return eventDate.getDate() === day && 
                eventDate.getMonth() === month && 
                eventDate.getFullYear() === year;
@@ -68,8 +68,8 @@ const Calendar = () => {
           <div className="day-number">{day}</div>
           <div className="day-events">
             {dayEvents.map(event => (
-              <div key={event.id} className="event-item">
-                {event.name}
+              <div key={event.event_id} className="event-item">
+                {event.event_name}
               </div>
             ))}
           </div>
