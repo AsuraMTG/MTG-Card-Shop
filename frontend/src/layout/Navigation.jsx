@@ -4,7 +4,6 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHome,
-  faBoxOpen,
   faCalendarAlt,
   faInfoCircle,
   faSignInAlt,
@@ -28,12 +27,6 @@ function Navigation() {
               <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                 <FontAwesomeIcon icon={faHome} className="me-2" />
                 Főoldal
-              </NavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <NavLink to="/products" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-                <FontAwesomeIcon icon={faBoxOpen} className="me-2" />
-                Termékek
               </NavLink>
             </Nav.Item>
             <Nav.Item>

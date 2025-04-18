@@ -14,7 +14,7 @@ function Navbar({ isAuthenticated })  {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-left">
-          <Link to="/web/login" className="nav-icon" title="Login">
+          <Link to="/login" className="nav-icon" title="Login">
           <FontAwesomeIcon icon="fa-solid fa-right-to-bracket" />
           </Link>
           <Link to="/home" className="nav-link">Nyitó lap</Link>

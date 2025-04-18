@@ -46,14 +46,13 @@ function App() {
         <Navigation />
         <div className="content-wrap">
           <Routes>
-            <Route path="/" element={<MainPage />} />
+            <Route path="/" element={<ProductsPage />} />
             <Route path="/cart" element={user ? <CartPage /> : <Navigate to="/" />} />
             <Route path="/products/:id" element={<ProductPage />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/products" element={<ProductsPage />} />
           </Routes>
         </div>
         <Footer />
