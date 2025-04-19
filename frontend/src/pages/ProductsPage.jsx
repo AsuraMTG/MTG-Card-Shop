@@ -5,18 +5,25 @@ import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import Navigation from '../layout/Navigation';
 import './ProductsPage.css';
 import { Button } from 'react-bootstrap';
+import { useCart } from '../components/CartContext';
 
 function ProductsPage() {
-  const [products, setProducts] = useState([]);
+  const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { addToCart } = useCart(); // a komponens belsejében
+  
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    console.log('Termék hozzáadva a kosárhoz:', product);
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:3000/products/');
-        setProducts(response.data);
+        setProduct(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -46,7 +53,7 @@ function ProductsPage() {
     );
   }
 
-  if (products.length === 0) {
+  if (product.length === 0) {
     return (
       <Container className="mt-5">
         <Alert variant="info">No products found.</Alert>
@@ -59,21 +66,21 @@ function ProductsPage() {
       <h1>Jelenleg elérhető termékek</h1>
       <Container className="mt-4">
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-          {products.map((product) => (
+          {product.map((product) => (
             <Col key={product.product_id}>
-              <Card className="h-100" onClick={() => navigate(`/products/${product.product_id}`)} style={{ cursor: 'pointer' }}>
+              <Card className="product-card">
                 <Card.Img
+                  onClick={() => navigate(`/products/${product.product_id}`)} style={{ cursor: 'pointer', objectFit: 'cover', height: '200px'  }}
                   variant="top"
                   src={`http://localhost:3000/image/${product.imageUrl}`}
                   onError={(e) => (e.target.src = '/api/placeholder/400/400')}
-                  style={{ objectFit: 'cover', height: '200px' }}
                 />
                 <Card.Body>
-                  <Card.Title>{product.name}</Card.Title>
-                  <Card.Text>
+                  <Card.Title className='product-name'>{product.name}</Card.Title>
+                  <Card.Text className='product-description'>
                     {product.description.slice(0, 120)}...
                   </Card.Text>
-                  <div className="mb-2">
+                  <div className="product-price">
                     <strong>
                       {new Intl.NumberFormat('hu-HU', {
                         style: 'currency',
@@ -81,7 +88,12 @@ function ProductsPage() {
                       }).format(product.price)}
                     </strong>
                   </div>
-                  <Button variant="primary">Kiválasztom</Button>
+                  <Button
+                    className="add-to-cart-button"
+                    onClick={() => handleAddToCart(product)}
+                  >
+                  Kosárba
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>

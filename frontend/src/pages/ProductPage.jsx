@@ -16,6 +16,7 @@ function ProductPage() {
     addToCart(product);
     console.log('Termék hozzáadva a kosárhoz:', product);
   };
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -44,27 +45,28 @@ function ProductPage() {
   }
   
   return (
-    <div className="product-page-container">
-      <button onClick={() => navigate(-1)} className="back-button">Vissza</button>
-      <div className="product-card">
-        <div className="product-image">
+    <>
+     <button onClick={() => navigate(-1)} className="back-button">Vissza</button>
+    <div className="product-page-details">
+      <div className="product-page-card">
+        <div className="product-page-image">
           <img
             src={`http://localhost:3000/image/${product.imageUrl}`}
             alt={product.name}
             onError={(e) => (e.target.src = '/api/placeholder/200/200')}
           />
         </div>
-        <div className="product-details">
-          <h3 className="product-name">{product.name}</h3>
-          <p className="product-description">{product.description}</p>
-          <p className="product-price">
+        <div className="product-page-info">
+          <h3 className="product-page-name">{product.name}</h3>
+          <p className="product-page-description">{product.description}</p>
+          <p className="product-page-price">
             {new Intl.NumberFormat('hu-HU', {
               style: 'currency',
               currency: 'HUF',
             }).format(Number(product.price))}
           </p>
           <button
-            className="add-to-cart-button"
+            className="product-page-add-to-cart-button"
             onClick={handleAddToCart}
           >
             Kosárba
@@ -72,6 +74,7 @@ function ProductPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

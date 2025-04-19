@@ -19,13 +19,7 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.card-image-top {
-  width: auto;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
+
 .product-page-image {
   flex: 1;
   display: flex;
@@ -50,37 +44,50 @@
 
 .product-page-price {
   font-size: 18px;
-  display: flex;
-  align-items: center;
   gap: 10px;
+  font-weight: bold;
 }
 
-.quantity-selector {
-  display: flex;
+
+.back-button {
+  display: inline-flex;
   align-items: center;
-  gap: 10px;
-}
-
-.quantity-selector label {
-  font-size: 16px;
-}
-
-.quantity-selector input {
-  width: 40px;
-  height: 30px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.close-button {
-  background-color: #ff5757;
+  gap: 8px;
+  background-color: var(--accent-color); /* Customize this with your theme */
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
+
+.back-button:hover {
+  background-color: var(--button-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(100, 100, 255, 0.4);
+}
+
+.back-button svg {
+  width: 16px;
+  height: 16px;
+  fill: white;
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+  transform: translateX(-4px);
+}
+
 
 .product-page-add-to-cart-button {
   background-color: #2196f3;
