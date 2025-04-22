@@ -46,7 +46,6 @@ function ProductPage() {
   
   return (
     <>
-     <button onClick={() => navigate(-1)} className="back-button">Vissza</button>
     <div className="product-page-details">
       <div className="product-page-card">
         <div className="product-page-image">

@@ -49,9 +49,7 @@
 }
 
 
-.back-button {
-  display: inline-flex;
-  align-items: center;
+.product-page-add-to-cart-button {
   gap: 8px;
   background-color: var(--accent-color); /* Customize this with your theme */
   color: white;
@@ -64,40 +62,31 @@
   text-decoration: none;
   transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 4px;
 }
 
-.back-button:hover {
+.product-page-add-to-cart-button:hover {
   background-color: var(--button-hover);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.back-button:focus {
+.product-page-add-to-cart-button:focus {
   outline: none;
   box-shadow: 0 0 0 3px rgba(100, 100, 255, 0.4);
 }
 
-.back-button svg {
+.product-page-add-to-cart-button svg {
   width: 16px;
   height: 16px;
   fill: white;
   transition: transform 0.3s ease;
 }
 
-.back-button:hover svg {
+.product-page-add-to-cart-button:hover svg {
   transform: translateX(-4px);
-}
-
-
-.product-page-add-to-cart-button {
-  background-color: #2196f3;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px;
 }
 
 .loading-state {

@@ -1,0 +1,173 @@
+/* EventPage.css */
+
+.event-modal .modal-content {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--card-bg, #F9F9F9);
+    color: var(--text-color, #333333);
+  }
+  
+  .event-modal .modal-header {
+    background-color: var(--header-bg, #007B84);
+    color: white;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    padding: 15px 20px;
+  }
+  
+  .event-modal .modal-header .close {
+    color: white;
+  }
+  
+  .event-title {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .event-details {
+    padding: 10px 0;
+  }
+  
+  .event-date {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: var(--primary-dark, #388E3C);
+  }
+  
+  .event-description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    text-align: justify;
+  }
+  
+  .registration-status {
+    margin-bottom: 20px;
+  }
+  
+  .progress {
+    height: 10px;
+    border-radius: 5px;
+  }
+  
+  .participants-section {
+    margin-top: 20px;
+  }
+  
+  .participants-section h5 {
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--primary-color, #4CAF50);
+    border-bottom: 2px solid var(--primary-light, #8BC34A);
+    padding-bottom: 5px;
+  }
+  
+  .registration-list {
+    max-height: 250px;
+    overflow-y: auto;
+    border-radius: 8px;
+  }
+  
+  .registration-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: white;
+    border-left: 4px solid var(--primary-color, #4CAF50);
+    margin-bottom: 5px;
+    transition: all 0.2s;
+  }
+  
+  .registration-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registration-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--primary-light, #8BC34A);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+  
+  .registration-name {
+    font-weight: 500;
+  }
+  
+  /* Button styling */
+  .modal-body .btn-primary {
+    background-color: var(--primary-color, #4CAF50);
+    border-color: var(--primary-dark, #388E3C);
+    transition: all 0.2s;
+  }
+  
+  .modal-body .btn-primary:hover {
+    background-color: var(--primary-dark, #388E3C);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-body .btn-danger {
+    background-color: #f44336;
+    border-color: #d32f2f;
+  }
+  
+  .modal-body .btn-danger:hover {
+    background-color: #d32f2f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal-footer {
+    border-top: none;
+    padding: 0 20px 20px;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .event-title {
+      font-size: 1.2rem;
+    }
+    
+    .event-date {
+      font-size: 1rem;
+    }
+    
+    .registration-item {
+      padding: 8px 12px;
+    }
+    
+    .registration-number {
+      width: 25px;
+      height: 25px;
+      font-size: 0.8rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .event-modal .modal-header {
+      padding: 10px 15px;
+    }
+    
+    .event-title {
+      font-size: 1.1rem;
+    }
+    
+    .participants-section h5 {
+      font-size: 1rem;
+    }
+    
+    .registration-list {
+      max-height: 200px;
+    }
+  }
+  
