@@ -10,15 +10,20 @@
   width: 100%;
 }
 
-footer a {
-  color: white;
-  text-decoration: none;
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
 footer p {
   margin: 5px 0;
+}
+
+.logo-link {
+  display: block;
+  transition: transform 0.2s;
+}
+
+.logo-link:hover {
+  transform: translateY(-2px);
+}
+
+.footer-logo {
+  height: 40px;
+  width: auto;
 }

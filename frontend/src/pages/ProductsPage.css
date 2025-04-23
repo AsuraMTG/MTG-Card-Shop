@@ -19,20 +19,6 @@
 }
 
 
-
-/* Image-related styles from #1 */
-/*.product-image {
-  flex-grow: 1; /* Retained from #1 to ensure the image takes up available space 
-  overflow: hidden; /* Retained from #1 to prevent clipping 
-}
-
-.product-image img {
-  width: 100%;  Retained from #1 to ensure the image fills the container 
-  height: auto;  Retained from #1 to maintain aspect ratio 
-  border-radius: 8px;  Retained from #1 for rounded corners 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  Retained from #1 for shadow effect 
-}*/
-
 .product-name {
   font-size: 15px;
   font-weight: 600;
@@ -53,8 +39,6 @@
   max-height: 36px; /* Adjust this value to control how much text is visible */
   overflow: hidden; /* Hide the overflowing text */
   line-height: 1.4; /* Ensure consistent line height */
-  display: -webkit-box;
-  -webkit-line-clamp: 2; /* Number of lines to show before truncation */
   -webkit-box-orient: vertical;
 }
 
