@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// Registering a participant dor an event 
+// Registering a participant for an event 
 router.post('/', async (req, res) => {
     const { event_id, customer_id } = req.body;
 
