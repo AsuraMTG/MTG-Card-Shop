@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './AboutUs.css';
-import gyaa from '../public/gyaa.jpg';
+import team from '../public/team.jpg';
 import UWcontrol from '../public/UWcontrol.png'
 
 const AboutPage = () => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const images = [
-      gyaa,
+      team,
       UWcontrol,
     ];
   
@@ -21,7 +21,7 @@ const AboutPage = () => {
         <div className="about-content">
           <h1 className="about-title">About Us</h1>
           
-          <p className="about-text">Two guy playing card games</p>
+          <p className="about-text">Just two guy playing card games</p>
         
           {/* Central image that changes on click */}
           <div className="image-container">
@@ -32,19 +32,22 @@ const AboutPage = () => {
               onClick={handleImageClick}
             />
           </div>
-          <p className="about-text">Check out our MTG Decks</p>  
+          <p className="about-text">Check out our MTG Decks: </p>  
+          <div className='profile-descriptions'>
+            <p className='profile-text'>Marci</p>
+            <p className='profile-text'>Beni</p>
+          </div>
+          
           <div className="profile-icons">
             <div className="profile-icon">
                 <a href="https://moxfield.com/users/AsuraMTG" target="_blank">
                 <img src="https://assets.moxfield.net/assets/images/empty-profile.png" alt="Asura" />
                 </a>
-              <p>Marci</p>
             </div>
             <div className="profile-icon">
                 <a href="https://moxfield.com/users/shadowsanke" target="_blank">
                 <img src="https://assets.moxfield.net/assets/images/empty-profile.png" alt="ShadowSnake" />
                 </a>
-              <p>Beni</p>
             </div>
           </div>
         </div>

@@ -7,7 +7,6 @@
   
   .about-content {
     flex: 1;
-    background-color: #e6f7ff; /* Light blue background from the first image */
     padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
@@ -54,8 +53,6 @@
     justify-content: space-around;
     width: 100%;
     max-width: 600px;
-    margin: 2rem 0;
-    padding: 0 1rem;
   }
   
   .profile-icon {
@@ -71,6 +68,20 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .profile-descriptions {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .profile-text {
+    color: #555;
+    font-size: 0.9rem;
+    padding-right: 0.5rem;
+  }
   
   /* Responsive styles */
   @media screen and (max-width: 768px) {
@@ -85,6 +96,15 @@
     .profile-icons {
       max-width: 300px;
     }
+
+    .profile-descriptions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .profile-text {
+        margin-bottom: 1rem;
+      }
   }
   
   @media screen and (max-width: 480px) {
@@ -114,4 +134,8 @@
       width: 50px;
       height: 50px;
     }
+
+    .profile-text {
+        font-size: 0.8rem;
+      }
   }
