@@ -5,25 +5,26 @@ import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import EventPage from './EventPage';
 import './Calendar.css';
 
-const CalendarPage = () => {
-  const [date, setDate] = useState(new Date());
+function CalendarPage() {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
   const [showModal, setShowModal] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState(null);
+  const [highlightToday, setHighlightToday] = useState(false);
 
-  // Fetch events from backend
+
+  // Fetch events from the API
   useEffect(() => {
     const fetchEvents = async () => {
-      setLoading(true);
       try {
-        const response = await axios.get("http://localhost:3000/events");
+        const response = await axios.get('http://localhost:3000/events');
         setEvents(response.data);
         setLoading(false);
-      } catch (error) {
-        console.error("Error fetching events:", error);
-        setError("Failed to load events");
+      } catch (err) {
+        console.error("Error fetching events:", err);
+        setError("Failed to load events. Please try again later.");
         setLoading(false);
       }
     };
@@ -31,57 +32,126 @@ const CalendarPage = () => {
     fetchEvents();
   }, []);
 
-  // Get days in month
-  const getDaysInMonth = (year, month) => {
-    return new Date(year, month + 1, 0).getDate();
+
+
+  // Functions to navigate between months
+  const prevMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   };
 
-  // Get day of week for first day of month (0 = Sunday, 1 = Monday, etc.)
-  const getFirstDayOfMonth = (year, month) => {
-    return new Date(year, month, 1).getDay();
+  const nextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
+
+  const goToToday = () => {
+    setCurrentDate(new Date());
+    setHighlightToday(true);
+  
+    setTimeout(() => {
+      setHighlightToday(false);
+    }, 3000);
+  };
+
+
 
   // Open event modal
   const handleEventClick = (eventId) => {
     setSelectedEventId(eventId);
     setShowModal(true);
   };
-  
+
   // Close event modal
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  // Function to generate calendar days
+  // Get events for a specific day
+  const getEventsForDay = (day) => {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const date = new Date(year, month, day);
+    
+    return events.filter(event => {
+      const eventDate = new Date(event.event_date);
+      return (
+        eventDate.getDate() === date.getDate() &&
+        eventDate.getMonth() === date.getMonth() &&
+        eventDate.getFullYear() === date.getFullYear()
+      );
+    });
+  };
+
+  // Highlight today button briefly
+  useEffect(() => {
+  const todayButton = document.querySelector('.today-button');
+  if (!todayButton) return;
+
+  todayButton.classList.add('highlighted');
+  const timeout = setTimeout(() => {
+    todayButton.classList.remove('highlighted');
+  }, 3000);
+
+  return () => clearTimeout(timeout);
+  }, [currentDate]);
+
+
+  // Format month and year for display
+  const formatMonthYear = (date) => {
+    return date.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long' });
+  };
+    /*const formatMonthYear = () => {
+  const months = [
+    "Január", "Február", "Március", "Április", "Május", "Június",
+    "Július", "Augusztus", "Szeptember", "Október", "November", "December"
+    ];
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
+  };*/
+    
+  
+  // Get days in month, and first day of month
+  const getDaysInMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+  };
+  
+  const getFirstDayOfMonth = (date) => {
+    const day = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    return (day + 6) % 7;
+  };
+
+  // Generate calendar days
   const generateCalendarDays = () => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const daysInMonth = getDaysInMonth(year, month);
-    const firstDayOfMonth = getFirstDayOfMonth(year, month);
-    
+    const daysInMonth = getDaysInMonth(currentDate);
+    const firstDayOfMonth = getFirstDayOfMonth(currentDate);
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
     const days = [];
-    
-    // Add empty spaces for days before the first day of the month
+
+    // Add empty cells for days before the first day of month
     for (let i = 0; i < firstDayOfMonth; i++) {
-      days.push(<div key={`empty-${i}`} className="calendar-day empty"></div>);
-    }
-    
-    // Add days of the month
-    for (let day = 1; day <= daysInMonth; day++) {
-      // Filter events for this specific day
-      const dayEvents = events.filter(event => {
-        const eventDate = new Date(event.event_date);
-        return eventDate.getDate() === day && 
-               eventDate.getMonth() === month && 
-               eventDate.getFullYear() === year;
-      });
-      
       days.push(
-        <div key={`day-${day}`} className="calendar-day">
+        <div key={`empty-${i}`} className="calendar-day empty"></div>
+      );
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isToday =
+        day === new Date().getDate() &&
+        month === new Date().getMonth() &&
+        year === new Date().getFullYear();
+  
+      const dayEvents = getEventsForDay(day);
+  
+      days.push(
+        <div
+          key={`day-${day}`}
+          className={`calendar-day${isToday && highlightToday ? ' highlight-today' : ''}`}
+        >
           <div className="day-number">{day}</div>
           <div className="day-events">
             {dayEvents.map(event => (
-              <div key={event.event_id} className="event-item"
+              <div
+                key={event.event_id}
+                className="event-item"
                 onClick={() => handleEventClick(event.event_id)}
               >
                 {event.event_name}
@@ -91,44 +161,15 @@ const CalendarPage = () => {
         </div>
       );
     }
-    
+  
     return days;
   };
-
-  // Navigate to previous month
-  const prevMonth = () => {
-    setDate(new Date(date.getFullYear(), date.getMonth() - 1, 1));
-  };
-
-  // Navigate to next month
-  const nextMonth = () => {
-    setDate(new Date(date.getFullYear(), date.getMonth() + 1, 1));
-  };
-
-  // Navigate to today
-  const goToToday = () => {
-    setDate(new Date());
-  };
-
-  // Format month and year for display
-  /**  const formatMonthYear = (date) => {
-    return date.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long' });
-  }; */
-  const formatMonthYear = () => {
-    const months = [
-      "Január", "Február", "Március", "Április", "Május", "Június",
-      "Július", "Augusztus", "Szeptember", "Október", "November", "December"
-    ];
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
-  };
-
-  
   return (
     <>
       <Container className="calendar-container">
         <div className="calendar-header">
           <button onClick={prevMonth} className="calendar-nav-button">&lt;</button>
-          <div className="month-year">{formatMonthYear()}</div>
+          <div className="month-year">{formatMonthYear(currentDate)}</div>
           <button onClick={nextMonth} className="calendar-nav-button">&gt;</button>
         </div>
         

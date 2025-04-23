@@ -127,4 +127,3 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
-// import React, { useState } from 'react';

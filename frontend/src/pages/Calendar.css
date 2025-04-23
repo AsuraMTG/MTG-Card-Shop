@@ -56,6 +56,17 @@
   .today-button:hover {
     background-color: #0096A6;
   }
+
+  .highlight-today {
+    background-color: #ffe58f;
+    animation: pulse 0.5s ease-in-out;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 rgba(255, 229, 143, 0.7); }
+    50% { box-shadow: 0 0 15px rgba(255, 229, 143, 0.9); }
+    100% { box-shadow: 0 0 0 rgba(255, 229, 143, 0.7); }
+  }
   
   .calendar-weekdays {
     display: grid;
