@@ -80,7 +80,7 @@ function EventPage({ show, onHide, eventId }) {
       // Update event count
       setEvent({
         ...event,
-        current_participants: (event.current_participants || 0) + 1
+        current_participants: (event.current_participants) + 1
       });
       
       // Clear success message after 3 seconds
