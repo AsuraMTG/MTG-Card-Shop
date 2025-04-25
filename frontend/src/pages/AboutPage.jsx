@@ -21,7 +21,7 @@ const AboutPage = () => {
         <div className="about-content">
           <h1 className="about-title">About Us</h1>
           
-          <p className="about-text">Just two guy playing card games</p>
+          <p className="about-text">Just two guys playing card games</p>
         
           {/* Central image that changes on click */}
           <div className="image-container">

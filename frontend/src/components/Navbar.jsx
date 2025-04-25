@@ -40,10 +40,10 @@ function Navbar({ isAuthenticated })  {
         <Route path='/cart' element={
           isAuthenticated ? <Navigate to="/cart" /> : <CartPage /> 
         } />
-        <Route path="/web/login" element={
+        <Route path="/login" element={
           isAuthenticated ? <Navigate to="/" /> : <Login onLogin={handleLogin} />
         } />
-        <Route path="/web/register" element={
+        <Route path="/register" element={
           isAuthenticated ? <Navigate to="/" /> : <Register />
         } />
         <Route path="/products/:id" element={
@@ -60,7 +60,7 @@ function Navbar({ isAuthenticated })  {
               {/* Other components */}
             </div>
           ) : (
-            <Navigate to="/web/login" />
+            <Navigate to="/login" />
           )
         } />
         {/* Add other routes as needed */}

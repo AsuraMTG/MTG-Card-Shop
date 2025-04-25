@@ -26,7 +26,7 @@ function Navigation() {
             <Nav.Item>
               <NavLink to="/" end className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
                 <FontAwesomeIcon icon={faHome} className="me-2" />
-                Főoldal
+                Termékek
               </NavLink>
             </Nav.Item>
             <Nav.Item>
