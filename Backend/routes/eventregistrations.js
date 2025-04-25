@@ -6,46 +6,45 @@ const router = express.Router();
 // List all registrations for events
 router.get('/', async (req, res) => {
     try {
-        const [rows] = await pool.query(
-            `SELECT r.registration_id, r.event_id, r.customer_id, r.registration_date, e.event_name, c.name AS customer_name
-             FROM registrations r
-             JOIN events e ON r.event_id = e.event_id
-             JOIN customers c ON r.customer_id = c.customer_id`
-        );
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: 'An error occurred while listing registrations.', error });
+      const [rows] = await pool.query(`
+        SELECT r.registration_id, r.event_id, r.customer_id, r.registration_date, 
+               c.name AS customer_name
+        FROM registrations r
+        JOIN customers c ON r.customer_id = c.customer_id
+      `);
+      res.json(rows);
+    } catch (err) {
+      res.status(500).json({ message: 'Fetching registrations failed.' });
     }
-});
+  });
 
 // Registering a participant for an event 
 router.post('/', async (req, res) => {
     const { event_id, customer_id } = req.body;
-
     if (!event_id || !customer_id) {
-        return res.status(400).json({ message: 'Missing event_id or customer_id' });
+      return res.status(400).json({ message: 'Missing event_id or customer_id' });
     }
-
+  
     try {
-        const [result] = await pool.query(
-            `INSERT INTO registrations (event_id, customer_id, registration_date)
-             VALUES (?, ?, NOW())`,
-            [event_id, customer_id]
-        );
-
-        await pool.query(
-            `UPDATE events
-             SET current_participants = current_participants + 1
-             WHERE event_id = ?`,
-            [event_id]
-        );
-
-        res.status(201).json({ registration_id: result.insertId });
-    } catch (error) {
-        console.error("Registration failed:", error);
-        res.status(500).json({ message: 'Registration failed.', error });
+      const [result] = await pool.query(
+        `INSERT INTO registrations (event_id, customer_id, registration_date)
+         VALUES (?, ?, NOW())`,
+        [event_id, customer_id]
+      );
+  
+      await pool.query(
+        `UPDATE events SET current_participants = current_participants + 1 WHERE event_id = ?
+         WHERE event_id = ?`,
+        [event_id]
+      );
+  
+      res.status(201).json({ registration_id: result.insertId });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Registration failed.' });
     }
-});
+  });
+  
 
 
 
