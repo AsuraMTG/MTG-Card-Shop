@@ -4,8 +4,8 @@ import customersRoutes from './routes/customers.js';
 import productsRoutes from './routes/products.js';
 import eventsRoutes from './routes/events.js';
 import eventregistrations from './routes/eventregistrations.js';
-//import ordersRoutes from './routes/orders.js';
-//import orderItemsRoutes from './routes/order_items.js';
+import ordersRoutes from './routes/orders.js';
+import orderItemsRoutes from './routes/order_items.js';
 //import bodyParser from 'body-parser'; T
 import cors from 'cors';
 import path from 'path';
@@ -43,8 +43,8 @@ app.use('/categories', categoriesRoutes);
 app.use('/customers', customersRoutes);
 app.use('/products', productsRoutes);
 app.use('/events', eventsRoutes);
-//app.use('/orders', ordersRoutes);
-//app.use('/order_items', orderItemsRoutes);
+app.use('/orders', ordersRoutes);
+app.use('/order_items', orderItemsRoutes);
 app.use('/eventregistrations', eventregistrations);
 app.use('/', (req, res) => {
   res.send('Üdvözöljük a Magic: The Gathering kártya boltban!');

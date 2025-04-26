@@ -20,34 +20,31 @@ router.get('/', async (req, res) => {
 
 // Registering a participant for an event 
 router.post('/', async (req, res) => {
-    const { event_id, customer_id } = req.body;
-    if (!event_id || !customer_id) {
-      return res.status(400).json({ message: 'Missing event_id or customer_id' });
-    }
-  
-    try {
-      const [result] = await pool.query(
-        `INSERT INTO registrations (event_id, customer_id, registration_date)
-         VALUES (?, ?, NOW())`,
-        [event_id, customer_id]
-      );
-  
-      await pool.query(
-        `UPDATE events SET current_participants = current_participants + 1 WHERE event_id = ?
-         WHERE event_id = ?`,
-        [event_id]
-      );
-  
-      res.status(201).json({ registration_id: result.insertId });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: 'Registration failed.' });
-    }
-  });
-  
+  const { event_id, customer_id } = req.body;
+  if (!event_id || !customer_id) {
+    return res.status(400).json({ message: 'Missing event_id or customer_id' });
+  }
 
+  try {
+    const [result] = await pool.query(
+      `INSERT INTO registrations (event_id, customer_id, registration_date)
+       VALUES (?, ?, NOW())`,
+      [event_id, customer_id]
+    );
 
+    await pool.query(
+      `UPDATE events SET current_participants = current_participants + 1
+       WHERE event_id = ?`,
+      [event_id]
+    );
 
+    res.status(201).json({ registration_id: result.insertId });
+  } catch (err) {
+    console.error('Registration error:', err);  // <== ADD THIS
+    res.status(500).json({ message: 'Registration failed.', error: err.message }); // <== ADD THIS
+  }
+});
+  
 // Cancel a registration (delete application)
 router.delete('/:id', async (req, res) => {
     const registrationId = req.params.id;
