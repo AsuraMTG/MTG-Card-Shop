@@ -14,46 +14,45 @@ function EventPage({ show, onHide, eventId }) {
   const [registrationId, setRegistrationId] = useState(null);
 
   // Fetch event details and registrations
-    const fetchEventData = async () => {
-      try {
-        const [eventRes, regRes] = await Promise.all([
-          axios.get(`http://localhost:3000/events/${eventId}`),
-          axios.get(`http://localhost:3000/eventregistrations`)
-        ]);
-    
-        setEvent(eventRes.data);
-    
-        const eventRegistrations = regRes.data.filter(
-          reg => reg.event_id === parseInt(eventId)
-        );
-        setRegistrations(eventRegistrations);
-    
-        if (user) {
-          const userReg = eventRegistrations.find(
-            reg => reg.customer_id === user.customer_id
-          );
-          setIsUserRegistered(!!userReg);
-          setRegistrationId(userReg?.registration_id ?? null);
-        }
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const fetchEventData = async () => {
+    try {
+      const [eventRes, regRes] = await Promise.all([
+        axios.get(`http://localhost:3000/events/${eventId}`),
+        axios.get(`http://localhost:3000/eventregistrations`)
+      ]);
+      setEvent(eventRes.data);
 
-    useEffect(() => {
-      if (show && eventId) {
-        fetchEventData();
+      const eventRegistrations = regRes.data.filter(
+        reg => reg.event_id === parseInt(eventId)
+      );
+      setRegistrations(eventRegistrations);
+
+      if (user) {
+        const userReg = eventRegistrations.find(
+          reg => reg.customer_id === user.customer_id
+        );
+        setIsUserRegistered(!!userReg);
+        setRegistrationId(userReg?.registration_id ?? null);
       }
-    }, [show, eventId]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    if (show && eventId) {
+      fetchEventData();
+    }
+  }, [show, eventId]);
 
   // Handle registration
   const handleRegister = async () => {
     try {
       await axios.post(`http://localhost:3000/eventregistrations`, {
-        event_id: event.event_id,
-        customer_id: user.customer_id
+        eventId: event.event_id,
+        userId: user.customer_id
       });
-  
+
       setRegistrationSuccess(true);
       await fetchEventData(); // refresh everything
     } catch (err) {
@@ -65,14 +64,14 @@ function EventPage({ show, onHide, eventId }) {
   // Handle cancellation
   const handleCancelRegistration = async () => {
     if (!registrationId) return;
-  
+
     try {
       await axios.delete(`http://localhost:3000/eventregistrations/${registrationId}`);
-      
+
       // Clear local state
       setIsUserRegistered(false);
       setRegistrationId(null);
-      
+
       await fetchEventData(); // this updates count, list, and checks if the user is still registered
     } catch (err) {
       console.error("Error canceling registration:", err);
@@ -82,8 +81,8 @@ function EventPage({ show, onHide, eventId }) {
 
   // Calculate registration percentage
   const registrationPercentage = event?.max_participants
-  ? Math.min(100, Math.round((event.current_participants / event.max_participants) * 100))
-  : 0;
+    ? Math.min(100, Math.round((event.current_participants / event.max_participants) * 100))
+    : 0;
 
   // Format date
   const formatDate = (dateString) => {
@@ -118,66 +117,66 @@ function EventPage({ show, onHide, eventId }) {
                 Sikeres jelentkezés az eseményre!
               </Alert>
             )}
-<div className="event-details">
-          <p className="event-date"><strong>Időpont:</strong> {formatDate(event.event_date)}</p>
-          <p className="event-description">{event.event_description}</p>
-          
-          <div className="registration-status">
-            <div className="d-flex justify-content-between mb-1">
-              <span>Jelentkezettek száma:</span>
-              <span>{event.current_participants} / {event.max_participants}</span>
+            <div className="event-details">
+              <p className="event-date"><strong>Időpont:</strong> {formatDate(event.event_date)}</p>
+              <p className="event-description">{event.event_description}</p>
+
+              <div className="registration-status">
+                <div className="d-flex justify-content-between mb-1">
+                  <span>Jelentkezettek száma:</span>
+                  <span>{event.current_participants} / {event.max_participants}</span>
+                </div>
+                <ProgressBar
+                  now={registrationPercentage}
+                  variant={registrationPercentage > 75 ? 'danger' : registrationPercentage > 50 ? 'warning' : 'success'}
+                  className="mb-3"
+                />
+              </div>
+
+              {user ? (
+                isUserRegistered ? (
+                  <Button
+                    variant="danger"
+                    className="w-100 mb-4"
+                    onClick={handleCancelRegistration}
+                  >
+                    Jelentkezés visszavonása
+                  </Button>
+                ) : (
+                  <Button
+                    variant="primary"
+                    className="w-100 mb-4"
+                    onClick={handleRegister}
+                    disabled={event.current_participants >= event.max_participants}
+                  >
+                    {event.current_participants >= event.max_participants
+                      ? 'Betelt létszám'
+                      : 'Jelentkezés'}
+                  </Button>
+                )
+              ) : (
+                <Alert variant="info" className="mb-4">
+                  Jelentkezéshez kérjük, jelentkezzen be!
+                </Alert>
+              )}
+
+              <div className="participants-section">
+                <h5>Jelentkezés:</h5>
+                {registrations.length > 0 ? (
+                  <ListGroup className="registration-list">
+                    {registrations.map((registration, index) => (
+                      <ListGroup.Item key={registration.registration_id ?? `${registration.customer_id}-${registration.event_id}-${index}`}
+                        className="registration-item">
+                        <div className="registration-number">#{index + 1}</div>
+                        <div className="registration-name">{registration.customer_name}</div>
+                      </ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                ) : (
+                  <p className="text-muted text-center">Még nincs jelentkező az eseményre.</p>
+                )}
+              </div>
             </div>
-            <ProgressBar 
-              now={registrationPercentage} 
-              variant={registrationPercentage > 75 ? 'danger' : registrationPercentage > 50 ? 'warning' : 'success'} 
-              className="mb-3"
-            />
-          </div>
-          
-          {user ? (
-            isUserRegistered ? (
-              <Button 
-                variant="danger" 
-                className="w-100 mb-4" 
-                onClick={handleCancelRegistration}
-              >
-                Jelentkezés visszavonása
-              </Button>
-            ) : (
-              <Button 
-                variant="primary" 
-                className="w-100 mb-4" 
-                onClick={handleRegister}
-                disabled={event.current_participants >= event.max_participants}
-              >
-                {event.current_participants >= event.max_participants 
-                  ? 'Betelt létszám' 
-                  : 'Jelentkezés'}
-              </Button>
-            )
-          ) : (
-            <Alert variant="info" className="mb-4">
-              Jelentkezéshez kérjük, jelentkezzen be!
-            </Alert>
-          )}
-          
-          <div className="participants-section">
-            <h5>Jelentkezés:</h5>
-            {registrations.length > 0 ? (
-              <ListGroup className="registration-list">
-                {registrations.map((registration, index) => (
-                  <ListGroup.Item key={registration.registration_id ?? `${registration.customer_id}-${registration.event_id}-${index}`}
-                   className="registration-item">
-                    <div className="registration-number">#{index + 1}</div>
-                    <div className="registration-name">{registration.customer_name}</div>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
-            ) : (
-              <p className="text-muted text-center">Még nincs jelentkező az eseményre.</p>
-            )}
-          </div>
-        </div>
           </>
         )}
       </Modal.Body>

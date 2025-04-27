@@ -1,7 +1,7 @@
 /* Navbar.css */
 
 .navbar {
-  background-color: #007B84;
+  background-color: var(--accent-color);
   padding: 10px 0;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@
 
 .nav-link {
   text-decoration: none;
-  color: #fff;
+  color: white;
   font-size: 16px;
   font-weight: 500;
   padding: 8px 16px;
@@ -44,7 +44,7 @@
 }
 
 .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--accent-hover);
   color: #fff;
 }
 .nav-link.active {

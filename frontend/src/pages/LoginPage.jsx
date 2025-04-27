@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../AuthContext';
 
+import './AuthPages.css';
+
 function LoginPage() {
   const { login } = useAuth();
   
@@ -16,7 +18,7 @@ function LoginPage() {
     try {
       const response = await axios.post(
         'http://localhost:3000/customers/login',
-        { username, password }, // Ez így megfelelő JSON
+        { username, password }, 
         {
           headers: { 'Content-Type': 'application/json' },
         }
@@ -39,7 +41,7 @@ function LoginPage() {
 
   return (
     <div className="container d-flex justify-content-center align-items-center mt-5">
-      <div className="card shadow-sm p-4" style={{ maxWidth: "500px" }}>
+      <div className="card auth-card shadow-sm p-4" style={{ maxWidth: "500px" }}>
         <h2 className="mb-4">Bejelentkezés</h2>
         {errorMessage && (
           <div className="alert alert-danger mb-3" role="alert">

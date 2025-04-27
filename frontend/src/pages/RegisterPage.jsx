@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import './AuthPages.css'
+
 function RegisterPage() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -42,7 +44,7 @@ function RegisterPage() {
 
   return (
     <div className="container mt-5">
-      <div className="card shadow p-4 mx-auto" style={{ maxWidth: '500px' }}>
+      <div className="card auth-card p-4 mx-auto" style={{ maxWidth: '500px' }}>
         <h2 className="mb-4 text-center">Regisztráció</h2>
         {error && (
           <div className="alert alert-danger" role="alert">
@@ -119,7 +121,7 @@ function RegisterPage() {
           <button type="submit" className="btn btn-success w-100">Regisztráció</button>
         </form>
         <div className="text-center mt-3">
-          Már van fiókod? <a href="/login" className="btn btn-outline-primary btn-sm">Belépés</a>
+          Már van fiókod? <a href="/login" className="btn btn-outline-secondary btn-sm">Belépés</a>
         </div>
       </div>
     </div>

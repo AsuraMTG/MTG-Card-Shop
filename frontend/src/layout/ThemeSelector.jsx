@@ -12,13 +12,13 @@ function ThemeSelector() {
         onChange={(e) => setTheme(e.target.value)}
       >
         <option value="theme-ocean">🌊 Ocean</option>
+        <option value="theme-forest">🌲 Forest</option>
+        <option value="theme-dark">🕸️ Dark</option>
         <option value="theme-sunset">🌇 Sunset</option>
-        <option value="theme-purple">💜 Purple Elegance</option>
+        <option value="theme-purple">🔮 Mox Purple </option>
       </select>
     </div>
   );
 }
 
 export default ThemeSelector;
-// Compare this snippet from frontend/src/layout/ThemeSelector.jsx:
-// import React, { useContext } from 'react';

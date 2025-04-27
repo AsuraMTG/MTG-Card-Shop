@@ -3,7 +3,6 @@ import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import "@saeris/typeface-beleren-bold"
 import { AuthProvider, useAuth } from './AuthContext';
 
-import './App.css'
 
 // pages import!
 import { CartProvider } from './components/CartContext'

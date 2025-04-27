@@ -1,4 +1,4 @@
-/* Base styles and resets */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,57 +10,14 @@
     transition: background-color 0.3s ease;
   }
   
-  /* ========== THEME: DEFAULT ========== */
-  .theme-default {
-    --primary-color: #4CAF50;
-    --primary-light: #8BC34A;
-    --primary-dark: #388E3C;
-    --secondary-color: #F3E9D2;
-    --accent-color: #1E88E5;
-    --text-color: #333333;
-    --card-bg: #F9F9F9;
-    --background: #E8F5E9;
-    --header-bg: #4CAF50;
-    --button-hover: #2E7D32;
-  }
-  
-  /* ========== THEME: DARK ========== */
-  .theme-dark {
-    --primary-color: #4CAF50;
-    --primary-light: #81C784;
-    --primary-dark: #2E7D32;
-    --secondary-color: #424242;
-    --accent-color: #29B6F6;
-    --text-color: #EEEEEE;
-    --card-bg: #333333;
-    --background: #212121;
-    --header-bg: #2E7D32;
-    --button-hover: #1B5E20;
-  }
-  
-  /* ========== THEME: NATURE ========== */
-  .theme-nature {
-    --primary-color: #8D6E63;
-    --primary-light: #A1887F;
-    --primary-dark: #6D4C41;
-    --secondary-color: #FFE0B2;
-    --accent-color: #26A69A;
-    --text-color: #5D4037;
-    --card-bg: #FFF8E1;
-    --background: #EFEBE9;
-    --header-bg: #795548;
-    --button-hover: #5D4037;
-  }
-  
-  /* Main page container */
+
   .main-page {
     min-height: 100vh;
     background-color: var(--background);
     position: relative;
-    padding-bottom: 60px; /* Space for footer */
   }
   
-  /* Header styles */
+
   .header {
     background-color: var(--header-bg);
     padding: 15px 20px;
@@ -72,11 +29,7 @@
     top: 0;
     z-index: 100;
   }
-  /* Cart icon styles */
-  .cart-icon {
-    position: relative;
-    font-size: 24px;
-  }
+
   
   .cart-count {
     position: absolute;
@@ -92,8 +45,8 @@
     align-items: center;
     justify-content: center;
   }
-  
-  /* Theme switcher */
+
+
   .theme-switcher {
     display: flex;
     gap: 10px;
@@ -114,38 +67,6 @@
     color: white;
   }
   
-  /* Logo background styles */
-  .logo-background {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-    height: 150px;
-    position: relative;
-  }
-  
-  .logo-glow {
-    width: 100px;
-    height: 100px;
-    background: url('your-logo-path.svg') no-repeat center center;
-    background-size: contain;
-    position: relative;
-  }
-  
-  .logo-glow::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120px;
-    height: 120px;
-    background: var(--primary-light);
-    border-radius: 50%;
-    filter: blur(20px);
-    opacity: 0.6;
-    z-index: -1;
-    animation: pulse 3s infinite alternate;
-  }
   
   @keyframes pulse {
     0% {
@@ -158,21 +79,21 @@
     }
   }
   
-  /* Product container */
+
   .product-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
   }
   
-  /* Product grid */
+
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
   }
   
-  /* Loading, error and no products states */
+
   .loading-state,
   .error-state,
   .no-products {
@@ -189,16 +110,6 @@
     color: #d32f2f;
   }
   
-  /* Footer styles */
-  .footer {
-    background-color: var(--header-bg);
-    color: white;
-    text-align: center;
-    padding: 20px;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
   
   /* Responsive styles for mobile */
   @media (max-width: 768px) {
@@ -208,41 +119,19 @@
       padding: 10px;
     }
   
-    .search-container {
-      width: 100%;
-      order: 2;
-    }
   
     .theme-switcher {
       order: 3;
       margin-top: 10px;
     }
   
-    .cart-icon {
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      order: 1;
-    }
+
   
     .product-grid {
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 15px;
     }
   
-    .logo-background {
-      height: 100px;
-    }
-  
-    .logo-glow {
-      width: 70px;
-      height: 70px;
-    }
-  
-    .logo-glow::before {
-      width: 90px;
-      height: 90px;
-    }
   }
   
   /* Mobile design specifically for smaller phones */
@@ -259,44 +148,3 @@
   }
   
   
-  /* Ocean Theme */
-  .theme-ocean {
-    --primary-color: #0277BD;
-    --primary-light: #03A9F4;
-    --primary-dark: #01579B;
-    --secondary-color: #E1F5FE;
-    --accent-color: #00BCD4;
-    --text-color: #263238;
-    --card-bg: #FFFFFF;
-    --background: #E3F2FD;
-    --header-bg: #0288D1;
-    --button-hover: #01579B;
-  }
-  
-  /* Sunset Theme */
-  .theme-sunset {
-    --primary-color: #FF7043;
-    --primary-light: #FFAB91;
-    --primary-dark: #E64A19;
-    --secondary-color: #FFF3E0;
-    --accent-color: #FFC107;
-    --text-color: #5D4037;
-    --card-bg: #FFFFFF;
-    --background: #FBE9E7;
-    --header-bg: #F4511E;
-    --button-hover: #D84315;
-  }
-  
-  /* Purple Elegance */
-  .theme-purple {
-    --primary-color: #7B1FA2;
-    --primary-light: #BA68C8;
-    --primary-dark: #4A148C;
-    --secondary-color: #F3E5F5;
-    --accent-color: #E040FB;
-    --text-color: #37474F;
-    --card-bg: #FFFFFF;
-    --background: #EDE7F6;
-    --header-bg: #8E24AA;
-    --button-hover: #6A1B9A;
-  }

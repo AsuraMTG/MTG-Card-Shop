@@ -3,6 +3,13 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #ffffff;
+    color: var(--text-light);
+    padding: 20px;
+  }
+
+  .theme-dark .about-container {
+    background-color: #1e1e1e;
   }
   
   .about-content {
@@ -15,13 +22,13 @@
   }
   
   .about-title {
-    color: #333;
+    color: var(--text-light);
     font-size: 2.5rem;
     margin-bottom: 1.5rem;
   }
   
   .about-text {
-    color: #333;
+    color: var(--text-light);
     font-size: 1rem;
     margin-bottom: 0.8rem;
     max-width: 800px;
@@ -60,7 +67,7 @@
     height: 60px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #ccc;
+    background-color: var(--card-bg-light);
   }
   
   .profile-icon img {
@@ -83,7 +90,6 @@
     padding-right: 0.5rem;
   }
   
-  /* Responsive styles */
   @media screen and (max-width: 768px) {
     .about-title {
       font-size: 2rem;
