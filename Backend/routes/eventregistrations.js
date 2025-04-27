@@ -5,73 +5,86 @@ const router = express.Router();
 
 // List all registrations for events
 router.get('/', async (req, res) => {
-    try {
-      const [rows] = await pool.query(`
+  try {
+    const [rows] = await pool.query(`
         SELECT r.registration_id, r.event_id, r.customer_id, r.registration_date, 
                c.name AS customer_name
         FROM registrations r
         JOIN customers c ON r.customer_id = c.customer_id
       `);
-      res.json(rows);
-    } catch (err) {
-      res.status(500).json({ message: 'Fetching registrations failed.' });
-    }
-  });
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ message: 'Fetching registrations failed.' });
+  }
+});
 
 // Registering a participant for an event 
 router.post('/', async (req, res) => {
-  const { event_id, customer_id } = req.body;
-  if (!event_id || !customer_id) {
-    return res.status(400).json({ message: 'Missing event_id or customer_id' });
-  }
-
+  const { userId, eventId } = req.body;
   try {
-    const [result] = await pool.query(
-      `INSERT INTO registrations (event_id, customer_id, registration_date)
-       VALUES (?, ?, NOW())`,
-      [event_id, customer_id]
+    // Ellenőrzés, hogy van-e már ilyen regisztráció
+    const [existing] = await pool.query(
+      'SELECT * FROM registrations WHERE customer_id = ? AND event_id = ?',
+      [userId, eventId]
     );
 
+    if (existing.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'Már regisztráltál erre az eseményre.'
+      });
+    }
+
+    // Ha nincs, akkor mentjük az új regisztrációt
     await pool.query(
-      `UPDATE events SET current_participants = current_participants + 1
-       WHERE event_id = ?`,
-      [event_id]
+      'INSERT INTO registrations (customer_id, event_id) VALUES (?, ?)',
+      [userId, eventId]
     );
 
-    res.status(201).json({ registration_id: result.insertId });
-  } catch (err) {
-    console.error('Registration error:', err);  // <== ADD THIS
-    res.status(500).json({ message: 'Registration failed.', error: err.message }); // <== ADD THIS
+    res.json({
+      success: true,
+      message: 'Sikeres regisztráció!'
+    });
+
+  } catch (error) {
+    console.error('Hiba történt:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Szerverhiba történt.'
+    });
   }
 });
-  
+
+
+
+
 // Cancel a registration (delete application)
 router.delete('/:id', async (req, res) => {
-    const registrationId = req.params.id;
+  const registrationId = req.params.id;
 
-    try {
-        const [registration] = await pool.query('SELECT * FROM registrations WHERE registration_id = ?', [registrationId]);
+  try {
+    const [registration] = await pool.query('SELECT * FROM registrations WHERE registration_id = ?', [registrationId]);
 
-        if (registration.length === 0) {
-            return res.status(404).json({ message: 'Registration not found' });
-        }
+    if (registration.length === 0) {
+      return res.status(404).json({ message: 'Registration not found' });
+    }
 
-        const eventId = registration[0].event_id;
+    const eventId = registration[0].event_id;
 
-        // Decrease the current participants for the event
-        await pool.query(
-            `UPDATE events
+    // Decrease the current participants for the event
+    await pool.query(
+      `UPDATE events
              SET current_participants = current_participants - 1
              WHERE event_id = ?`, [eventId]
-        );
+    );
 
-        // Delete the registration
-        await pool.query('DELETE FROM registrations WHERE registration_id = ?', [registrationId]);
+    // Delete the registration
+    await pool.query('DELETE FROM registrations WHERE registration_id = ?', [registrationId]);
 
-        res.sendStatus(204); // No content, as the registration was deleted
-    } catch (error) {
-        res.status(500).json({ message: 'An error occurred while deleting the registration.', error });
-    }
+    res.sendStatus(204); // No content, as the registration was deleted
+  } catch (error) {
+    res.status(500).json({ message: 'An error occurred while deleting the registration.', error });
+  }
 });
 
 export default router;
