@@ -248,6 +248,7 @@ ALTER TABLE `products`
 --
 ALTER TABLE `registrations`
   ADD PRIMARY KEY (`registration_id`),
+  ADD UNIQUE KEY `event_id_2` (`event_id`,`customer_id`),
   ADD KEY `registrations_ibfk_3` (`customer_id`),
   ADD KEY `event_id` (`event_id`);
 
