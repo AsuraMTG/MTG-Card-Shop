@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import EventPage from './EventPage';
 import './Calendar.css';
 
@@ -99,14 +98,6 @@ function CalendarPage() {
   const formatMonthYear = (date) => {
     return date.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long' });
   };
-    /*const formatMonthYear = () => {
-  const months = [
-    "Január", "Február", "Március", "Április", "Május", "Június",
-    "Július", "Augusztus", "Szeptember", "Október", "November", "December"
-    ];
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
-  };*/
-    
   
   // Get days in month, and first day of month
   const getDaysInMonth = (date) => {
@@ -195,7 +186,6 @@ function CalendarPage() {
           </div>
         )}
       </Container>
-      {/* Event Modal */}
       <EventPage 
         show={showModal} 
         onHide={handleCloseModal} 

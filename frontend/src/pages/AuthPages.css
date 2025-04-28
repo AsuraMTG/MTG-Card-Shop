@@ -14,15 +14,6 @@
     color: white;
   }
 
-  .theme-dark .btn-primary {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
-  }
-  
-  .theme-dark .btn-success {
-    background-color: #22c55e;
-    border-color: #22c55e;
-  }
   
   .theme-dark .btn-outline-primary,
   .theme-dark .btn-outline-secondary {

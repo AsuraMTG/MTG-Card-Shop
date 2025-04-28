@@ -11,19 +11,18 @@ const AboutPage = () => {
     ];
   
     const handleImageClick = () => {
-      // Cycle through images when clicked
+      // A kép átváltása
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
   
     return (
       <div className="about-container">
-        {/* Main content area with light blue background */}
         <div className="about-content">
-          <h1 className="about-title">About Us</h1>
+          <h1 className="about-title">Rólunk</h1>
           
-          <p className="about-text">Just two guys playing card games</p>
+          <p className="about-text">Marci talált rá erre a játékra és nem egy embert magával rántott. </p>
+          <p className='about-text'>Azóta is versenyzünk, hogy vajon ki a jobb.</p>
         
-          {/* Central image that changes on click */}
           <div className="image-container">
             <img 
               src={images[currentImageIndex]} 
@@ -32,7 +31,7 @@ const AboutPage = () => {
               onClick={handleImageClick}
             />
           </div>
-          <p className="about-text">Check out our MTG Decks: </p>  
+          <p className="about-text">Saját MTG Deck-jeink: </p>  
           <div className='profile-descriptions'>
             <p className='profile-text'>Marci</p>
             <p className='profile-text'>Beni</p>

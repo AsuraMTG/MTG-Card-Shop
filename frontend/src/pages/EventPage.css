@@ -1,4 +1,3 @@
-/* EventPage.css */
 
 .event-modal .modal-content {
     border-radius: 10px;
@@ -34,7 +33,6 @@
   .event-date {
     font-size: 1.1rem;
     margin-bottom: 15px;
-    color: var(--primary-dark, #388E3C);
   }
   
   .event-description {
@@ -104,7 +102,6 @@
     font-weight: 500;
   }
   
-  /* Button styling */
   .modal-body .btn-primary {
     background-color: var(--primary-color, #4CAF50);
     border-color: var(--primary-dark, #388E3C);

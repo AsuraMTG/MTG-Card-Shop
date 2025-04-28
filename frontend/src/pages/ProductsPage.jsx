@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, Spinner, Alert } from 'react-bootstrap';
 import Navigation from '../layout/Navigation';
 import './ProductsPage.css';
 import { Button } from 'react-bootstrap';
-import { useCart } from '../components/CartContext';
+import { useCart } from '../component/CartContext';
 
 function ProductsPage() {
   const [product, setProduct] = useState([]);

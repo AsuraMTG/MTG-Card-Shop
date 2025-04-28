@@ -5,8 +5,7 @@ import { AuthProvider, useAuth } from './AuthContext';
 
 
 // pages import!
-import { CartProvider } from './components/CartContext'
-import MainPage from './pages/MainPage'
+import { CartProvider } from './component/CartContext'
 import CartPage from './pages/CartPages'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'

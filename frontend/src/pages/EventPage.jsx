@@ -9,7 +9,6 @@ function EventPage({ show, onHide, eventId }) {
   const [event, setEvent] = useState(null);
   const [registrations, setRegistrations] = useState([]);
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
-  const [registrationError, setRegistrationError] = useState(null);
   const [isUserRegistered, setIsUserRegistered] = useState(false);
   const [registrationId, setRegistrationId] = useState(null);
 
@@ -57,7 +56,6 @@ function EventPage({ show, onHide, eventId }) {
       await fetchEventData(); // refresh everything
     } catch (err) {
       console.error(err);
-      setRegistrationError("Nem sikerült jelentkezni.");
     }
   };
 
@@ -72,10 +70,9 @@ function EventPage({ show, onHide, eventId }) {
       setIsUserRegistered(false);
       setRegistrationId(null);
 
-      await fetchEventData(); // this updates count, list, and checks if the user is still registered
+      await fetchEventData(); // update count, list, and checks if the user is still registered
     } catch (err) {
       console.error("Error canceling registration:", err);
-      setRegistrationError("Hiba történt a jelentkezés visszavonása során.");
     }
   };
 
@@ -84,7 +81,6 @@ function EventPage({ show, onHide, eventId }) {
     ? Math.min(100, Math.round((event.current_participants / event.max_participants) * 100))
     : 0;
 
-  // Format date
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
     return new Date(dateString).toLocaleDateString('hu-HU', options);
