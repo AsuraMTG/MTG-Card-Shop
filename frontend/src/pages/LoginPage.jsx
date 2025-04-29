@@ -74,7 +74,7 @@ function LoginPage() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-primary w-100">Belépés</button>
+          <button type="submit" className="btn w-100">Belépés</button>
         </form>
         <div className="mt-3">
           <span>Nincs még fiókod? </span>

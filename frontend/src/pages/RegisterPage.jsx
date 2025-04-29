@@ -118,7 +118,7 @@ function RegisterPage() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-success w-100">Regisztráció</button>
+          <button type="submit" className="btn w-100">Regisztráció</button>
         </form>
         <div className="text-center mt-3">
           Már van fiókod? <a href="/login" className="btn btn-outline-secondary btn-sm">Belépés</a>
