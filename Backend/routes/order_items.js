@@ -86,7 +86,7 @@ router.post('/order-items', async (req, res) => {
       const { product_id, quantity, price_at_order } = req.body;
       const [result] = await db.query(
         'INSERT INTO order_items (order_id, product_id, quantity, price_at_order) VALUES (?, ?, ?, ?)',
-        [1, product_id, quantity, price_at_order] // itt most mindig order_id = 1 (DE ezt majd később dinamikussá kell tenni)
+        [1, product_id, quantity, price_at_order]
       );
       res.json({ order_item_id: result.insertId });
     } catch (err) {
